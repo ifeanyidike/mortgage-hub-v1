@@ -1,5 +1,9 @@
 import user from "@/server/user";
 import { NextResponse, type NextRequest } from "next/server";
+import { z } from "zod";
+import bcrypt from "bcryptjs";
+import { Role } from "@/types/general";
+import { NewUser } from "@/types/db";
 
 /**
  * @swagger
@@ -26,7 +30,7 @@ import { NextResponse, type NextRequest } from "next/server";
  */
 export const GET = async (req: NextRequest) => {
   try {
-    const users = await user.getUsers();
+    const users = await user.getAll();
     return NextResponse.json(users);
   } catch (err) {
     return NextResponse.json({
@@ -42,6 +46,23 @@ export const GET = async (req: NextRequest) => {
  *   post:
  *     summary: Create user
  *     description: Creates a new User
+ *     requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *              schema:
+ *                  type: object
+ *                  properties:
+ *                      name:
+ *                          type: string
+ *                      email:
+ *                          type: string
+ *                      role:
+ *                          type: string
+ *                      auth0_sid:
+ *                          type: string
+ *                      profile_photo:
+ *                          type: string
  *     responses:
  *       201:
  *         description: A successful response
@@ -49,10 +70,17 @@ export const GET = async (req: NextRequest) => {
  *         description: An internal error
  */
 export const POST = async (req: NextRequest) => {
+  const body = await req.json();
+  console.log("body", body);
   try {
-    const createdUser = await user.createUser();
+    const createdUser = await user.createOne(body.email, body.password);
+    console.log("createdUser", createdUser);
     return NextResponse.json(createdUser);
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      console.log("error", error.message);
+      return NextResponse.json({ status: 400, error: error.errors });
+    }
     return NextResponse.json({
       status: 500,
       error: "Internal Server Error",
