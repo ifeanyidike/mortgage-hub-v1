@@ -2,13 +2,10 @@ import NextAuth, { Session } from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import userService from "./server/user";
-import bcrypt from "bcryptjs";
-import { ExistingUser } from "./types/db";
-import { AdapterSession, AdapterUser } from "next-auth/adapters";
+import { AdapterSession } from "next-auth/adapters";
 import { jwtDecode } from "jwt-decode";
 import { JWT } from "next-auth/jwt";
 import { cookies } from "next/headers";
-import { Role } from "./types/general";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   session: {
@@ -37,37 +34,49 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           const email = credentials.email as string;
           const password = credentials.password as string;
           const existingUser = await userService.authenticate(email, password);
-          return { id: existingUser.id, email: existingUser.email };
+          return {
+            id: existingUser.id,
+            role: existingUser.role,
+            is_email_verified: existingUser.is_email_verified,
+            is_phone_verified: existingUser.is_phone_verified,
+            email: existingUser.email,
+            accessToken: existingUser.accessToken,
+            refreshToken: existingUser.refreshToken,
+          };
         } catch (error: any) {
-          throw new Error(error);
+          console.log("error", error);
+          throw new Error("Invalid email or password");
         }
       },
     }),
   ],
   callbacks: {
     async jwt({ token, account, user }) {
+      // console.log("user", user);
       if (token.accessToken) {
         const decodedToken = jwtDecode(token.accessToken as string);
         token.accessTokenExpires = decodedToken.exp! * 1000;
       }
+
       if (account && user) {
         const role = (cookies().get("role")?.value || "user") as
           | "user"
           | "broker";
 
-        const expiresAt = new Date(
-          Date.now() + (account.expires_at as number) * 1000
-        );
-
-        await userService.handleTokens(
-          user.email as string,
-          account.access_token as string,
-          account.refresh_token as string,
-          expiresAt,
-          (account.provider || "credentials") as "google" | "credentials",
-          role
-        );
-        if (account.provider === "google") return token;
+        if (account.provider === "google") {
+          const expiresAt = new Date(
+            Date.now() + (account.expires_at as number) * 1000
+          );
+          await userService.handleTokens(
+            user.email as string,
+            account.access_token as string,
+            account.refresh_token as string,
+            expiresAt,
+            (account.provider || "credentials") as "google" | "credentials",
+            role
+          );
+          return token;
+        }
 
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
@@ -85,6 +94,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
     async session({ session, token }) {
       // If the user has not been verified yet, return null
+      // console.log("session", session);
+      // console.log("token", token);
       const newSession = { ...session } as {
         user: any;
       } & AdapterSession &
@@ -94,8 +105,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       newSession.refreshToken = token.refresh_token as string;
       newSession.user = token.user;
 
-      return session;
+      return newSession;
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 });
 

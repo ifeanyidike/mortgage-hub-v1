@@ -10,7 +10,7 @@ const SocialLoginForm = ({ role }: { role: string }) => {
   return (
     <form action={performAction}>
       <button
-        className="bg-pink-400 text-white p-1 rounded-md m-1 text-lg"
+        className="login-with-google-btn"
         type="submit"
         name="action"
         value="google"

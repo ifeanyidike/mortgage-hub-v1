@@ -1,15 +1,12 @@
 import DB from "@/lib/db";
-import {
-  ExistingUser,
-  ExistingUserWithPword,
-  NewUser,
-  UserUpdate,
-} from "@/types/db";
-import { z, ZodError } from "zod";
+import { ExistingUser, ExistingUserWithPword, UserUpdate } from "@/types/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { zodError } from "./error";
+import { customError } from "./error";
 import { emailService } from "./email";
+import accountService from "./account";
+import { supabase } from "@/lib/supabase";
+import { RealtimePostgresChangesPayload } from "@supabase/supabase-js";
 
 class User extends DB {
   constructor() {
@@ -47,14 +44,16 @@ class User extends DB {
     password: string,
     role: "user" | "broker" = "user"
   ) {
-    const data = zodError.registerSchema().parse({ email, password });
-
+    const data = customError.registerSchema().parse({ email, password });
+    console.log("data", data);
     const hash = await bcrypt.hash(data.password, 10);
+    console.log("this db", this.db);
     const [user] = await this.db
       .insertInto("users")
       .values({ email: data.email, password: hash, role })
       .returning("id")
       .execute();
+    console.log("user", user);
 
     const token = jwt.sign(
       { id: user.id },
@@ -91,6 +90,7 @@ class User extends DB {
 
   public async authenticate(email: string, password: string) {
     const user = await this.findByEmailWithPassword(email);
+
     if (
       !user ||
       !user.password ||
@@ -99,28 +99,34 @@ class User extends DB {
       throw new Error("Invalid email or password");
     }
 
-    return user;
-  }
+    const account = await accountService.findByEmailAndProvider(
+      email,
+      "credentials"
+    );
 
-  public async storeTokens(
-    userId: string,
-    provider: string,
-    email: string,
-    access_token: string,
-    refresh_token: string,
-    expiresAt: Date
-  ) {
-    await this.db
-      .insertInto("accounts")
-      .values({
-        user_id: userId,
-        provider,
+    const tokens = await this.generateAndSignToken(email);
+    if (!account) {
+      await accountService.createOne({
+        user_id: user.id,
+        provider: "credentials",
         email,
-        access_token,
-        refresh_token,
-        access_token_expires_at: expiresAt,
-      })
-      .execute();
+        ...tokens,
+      });
+    } else {
+      await accountService.updateOne(
+        {
+          access_token: tokens.access_token,
+          refresh_token: tokens.refresh_token,
+        },
+        account.id
+      );
+    }
+
+    return {
+      ...user,
+      accessToken: tokens?.access_token || null,
+      refreshToken: tokens?.refresh_token || null,
+    };
   }
 
   public async handleTokens(
@@ -132,42 +138,37 @@ class User extends DB {
     role: "user" | "broker" = "user"
   ) {
     console.log("handleTokens", email, access_token, refresh_token, role);
-    const account = await this.db
-      .selectFrom("accounts")
-      .selectAll()
-      .where("email", "=", email)
-      .where("provider", "=", provider)
-      .executeTakeFirst();
+    const account = await accountService.findByEmailAndProvider(
+      email,
+      provider
+    );
 
     if (account) {
       // Update tokens if user exists
-      await this.db
-        .updateTable("accounts")
-        .set({
+      await accountService.updateOne(
+        {
           access_token,
           refresh_token,
           access_token_expires_at: new Date(expiresAt),
-        })
-        .where("id", "=", account.id)
-        .execute();
+        },
+        account.id
+      );
     } else {
-      console.log("email", email);
       let user = (await this.findByEmail(email)) as Pick<ExistingUser, "id">;
 
       if (!user) {
         if (provider === "credentials") throw new Error("Invalid user");
         user = await this.createOneNoPassword(email, role);
-        console.log("returned user", user);
       }
 
-      await this.storeTokens(
-        user.id,
+      await accountService.createOne({
+        user_id: user.id,
         provider,
         email,
         access_token,
         refresh_token,
-        expiresAt
-      );
+        access_token_expires_at: expiresAt,
+      });
     }
   }
 
@@ -181,6 +182,22 @@ class User extends DB {
     this.handleTokens(email, access_token, refresh_token, expiresAt, provider);
   }
 
+  private async generateAndSignToken(email: string) {
+    // Generate new access and refresh tokens
+    const access_token = jwt.sign(
+      { email },
+      process.env.ACCESS_TOKEN_SECRET as string,
+      { expiresIn: "15m" }
+    );
+    const refresh_token = jwt.sign(
+      { email },
+      process.env.REFRESH_TOKEN_SECRET as string,
+      { expiresIn: "7d" }
+    );
+
+    return { access_token, refresh_token };
+  }
+
   public async refreshToken(token: string) {
     const decoded = jwt.verify(
       token,
@@ -188,36 +205,19 @@ class User extends DB {
     ) as Record<"email", string>;
 
     // Find the user based on the token's user ID
-    const account = await this.db
-      .selectFrom("accounts")
-      .selectAll()
-      .where("email", "=", decoded.email)
-      .executeTakeFirst();
+
+    const account = await accountService.findByEmail(decoded.email);
 
     if (!account) {
       throw new Error("Invalid refresh token");
     }
 
-    // Generate new access and refresh tokens
-    const newAccessToken = jwt.sign(
-      { email: decoded.email },
-      process.env.ACCESS_TOKEN_SECRET as string,
-      { expiresIn: "15m" }
-    );
-    const newRefreshToken = jwt.sign(
-      { email: decoded.email },
-      process.env.REFRESH_TOKEN_SECRET as string,
-      { expiresIn: "7d" }
-    );
-
-    // Optionally, update the refresh token in the database
-    await this.db
-      .updateTable("accounts")
-      .set({ refresh_token: newRefreshToken, access_token: newAccessToken })
-      .where("id", "=", account.id)
-      .execute();
-
-    return { refreshToken: newRefreshToken, accessToken: newAccessToken };
+    const tokens = await this.generateAndSignToken(decoded.email);
+    await accountService.updateOne({ ...tokens }, account.id);
+    return {
+      accessToken: tokens.access_token,
+      refreshToken: tokens.refresh_token,
+    };
   }
 }
 

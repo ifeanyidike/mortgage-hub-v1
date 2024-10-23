@@ -6,13 +6,15 @@ import Link from "next/link";
 const Auth = () => {
   return (
     <div className="grid place-items-center h-screen">
-      <LoginForm />
-      <p className="my-3">
-        Don't have an account?
-        <Link className="mx-2 underline" href="register">
-          Register
-        </Link>
-      </p>
+      <div>
+        <LoginForm />
+        <p className="py-6">
+          Don't have an account?
+          <Link className="mx-2 underline" href="register">
+            Register
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

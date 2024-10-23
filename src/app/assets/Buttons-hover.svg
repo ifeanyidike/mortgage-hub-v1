@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #1d1d1b;
+      }
+
+      .cls-2, .cls-4, .cls-5 {
+        font-family: Montserrat-SemiBold, Montserrat;
+        font-size: 15.4px;
+        font-weight: 600;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-6 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-7 {
+        clip-path: url(#clippath-3);
+      }
+
+      .cls-8 {
+        clip-path: url(#clippath-2);
+      }
+
+      .cls-9, .cls-5 {
+        fill: #3185fc;
+      }
+
+      .cls-10 {
+        letter-spacing: 0em;
+      }
+
+      .cls-11 {
+        letter-spacing: 0em;
+      }
+
+      .cls-12 {
+        letter-spacing: 0em;
+      }
+
+      .cls-13 {
+        letter-spacing: 0em;
+      }
+
+      .cls-14 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" x="116.4" y="23.3" width="162.3" height="37.5"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="cls-1" x="116.4" y="60.3" width="162.3" height="37.5"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <rect class="cls-1" x="142.1" y="135" width="110.7" height="37.5"/>
+    </clipPath>
+    <clipPath id="clippath-3">
+      <rect class="cls-1" x="142.1" y="176" width="110.7" height="37.5"/>
+    </clipPath>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g class="cls-14">
+        <path class="cls-9" d="M130.4,32.8c-7.8,0-14,6.3-14,14s6.3,14,14,14h134.2c7.8,0,14-6.3,14-14s-6.3-14-14-14h-134.2Z"/>
+      </g>
+      <text class="cls-4" transform="translate(167.7 52.8)"><tspan class="cls-11" x="0" y="0">S</tspan><tspan class="cls-12" x="9.1" y="0">UBMI</tspan><tspan class="cls-10" x="50.1" y="0">T</tspan></text>
+      <g class="cls-6">
+        <path class="cls-9" d="M130.4,69.8c-7.8,0-14,6.3-14,14s6.3,14,14,14h134.2c7.8,0,14-6.3,14-14s-6.3-14-14-14h-134.2Z"/>
+      </g>
+      <text class="cls-2" transform="translate(167.7 89.8)"><tspan class="cls-11" x="0" y="0">S</tspan><tspan class="cls-12" x="9.1" y="0">UBMI</tspan><tspan class="cls-10" x="50.1" y="0">T</tspan></text>
+      <g class="cls-8">
+        <path class="cls-3" d="M156.2,144.4c-7.8,0-14,6.3-14,14s6.3,14,14,14h77.4c7.8,0,14-6.3,14-14s-6.3-14-14-14h-77.4Z"/>
+      </g>
+      <text class="cls-4" transform="translate(163.2 164.5)"><tspan class="cls-11" x="0" y="0">S</tspan><tspan class="cls-13" x="9.1" y="0">E</tspan><tspan class="cls-11" x="18.8" y="0">A</tspan><tspan class="cls-12" x="29.7" y="0">RC</tspan><tspan x="50.9" y="0">H</tspan></text>
+      <g class="cls-7">
+        <path class="cls-3" d="M156.2,185.4c-7.8,0-14,6.3-14,14s6.3,14,14,14h77.4c7.8,0,14-6.3,14-14s-6.3-14-14-14h-77.4Z"/>
+      </g>
+      <text class="cls-5" transform="translate(163.2 205.5)"><tspan class="cls-11" x="0" y="0">S</tspan><tspan class="cls-13" x="9.1" y="0">E</tspan><tspan class="cls-11" x="18.8" y="0">A</tspan><tspan class="cls-12" x="29.7" y="0">RC</tspan><tspan x="50.9" y="0">H</tspan></text>
+    </g>
+  </g>
+</svg>

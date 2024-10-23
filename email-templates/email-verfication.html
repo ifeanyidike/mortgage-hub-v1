@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Verify Your Email</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      .header {
+        background-color: #ff6f00;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 24px;
+      }
+      .email-content {
+        padding: 40px 20px;
+        text-align: center;
+      }
+      .email-content h1 {
+        font-size: 24px;
+        color: #333333;
+      }
+      .email-content p {
+        font-size: 16px;
+        color: #666666;
+        margin-bottom: 30px;
+      }
+      .confirm-button {
+        background-color: #ff6f00;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 15px 25px;
+        font-size: 18px;
+        border-radius: 4px;
+        display: inline-block;
+        margin-top: 20px;
+      }
+      .confirm-button:hover {
+        background-color: #e65b00;
+      }
+      .footer {
+        background-color: #f9f9f9;
+        padding: 20px;
+        text-align: center;
+        font-size: 12px;
+        color: #aaaaaa;
+      }
+      .footer a {
+        color: #ff6f00;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+      .social-icons {
+        margin-top: 20px;
+      }
+      .social-icons a {
+        margin: 0 10px;
+        display: inline-block;
+      }
+      .social-icons img {
+        width: 30px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Verify Your Email Address</h1>
+      </div>
+
+      <div class="email-content">
+        <h1>Welcome to Mortgage Hub</h1>
+        <p>
+          Please click the button below to confirm your email address and
+          activate your account.
+        </p>
+        <a href="{{verificationUrl}}" class="confirm-button">Confirm Email</a>
+        <p>If you received this email in error, please ignore it.</p>
+      </div>
+
+      <div class="footer">
+        <p>&copy; 2019 Mortgage Hub</p>
+        <p>
+          If you do not wish to receive these emails,
+          <a href="#">unsubscribe here</a>.
+        </p>
+        <div class="social-icons">
+          <a href="#"
+            ><img src="https://i.imgur.com/Ql8F6Qo.png" alt="Facebook"
+          /></a>
+          <a href="#"
+            ><img src="https://i.imgur.com/wtKFPxW.png" alt="Twitter"
+          /></a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

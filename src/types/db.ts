@@ -31,6 +31,7 @@ export interface UserTable {
   role?: "user" | "broker" | "lender";
   profile_photo: string | null;
   is_email_verified?: boolean;
+  is_phone_verified?: boolean;
 
   // You can specify a different type for each operation (select, insert and
   // update) using the `ColumnType<SelectType, InsertType, UpdateType>`

@@ -85,12 +85,46 @@ class Verification extends DB {
     return decrypted.toString();
   }
 
-  public async verifyPhone() {
+  private async listService() {
+    const services = await this.twilio_client.verify.v2.services.list({
+      limit: 20,
+    });
+    return services;
+  }
+
+  private async createService() {
+    return await this.twilio_client.verify.v2.services.create({
+      friendlyName: "Phone OTP Verification Service",
+    });
+  }
+
+  private async getOrCreateService() {
+    const services = await this.listService();
+    if (services.length === 0) {
+      return await this.createService();
+    }
+    return services[0];
+  }
+
+  public async verifyPhone(code: string) {
+    const service = await this.getOrCreateService();
+    console.log("entered", service);
     const verification_check = await this.twilio_client.verify.v2
-      .services(process.env.SERVICE_SID as string)
-      .verificationChecks.create({ to: "+2348121520994", code: "[Code]" });
+      .services(service.sid)
+      .verificationChecks.create({ to: "+2348121520994", code });
     console.log("verification_check", verification_check);
     return verification_check;
+    //   .then((verification_check) => console.log(verification_check.status));
+  }
+
+  public async sendPhoneVerificationText() {
+    const service = await this.getOrCreateService();
+    console.log("entered", service);
+    const verification = await this.twilio_client.verify.v2
+      .services(service.sid)
+      .verifications.create({ to: "+2348121520994", channel: "sms" });
+    console.log("verification", verification);
+    return verification;
     //   .then((verification_check) => console.log(verification_check.status));
   }
 }

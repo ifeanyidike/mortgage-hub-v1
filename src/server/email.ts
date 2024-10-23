@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+const fs = require("fs").promises;
+import path from "path";
 
 class Email {
   // Send verification email
@@ -16,18 +18,25 @@ class Email {
 
     console.log(
       process.env.ETHEREAL_USER_NAME,
-      "rocess.env.ETHEREAL_USER_NAME",
-      process.env.ETHEREAL_PASSWOR
+      "process.env.ETHEREAL_USER_NAME",
+      process.env.ETHEREAL_PASSWORD
     );
 
     const verificationUrl = `http://localhost:3000/verify/email?token=${token}`;
+    const pathname = path.resolve(
+      process.cwd(),
+      "email-templates",
+      "email-verfication.html"
+    );
+
+    let template = await fs.readFile(pathname, "utf-8");
+    template = template.replace("{{verificationUrl}}", verificationUrl);
 
     const result = await transporter.sendMail({
       from: '"Your App" <no-reply@yourapp.com>',
       to: email,
       subject: "Email Verification",
-      html: `<p>Please verify your email by clicking the link below:</p>
-             <a href="${verificationUrl}">Verify Email</a>`,
+      html: template,
     });
 
     console.log(`Preview URL: `, result);

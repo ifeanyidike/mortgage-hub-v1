@@ -1,108 +1,127 @@
 "use client";
-import { AppstoreOutlined, HomeFilled } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  CloseOutlined,
+  HomeFilled,
+  MenuOutlined,
+} from "@ant-design/icons";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { Button, Dropdown, Flex, Menu, MenuProps, Space } from "antd";
-import React, { useState } from "react";
-import { HiOutlineHomeModern } from "react-icons/hi2";
-import { PiBankBold } from "react-icons/pi";
-import { TbBrain } from "react-icons/tb";
+import React, { useEffect, useState } from "react";
+import { getSession, useSession, signOut } from "next-auth/react";
+import Link from "next/link";
+import { handleLogout } from "@/actions/auth";
+import Logo from "@/app/assets/logo.jpeg";
+import Image from "next/image";
 
-type MenuItem = Required<MenuProps>["items"][number];
-
-const items: MenuItem[] = [
+const items: Record<"key" | "label", string>[] = [
   {
     label: "Home",
     key: "home",
-    icon: <HomeFilled />,
   },
   {
     label: "Lenders",
     key: "lenders",
-    icon: <PiBankBold />,
   },
   {
     label: "Brokers",
     key: "SubMenu",
-    icon: <AppstoreOutlined />,
-    // children: [
-    //   {
-    //     type: "group",
-    //     label: "Item 1",
-    //     children: [
-    //       { label: "Option 1", key: "setting:1" },
-    //       { label: "Option 2", key: "setting:2" },
-    //     ],
-    //   },
-    //   {
-    //     type: "group",
-    //     label: "Item 2",
-    //     children: [
-    //       { label: "Option 3", key: "setting:3" },
-    //       { label: "Option 4", key: "setting:4" },
-    //     ],
-    //   },
-    // ],
   },
   {
     label: "AI Genie",
     key: "ai",
-    icon: <TbBrain />,
   },
   {
     label: "First Home",
     key: "first-home",
-    icon: <HiOutlineHomeModern />,
   },
 ];
 
 const Header = () => {
   const [current, setCurrent] = useState("home");
-  const { user, error, isLoading } = useUser();
+  // const { user, error, isLoading } = useUser();
+  const { data: session, update, status } = useSession();
 
   const onClick: MenuProps["onClick"] = (e) => {
     console.log("click ", e);
     setCurrent(e.key);
   };
-  return (
-    <div className="w-full my-auto flex px-20 py-12 !items-center  bg-white">
-      <Flex justify="space-between" align="center" className="w-full ">
-        <h5 className="whitespace-nowrap font-extrabold text-xl">
-          Mortgage Hub
-        </h5>
+  const [mobileExpand, setMobileExpand] = useState(false);
 
-        <Menu
-          mode="horizontal"
-          selectedKeys={[current]}
-          defaultSelectedKeys={["home"]}
-          items={items}
-          expandIcon
-          className="!w-fit font-medium !flex gap-10 !leading-[50px] !text-base"
-          onClick={onClick}
-        />
-        <Button shape="round" className="uppercase">
-          {!user ? (
-            <a href="/api/auth/login">Log-in | Register</a>
+  return (
+    <>
+      <div className="w-full my-auto flex max-[1200px]:px-14 px-20 py-12 !items-center  bg-[#f0f0f0] font-[family-name:var(--font-montserrat)] max-lg:hidden">
+        <Flex justify="space-between" align="center" className="w-full ">
+          {/* <h5 className="whitespace-nowrap font-extrabold text-xl">
+          Mortgage Hub
+        </h5> */}
+          <Link href="/">
+            <Image src={Logo} alt="" />
+          </Link>
+
+          <div className="w-4/5 flex justify-between items-end text-lg font-semibold px-24 max-[1200px]:px-14 max-[1050px]:px-8">
+            {items.map((i) => (
+              <Link key={i?.key} href={`/${i.key}`} className="text-black  ">
+                {i.label}
+              </Link>
+            ))}
+          </div>
+          {!session?.user ? (
+            <Button
+              shape="round"
+              className="uppercase !bg-[#f0f0f0] !border !border-black"
+            >
+              <a href="/login">Log-in | Register</a>
+            </Button>
           ) : (
-            <a href="/api/auth/logout">Log-out</a>
+            <Button
+              shape="round"
+              className="uppercase !bg-[#f0f0f0] !border !border-black"
+              onClick={async () => {
+                console.log("session user", session?.user);
+                if (session?.user) {
+                  await signOut();
+                  await handleLogout();
+                }
+              }}
+            >
+              Logout
+            </Button>
           )}
-        </Button>
-        {/* <a
-        href="https://www.google.com"
-        target="_blank"
-        rel="noopener noreferrer"
+        </Flex>
+      </div>
+      <div
+        className={`w-full my-auto  flex flex-col font-[family-name:var(--font-montserrat)] lg:hidden bg-[#f0f0f0] ${
+          mobileExpand && "fixed h-screen z-20"
+        }`}
       >
-        <Button type="primary">Search</Button>
-      </a>
-      <Dropdown menu={{ items }}>
-        <Button>
-          <Avatar src="https://zos.alipayobjects.com/rmsportal/QBnOOoLaAfKPdL.png" />
-          <span className="ml-2">Profile</span>
-        </Button>
-      </Dropdown> */}
-      </Flex>
-    </div>
+        <div className="flex justify-between  px-10 max-[500px]:px-4 py-12 !items-center w-full">
+          <Link href="/">
+            <Image src={Logo} alt="" />
+          </Link>
+          <button
+            className="cursor-pointer"
+            onClick={() => setMobileExpand(!mobileExpand)}
+          >
+            {!mobileExpand ? (
+              <MenuOutlined className="text-4xl" />
+            ) : (
+              <CloseOutlined className="text-4xl" />
+            )}
+          </button>
+        </div>
+        {mobileExpand && (
+          <div className="w-full flex flex-col items-center justify-between font-semibold text-4xl h-[50%] mt-24 overflow-auto">
+            {items.map((i) => (
+              <Link key={i?.key} href={`/${i.key}`} className="text-black  ">
+                {i.label}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
 export default Header;
-

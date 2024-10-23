@@ -1,14 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SocialLoginForm from "../login/SocialLoginForm";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Button, Input, Radio } from "antd";
+import { MdEmail } from "react-icons/md";
+import { LockFilled } from "@ant-design/icons";
+import { customError } from "@/server/error";
+import supabaseSubscriptions from "@/server/supabase-subscriptions";
+import { supabase } from "@/lib/supabase";
 
+const options = [
+  { label: "Continue as a broker", value: "broker" },
+  { label: "Continue as a user", value: "user" },
+];
 const RegistrationForm = () => {
   const router = useRouter();
   const [role, setRole] = useState<"user" | "broker">("user");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const subscription = supabaseSubscriptions.listenToEvents(
+      "INSERT",
+      (payload) => console.log("Payload: ", payload)
+    );
+
+    return () => {
+      supabase.removeChannel(subscription);
+    };
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    console.log("submitting...");
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
@@ -16,16 +40,36 @@ const RegistrationForm = () => {
       const response = await axios.post("/api/auth/register", { ...data });
       if (response.status === 201) router.push("/login");
     } catch (error: any) {
-      console.log("error", error);
+      if (axios.isAxiosError(error)) {
+        const serializedError = customError.serializeAxiosError(error);
+        setError(serializedError.message);
+        console.log(
+          "Serialized Axios error:",
+          JSON.stringify(serializedError, null, 2)
+        );
+      } else {
+        console.error("Unknown error:", error);
+      }
     }
   }
   return (
-    <>
-      <form
-        onSubmit={handleSubmit}
-        className="my-5 flex flex-col items-center border p-3 border-gray-200 rounded-md text-black"
-      >
-        <input
+    <div className="grid place-items-center h-screen">
+      <div className="flex flex-col justify-center items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="my-5 gap-5 flex flex-col w-[500px] items-center border p-3 border-gray-200 rounded-md text-black"
+        >
+          <Radio.Group
+            block
+            options={options}
+            defaultValue="user"
+            optionType="button"
+            buttonStyle="solid"
+            className="!w-full"
+            name="role"
+            onChange={(e) => setRole(e.target.value)}
+          />
+          {/* <input
           type="radio"
           id="user"
           name="role"
@@ -40,8 +84,8 @@ const RegistrationForm = () => {
           value="Broker"
           onChange={() => setRole("broker")}
         />
-        <label htmlFor="broker">Broker</label>
-        {/* <div className="my-2">
+        <label htmlFor="broker">Broker</label> */}
+          {/* <div className="my-2">
           <label htmlFor="email">Name</label>
           <input
             className="border mx-2 border-gray-500 rounded"
@@ -50,35 +94,38 @@ const RegistrationForm = () => {
             id="name"
           />
         </div> */}
-        <div className="my-2">
-          <label htmlFor="email">Email Address</label>
-          <input
-            className="border mx-2 border-gray-500 rounded"
+
+          <Input
             type="email"
             name="email"
-            id="email"
+            required
+            aria-placeholder="Enter your email address"
+            size="large"
+            placeholder="Enter your email address"
+            prefix={<MdEmail />}
           />
-        </div>
-
-        <div className="my-2">
-          <label htmlFor="password">Password</label>
-          <input
-            className="border mx-2 border-gray-500 rounded"
+          <Input.Password
             type="password"
             name="password"
-            id="password"
+            required
+            aria-placeholder="Enter your password"
+            size="large"
+            placeholder="Enter your password"
+            prefix={<LockFilled />}
           />
-        </div>
-
-        <button
-          type="submit"
-          className="bg-orange-300 mt-4 rounded flex justify-center items-center w-36"
-        >
-          Register
-        </button>
-      </form>
-      <SocialLoginForm role={role} />
-    </>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+          <Button
+            type="default"
+            className="w-3/5"
+            size="large"
+            htmlType="submit"
+          >
+            Submit
+          </Button>
+        </form>
+        <SocialLoginForm role={role} />
+      </div>
+    </div>
   );
 };
 

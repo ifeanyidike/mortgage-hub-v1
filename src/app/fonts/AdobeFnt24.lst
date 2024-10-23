@@ -1,0 +1,338 @@
+%!Adobe-FontList 1.24
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/AdobeFnt24.lst
+FileLength:7896
+FileModTime:751222433
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Gibson-SemiBold
+FamilyName:Gibson
+StyleName:SemiBold
+MenuName:Gibson Light
+StyleBits:2
+WeightClass:600
+WidthClass:5
+AngleClass:0
+FullName:Gibson SemiBold
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Gibson-SemiBold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:98532
+FileModTime:417404210
+NameArray:0,Mac,4,Gibson SemiBold
+NameArray:0,Win,1,Gibson Light
+NameArray:0,Win,16,Gibson
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+MenuName:Minion Pro
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Minion Pro
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:218640
+FileModTime:689616197
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Montserrat-Black
+FamilyName:Montserrat
+StyleName:Black
+MenuName:Montserrat Black
+StyleBits:0
+WeightClass:900
+WidthClass:5
+AngleClass:0
+FullName:Montserrat Black
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Montserrat-Black.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:257552
+FileModTime:345423600
+NameArray:0,Win,1,Montserrat Black
+NameArray:0,Win,16,Montserrat
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Montserrat-Bold
+FamilyName:Montserrat
+StyleName:Bold
+MenuName:Montserrat
+StyleBits:2
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Montserrat Bold
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Montserrat-Bold.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:244468
+FileModTime:345423600
+NameArray:0,Win,1,Montserrat
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Montserrat-Italic
+FamilyName:Montserrat
+StyleName:Italic
+MenuName:Montserrat
+StyleBits:1
+WeightClass:400
+WidthClass:5
+AngleClass:1
+FullName:Montserrat Italic
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Montserrat-Italic.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:249088
+FileModTime:345423600
+NameArray:0,Win,1,Montserrat
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Montserrat-Light
+FamilyName:Montserrat
+StyleName:Light
+MenuName:Montserrat Light
+StyleBits:0
+WeightClass:300
+WidthClass:5
+AngleClass:0
+FullName:Montserrat Light
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Montserrat-Light.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:242068
+FileModTime:345423600
+NameArray:0,Win,1,Montserrat Light
+NameArray:0,Win,16,Montserrat
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Montserrat-Medium
+FamilyName:Montserrat
+StyleName:Medium
+MenuName:Montserrat Medium
+StyleBits:0
+WeightClass:500
+WidthClass:5
+AngleClass:0
+FullName:Montserrat Medium
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Montserrat-Medium.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:243180
+FileModTime:345423600
+NameArray:0,Win,1,Montserrat Medium
+NameArray:0,Win,16,Montserrat
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Montserrat-Regular
+FamilyName:Montserrat
+StyleName:Regular
+MenuName:Montserrat
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Montserrat Regular
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Montserrat-Regular.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:245708
+FileModTime:345423600
+NameArray:0,Win,1,Montserrat
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Montserrat-SemiBold
+FamilyName:Montserrat
+StyleName:SemiBold
+MenuName:Montserrat SemiBold
+StyleBits:0
+WeightClass:600
+WidthClass:5
+AngleClass:0
+FullName:Montserrat SemiBold
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Montserrat-SemiBold.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:243816
+FileModTime:345423600
+NameArray:0,Win,1,Montserrat SemiBold
+NameArray:0,Win,16,Montserrat
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Montserrat-SemiBoldItalic
+FamilyName:Montserrat
+StyleName:SemiBold Italic
+MenuName:Montserrat SemiBold
+StyleBits:1
+WeightClass:600
+WidthClass:5
+AngleClass:1
+FullName:Montserrat SemiBold Italic
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Montserrat-SemiBoldItalic.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:249192
+FileModTime:345423600
+NameArray:0,Win,1,Montserrat SemiBold
+NameArray:0,Win,16,Montserrat
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Oswald-Regular
+FamilyName:Oswald
+StyleName:Regular
+MenuName:Oswald
+FamilyPrefix:Oswald
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Oswald Regular
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Oswald-VariableFont_wght.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:TrueTypeVariableFont
+FileLength:126336
+FileModTime:352166400
+NameArray:0,Win,1,Oswald
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Roboto-Bold
+FamilyName:Roboto
+StyleName:Bold
+MenuName:Roboto
+StyleBits:2
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Roboto Bold
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Roboto-Bold.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:162464
+FileModTime:490801954
+NameArray:0,Win,1,Roboto
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Roboto-Medium
+FamilyName:Roboto
+StyleName:Medium
+MenuName:Roboto Medium
+StyleBits:0
+WeightClass:500
+WidthClass:5
+AngleClass:0
+FullName:Roboto Medium
+WritingScript:Roman
+OutlineFileName:/Users/adrianrobson/Documents/Work/Mortgage Hub Landing page/MORTGAGE HUB Assets/Mortgage Hub (Mobile Site) Folder/Document fonts/Roboto-Medium.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:171656
+FileModTime:379382400
+NameArray:0,Win,1,Roboto Medium
+NameArray:0,Win,16,Roboto
+%EndFont
+

@@ -29,6 +29,7 @@ abstract class DB {
           password: process.env.DB_PASSWORD,
         }),
       }),
+      log: ["query", "error"],
     });
   }
 }

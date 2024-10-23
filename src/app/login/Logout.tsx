@@ -1,10 +1,13 @@
 import { handleLogout } from "@/actions/auth";
+import { Button } from "antd";
 import React from "react";
 
 const Logout = () => {
   return (
     <form action={handleLogout}>
-      <button className="bg-blue-500 text-white">Logout</button>
+      <Button shape="round" className="uppercase" htmlType="submit">
+        Logout
+      </Button>
     </form>
   );
 };

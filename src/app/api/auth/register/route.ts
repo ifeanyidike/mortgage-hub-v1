@@ -1,4 +1,3 @@
-import { zodError } from "@/server/error";
 import user from "@/server/user";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";

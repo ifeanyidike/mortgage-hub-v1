@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 155.3 129.8">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-2, .cls-3 {
+        font-family: Roboto-Medium, Roboto;
+        font-size: 9.3px;
+        font-weight: 500;
+      }
+
+      .cls-4 {
+        fill: #1d1d1b;
+      }
+
+      .cls-5 {
+        fill: #c6c6c6;
+      }
+
+      .cls-6 {
+        fill: #575756;
+      }
+
+      .cls-3 {
+        fill: #fe621d;
+      }
+
+      .cls-7 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" x="9.8" y="48.7" width="135.7" height="28.6"/>
+    </clipPath>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g class="cls-7">
+        <path class="cls-4" d="M34.7,55.2c-5,0-9,4-9,9s4,9,9,9h86.5c5,0,9-4,9-9s-4-9-9-9H34.7Z"/>
+        <path class="cls-6" d="M140,69.8v-1.9l3.7-2.7-3.7-2.7v-2l5.2,3.7v1.9l-5.2,3.7Z"/>
+        <path class="cls-5" d="M10.2,66.1v-1.9l5.2-3.7v2l-3.7,2.7,3.7,2.7v1.9l-5.2-3.7Z"/>
+      </g>
+      <text class="cls-3" transform="translate(43.2 67.8)"><tspan x="0" y="0">1</tspan></text>
+      <text class="cls-2" transform="translate(48.5 67.8)"><tspan x="0" y="0" xml:space="preserve">    2     3    4     5</tspan></text>
+    </g>
+  </g>
+</svg>

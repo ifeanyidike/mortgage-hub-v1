@@ -9,7 +9,8 @@ export async function handleSocialLogin(formData: FormData) {
   await signIn(action, { redirectTo: "/", state: "broker" });
 }
 
-export async function handleLogout(formData: FormData) {
+export async function handleLogout() {
+  console.log("I am called");
   await signOut({ redirectTo: "/" });
 }
 
@@ -22,8 +23,10 @@ export async function handleCredentialLogin(formData: FormData) {
       password,
       redirect: false,
     });
+
+    console.log("result in login credentials", result);
     return result;
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    throw new Error("Invalid email or password");
   }
 }

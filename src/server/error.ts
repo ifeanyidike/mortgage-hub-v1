@@ -1,6 +1,7 @@
+import { AxiosError, AxiosResponse } from "axios";
 import { z } from "zod";
 
-export class ZodError {
+export class CustomError {
   public registerSchema() {
     const passwordSchema = z
       .string()
@@ -36,6 +37,59 @@ export class ZodError {
       return error[0].message;
     }
   }
+
+  // Utility function to serialize Axios errors
+  public serializeAxiosError(error: AxiosError) {
+    let errorData = "";
+    let zodErrors = [];
+    if (error.response) {
+      if (error.response.data) {
+        const { error: err } = error.response.data as AxiosResponse["data"] & {
+          error: any;
+        };
+
+        if (err) {
+          zodErrors = JSON.parse(err);
+        }
+      }
+
+      if (
+        error.response.statusText.includes(
+          "duplicate key value violates unique constraint"
+        )
+      ) {
+        errorData = "Email already exists";
+      }
+
+      let message = error.response.statusText;
+      if (zodErrors.length) {
+        message = zodErrors[0].message;
+      } else if (errorData) {
+        message = errorData;
+      }
+
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        data: error.response.data,
+        errorData,
+        zodErrors,
+        headers: error.response.headers,
+        message,
+      };
+    } else if (error.request) {
+      // The request was made but no response was received
+      return {
+        message: "No response received from the server",
+        request: error.request, // Provides details of the request
+      };
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      return {
+        message: error.message, // General error message
+      };
+    }
+  }
 }
 
-export const zodError = new ZodError();
+export const customError = new CustomError();
