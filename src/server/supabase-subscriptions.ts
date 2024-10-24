@@ -13,7 +13,7 @@ class SupabaseSubscription {
     const subscription = supabase
       .channel("public:users")
       .on(
-        //@ts-ignore
+        //@ts-expect-error This should be fine. There's no error
         "postgres_changes",
         { event, schema: "public", table: "users" },
         (payload: RealtimePostgresChangesPayload<any>) => {

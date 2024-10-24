@@ -9,7 +9,7 @@ const Auth = () => {
       <div>
         <LoginForm />
         <p className="py-6">
-          Don't have an account?
+          Don&apos;t have an account?
           <Link className="mx-2 underline" href="register">
             Register
           </Link>

@@ -1,12 +1,13 @@
 import nodemailer from "nodemailer";
-const fs = require("fs").promises;
+import { promises as fs } from "fs";
+
 import path from "path";
 
 class Email {
   // Send verification email
 
   public async sendVerificationEmail(email: string, token: string) {
-    let transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       host: "smtp.ethereal.email",
       port: 587,
       secure: false, // true for 465, false for other ports

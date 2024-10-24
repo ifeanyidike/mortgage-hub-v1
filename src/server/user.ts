@@ -177,7 +177,7 @@ class User extends DB {
     access_token: string,
     refresh_token: string,
     expiresAt: Date,
-    provider = "google" as "google"
+    provider = "google" as const
   ) {
     this.handleTokens(email, access_token, refresh_token, expiresAt, provider);
   }

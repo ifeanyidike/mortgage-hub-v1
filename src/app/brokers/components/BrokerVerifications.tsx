@@ -7,7 +7,7 @@ import React, { useState } from "react";
 
 type OTPProps = GetProps<typeof Input.OTP>;
 
-const page = () => {
+const BrokerVerifications = () => {
   const [code, setCode] = useState("");
 
   const [form] = Form.useForm();
@@ -65,4 +65,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default BrokerVerifications;

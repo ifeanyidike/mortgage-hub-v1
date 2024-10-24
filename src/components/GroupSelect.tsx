@@ -39,7 +39,9 @@ const GroupSelect = (props: Props) => {
             className="!placeholder-black"
             allowClear
             onChange={(value) => handleChange(value, d.key)}
-            {...d}
+            placeholder={d.placeholder}
+            options={d.options}
+            key={d.key}
           />
         ))}
 

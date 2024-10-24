@@ -27,6 +27,7 @@ export async function handleCredentialLogin(formData: FormData) {
     console.log("result in login credentials", result);
     return result;
   } catch (error: any) {
+    console.log("error in login credentials", error);
     throw new Error("Invalid email or password");
   }
 }

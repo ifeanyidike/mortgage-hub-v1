@@ -2,6 +2,7 @@
 import { generateTotpSecret } from "@/actions/generateTotp";
 import { useState, useEffect } from "react";
 import VerifyTotp from "./OtpVerification";
+import Image from "next/image";
 
 export default function TotpSetup() {
   const [qrCodeURL, setQrCodeURL] = useState("");
@@ -19,7 +20,7 @@ export default function TotpSetup() {
   return (
     <div>
       <h1>Scan the QR Code with your Authenticator App</h1>
-      {qrCodeURL && <img src={qrCodeURL} alt="QR Code" />}
+      {qrCodeURL && <Image src={qrCodeURL} alt="QR Code" />}
 
       <p>Or manually enter this code in your app:</p>
       <code>{secret}</code>

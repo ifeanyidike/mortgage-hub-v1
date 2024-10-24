@@ -8,7 +8,7 @@ const Auth = () => {
     <div className="grid place-items-center h-screen">
       <LoginForm />
       <p className="my-3">
-        Don't have an account?
+        Don&apos;t have an account?
         <Link className="mx-2 underline" href="register">
           Register
         </Link>

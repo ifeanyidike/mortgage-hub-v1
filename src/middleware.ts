@@ -5,7 +5,7 @@ import { PUBLIC_ROUTES, ROOT, LOGIN } from "./lib/routes";
 
 const authConfig = {
   session: {
-    strategy: "jwt" as "jwt",
+    strategy: "jwt" as const,
   },
   providers: [],
 };

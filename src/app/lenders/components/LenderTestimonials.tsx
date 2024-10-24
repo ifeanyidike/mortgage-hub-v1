@@ -24,7 +24,7 @@ const LenderTestimonials = () => {
           <VscQuote size={40} />
         </span>
         <p className="text-lg md:text-xl italic text-gray-600 mb-8">
-          I couldn't get a loan with my bank, never knew there were private
+          I couldn&apos;t get a loan with my bank, never knew there were private
           lenders that could work with me.
         </p>
         <div className="flex items-center gap-2">
