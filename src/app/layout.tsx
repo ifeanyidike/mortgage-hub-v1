@@ -7,6 +7,7 @@ import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,6 +40,7 @@ export default async function RootLayout({
           <AntdRegistry>
             <Header />
             {children}
+            <Footer />
           </AntdRegistry>
         </body>
       </SessionProvider>

@@ -96,7 +96,7 @@ export default async function Home() {
         )} */}
       </section>
 
-      <section className="lg:pt-24 pb-16 pt-16 flex flex-col gap-16">
+      <section className="lg:pt-24 pb-16 pt-16 flex flex-col gap-16 overflow-hidden">
         <div className="flex flex-col justify-center items-center text-center gap-4">
           <h2 className="text-4xl">Lateum Sit Ad Lorem Ipsum</h2>
           <div>
@@ -114,13 +114,13 @@ export default async function Home() {
         </div>
         <BlogHighlights />
       </section>
-      <section>
+      <section className="overflow-hidden">
         <HouseTransfer />
       </section>
-      <section>
+      <section className="overflow-hidden">
         <HomeAIPane />
       </section>
-      <section className="bg-gray-200 pb-32">
+      <section className="bg-gray-200 pb-32 overflow-hidden">
         <CustomerServicePane />
         <StatPane />
       </section>

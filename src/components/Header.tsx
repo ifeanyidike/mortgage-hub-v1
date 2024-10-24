@@ -11,13 +11,13 @@ import React, { useEffect, useState } from "react";
 import { getSession, useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { handleLogout } from "@/actions/auth";
-import Logo from "@/app/assets/logo.jpeg";
+import Logo from "@/app/assets/logo.png";
 import Image from "next/image";
 
 const items: Record<"key" | "label", string>[] = [
   {
     label: "Home",
-    key: "home",
+    key: "/",
   },
   {
     label: "Lenders",
@@ -25,15 +25,15 @@ const items: Record<"key" | "label", string>[] = [
   },
   {
     label: "Brokers",
-    key: "SubMenu",
+    key: "brokers",
+  },
+  {
+    label: "New Immigrants",
+    key: "new-immigrants",
   },
   {
     label: "AI Genie",
     key: "ai",
-  },
-  {
-    label: "First Home",
-    key: "first-home",
   },
 ];
 
@@ -96,7 +96,7 @@ const Header = () => {
         }`}
       >
         <div className="flex justify-between  px-10 max-[500px]:px-4 py-12 !items-center w-full">
-          <Link href="/">
+          <Link onClick={() => setMobileExpand(false)} href="/">
             <Image src={Logo} alt="" />
           </Link>
           <button
@@ -113,7 +113,12 @@ const Header = () => {
         {mobileExpand && (
           <div className="w-full flex flex-col items-center justify-between font-semibold text-4xl h-[50%] mt-24 overflow-auto">
             {items.map((i) => (
-              <Link key={i?.key} href={`/${i.key}`} className="text-black  ">
+              <Link
+                onClick={() => setMobileExpand(false)}
+                key={i?.key}
+                href={`/${i.key}`}
+                className="text-black  "
+              >
                 {i.label}
               </Link>
             ))}

@@ -19,7 +19,7 @@ const CustomerServicePane = () => {
           Lupti occatus, simeniatur re quis reptiatur agnatem aute qui de debis
           iur sequassitin prerum es que
         </p>
-        <button className="flex w-fit uppercase text-white gap-4 items-center !bg-[#21334C] !py-2 px-4 rounded-full">
+        <button className="flex w-fit uppercase text-white gap-4 items-center !bg-[#21334C] !py-2 px-8 rounded-full">
           <Image
             src={ChatIcon}
             alt=""
