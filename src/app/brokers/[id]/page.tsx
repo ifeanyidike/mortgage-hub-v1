@@ -20,7 +20,7 @@ export default function Page({ params }: { params: { id: string } }) {
             src={profile?.imgSrc}
             width={500}
             height={300}
-            className="w-auto max-w-[300px] h-auto max-h-[300px] order-1 self-center"
+            className="w-auto max-w-[300px] h-auto max-h-[400px] order-1 self-center lg:self-start"
             alt={profile.name}
           />
           <div className="xl:px-16 p-8 bg-white rounded-3xl gap-6 flex flex-col w-full lg:w-1/2 order-3 lg:order-2">

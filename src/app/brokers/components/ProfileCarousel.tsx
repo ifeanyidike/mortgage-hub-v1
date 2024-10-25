@@ -12,6 +12,7 @@ import { motion, PanInfo, useMotionValue, useSpring } from "framer-motion";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { profiles } from "./data";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const START_INDEX = 1;
@@ -140,9 +141,12 @@ export default function ProfileCarousel() {
           dragOffset < offsetWidth - itemOffset &&
           i < itemsRef.current.length - 2)
       ) {
-        dragOffset > 0
-          ? (offsetWidth += prevItemWidth)
-          : (offsetWidth -= nextItemWidth);
+        if (dragOffset > 0) {
+          offsetWidth += prevItemWidth;
+        } else {
+          offsetWidth -= nextItemWidth;
+        }
+
         continue;
       }
 
@@ -290,10 +294,13 @@ type ItemProps = {
   imgSrc: string;
 };
 const ProfileItem = (props: ItemProps) => {
+  const router = useRouter();
   const { id, rating, name, description, imgSrc } = props;
   return (
-    <Link
-      href={`/brokers/${id}`}
+    <div
+      onClick={(e) => {
+        router.push(`/brokers/${id}`);
+      }}
       className="min-w-96 h-auto rounded-[50px] rounded-bl-none bg-gray-200 px-14 py-8 flex flex-col gap-8"
     >
       <div className="flex justify-between items-center">
@@ -327,6 +334,6 @@ const ProfileItem = (props: ItemProps) => {
           <FaHeart color="#ADBDFF" className="!w-3/5 !h-3/5 mt-1" />
         </button>
       </div>
-    </Link>
+    </div>
   );
 };
