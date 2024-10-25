@@ -11,24 +11,25 @@ import BrokersHomeSelect from "./BrokersHomeSelect";
 const Hero = () => {
   return (
     <div
-      className="w-full lg:h-[950px] h-[2000px] bg-[url('/assets/images/brokers-background.png')] 
+      className="w-full lg:h-[950px] h-[1700px] bg-[url('/assets/images/brokers-background.png')] 
     bg-center bg-cover bg-no-repeat bg-gray-150
     px-32
     max-lg:px-8
     flex flex-col
+    overflow-hidden
    "
     >
       <h2 className="text-6xl text-black text-center pt-16">
         Find A Broker On Your Vibe
       </h2>
-      <div className="flex justify-center items-center gap-8 mt-8 relative w-full h-[1400px] lg:h-[600px] ">
+      <div className="flex justify-center items-center gap-8 mt-8 relative w-full h-[1000px] lg:h-[600px] ">
         <ImageComponent
           src={SmilingBeautyBlack}
           text="LUXURY & CLASS"
           color="text-white"
           bg="bg-[#006B78]"
           textPos={{ x: "-right-32", y: "top-0" }}
-          pos={{ x: "lg:left-0 left-[5%]", y: "lg:top-[5%] top-[60%]" }}
+          pos={{ x: "lg:left-0 left-[5%]", y: "lg:top-[5%] top-[62%]" }}
         />
         <ImageComponent
           src={SmilingTeacup}
@@ -44,7 +45,7 @@ const Hero = () => {
           color="text-white"
           bg="bg-[#3185FC]"
           textPos={{ x: "-left-16", y: "bottom-0" }}
-          pos={{ x: "left-[40%] lg:left-[10%]", y: "top-[79%] lg:top-[50%]" }}
+          pos={{ x: "left-[40%] lg:left-[10%]", y: "top-[81%] lg:top-[50%]" }}
         />
         <ImageComponent
           src={SmilingHappy}
@@ -52,7 +53,7 @@ const Hero = () => {
           color="text-white"
           bg="bg-[#3EBA97]"
           textPos={{ x: "-left-40", y: "-top-6" }}
-          pos={{ x: "lg:left-[42%] left-[40%]", y: "lg:top-[40%] top-[38%]" }}
+          pos={{ x: "lg:left-[42%] left-[40%]", y: "lg:top-[40%] top-[40%]" }}
         />
 
         <ImageComponent
@@ -81,9 +82,9 @@ type Props = {
 const ImageComponent = (props: Props) => {
   const { src, text, color, bg, textPos, pos } = props;
   return (
-    <div className={`absolute ${pos.x} ${pos.y}`}>
+    <div className={`absolute ${pos.x} ${pos.y} w-40 h-40 lg:w-56 lg:h-56`}>
       <Image
-        className="rounded-full w-56 h-56 aspect-square"
+        className="rounded-full w-full h-full aspect-square object-cover"
         src={src}
         alt={text}
         placeholder="blur"

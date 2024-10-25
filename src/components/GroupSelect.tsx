@@ -36,7 +36,7 @@ const GroupSelect = (props: Props) => {
               height: 50,
               fontFamily: "Montserrat, sans-serif",
             }}
-            className="!placeholder-black"
+            className="!placeholder-black !border !rounded-lg !text-black group-select"
             allowClear
             onChange={(value) => handleChange(value, d.key)}
             placeholder={d.placeholder}

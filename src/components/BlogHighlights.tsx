@@ -73,7 +73,7 @@ const ItemPane = (props: Props) => {
       }`}
     >
       <small className="uppercase text-gray-600">{title}</small>
-      <p className="font-semibold">{text}</p>
+      <p className="font-semibold hover:text-[##3EBA97]">{text}</p>
       <small>{time} read</small>
     </div>
   );
