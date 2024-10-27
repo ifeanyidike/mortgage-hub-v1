@@ -31,8 +31,8 @@ type ItemProps = {
 };
 export const HomeCarouselItem = (props: ItemProps) => {
   return (
-    <div className="flex flex-col h-[500px]">
-      <div className="h-96 w-96 relative object-cover rounded-full aspect-square p-1 border border-gray-200">
+    <div className="flex flex-col h-[500px] max-sm:h-[400px]">
+      <div className="h-96 w-96 max-sm:h-80 max-sm:w-80 relative object-cover rounded-full aspect-square p-1 border border-gray-200">
         <Image
           src={props.img}
           alt=""

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const FurtherStat = () => {
   return (
-    <div className="flex py-16 px-40 max-2xl:px-8 max-2xl:gap-8 max-lg:px-24 max-lg:flex-col items-center">
+    <div className="flex py-16 px-40 max-2xl:px-8 max-2xl:gap-8 max-lg:px-24 max-md:px-4 max-lg:flex-col items-center">
       <div className="w-1/2 max-h-[800px] max-lg:w-full">
         <Image
           src={SmilingWithPhone}
@@ -13,7 +13,7 @@ const FurtherStat = () => {
         />
       </div>
       <div className="w-1/2 flex flex-col max-lg:w-full">
-        <h3 className="text-3xl font-semibold text-left">
+        <h3 className="text-3xl font-semibold text-left max-sm:text-2xl">
           Ad situem felored invicto ad ipsum alores dores sit ateum braclilius
         </h3>
         <div className="flex max-lg:flex-col justify-around max-lg:justify-start max-lg:gap-8 items-center max-lg:items-start mt-20">
@@ -49,11 +49,11 @@ const StatPane = (props: Props) => {
   return (
     <div className="flex flex-col justify-center items-center gap-2 max-lg:gap-8 max-lg:flex-row">
       <div
-        className={`rounded-full w-44 h-44 aspect-square border ${props.color} font-bold flex items-center justify-center text-6xl`}
+        className={`rounded-full w-44 h-44 max-md:w-28 max-sm:h-28 aspect-square border ${props.color} font-bold flex items-center justify-center text-6xl max-md:text-3xl`}
       >
         {props.stat}
       </div>
-      <p className="text-xl">{props.text}</p>
+      <p className="text-xl max-md:text-base">{props.text}</p>
     </div>
   );
 };

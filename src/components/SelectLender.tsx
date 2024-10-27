@@ -10,7 +10,7 @@ import Image from "next/image";
 const SelectLender = () => {
   return (
     <div className="bg-[#3185FC] px-36 py-16 max-lg:px-16 max-md:px-8 max-sm:px-4">
-      <h4 className="text-white text-6xl text-center mb-16">
+      <h4 className="text-white text-6xl text-center mb-16 max-sm:text-4xl">
         Select a Lender of your choice
       </h4>
       <div className="grid grid-cols-3 max-xl:grid-cols-2 gap-32 max-lg:gap-8 max-md:gap-4 max-sm:gap-2">

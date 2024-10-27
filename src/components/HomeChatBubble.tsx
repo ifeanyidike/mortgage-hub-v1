@@ -22,22 +22,26 @@ const HomeChatBubble = (props: Props) => {
   } = props;
   return (
     <div
-      className={`bubble-small ${hasShadow && "shadow-md"}`}
+      className={`bubble-small ${
+        hasShadow && "shadow-md"
+      } max-sm:!w-fit whitespace-nowrap max-sm:!p-3`}
       style={{
         color,
         boxShadow: hasShadow ? "5px 10px 15px rgba(0, 0, 0, 0.3)" : "",
       }}
     >
-      <p className="text-black text-[22px] font-medium">{text}</p>
+      <p className="text-black text-[22px] max-sm:text-base font-medium">
+        {text}
+      </p>
       <small
         className={`${
           color.toLowerCase() === "#ffffff" ? "text-black" : "text-white"
-        } absolute bottom-1 text-[14px] font-medium right-6`}
+        } absolute bottom-1 text-[14px] font-medium right-6 max-sm:text-[9px]`}
       >
         {time}
       </small>
       {hasHappy && (
-        <div className="absolute -top-7 right-11 rounded-full flex gap-2 text-6xl">
+        <div className="absolute -top-7 right-11 rounded-full flex gap-2 text-6xl max-sm:text-4xl">
           <span>😀</span>
           <span>😀</span>
         </div>

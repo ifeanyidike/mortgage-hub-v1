@@ -23,9 +23,13 @@ const HomeAIPane = () => {
           Lorem Ipsum
         </Button>
       </div>
-      <div className="w-1/2 max-w-[600px] max-lg:w-full relative">
-        <Image src={HappyReadingAI} alt="" />
-        <div className="absolute -top-8 -left-40 ">
+      <div className="w-1/2 max-w-[600px] max-sm:max-w-[400px] max-lg:w-full relative">
+        <Image
+          src={HappyReadingAI}
+          alt=""
+          className="max-sm:max-w-80 max-sm:mx-auto"
+        />
+        <div className="absolute -top-8 -left-40 max-sm:-left-8">
           <FloatingPane
             text="Down Payment Assistance"
             color="bg-[#3EBA97]"
@@ -33,12 +37,12 @@ const HomeAIPane = () => {
               <Image
                 src={MortgageAssistance}
                 alt=""
-                className="h-12 w-12 aspect-square rounded-full"
+                className="h-12 w-12 max-sm:h-6 max-sm:w-6 aspect-square rounded-full"
               />
             }
           />
         </div>
-        <div className="absolute bottom-7 -left-20 ">
+        <div className="absolute bottom-7 -left-20 max-sm:-left-4">
           <FloatingPane
             text="Term Extensions"
             color="bg-[#82A6BF]"
@@ -47,17 +51,17 @@ const HomeAIPane = () => {
               <Image
                 src={CreditScore}
                 alt=""
-                className="h-12 w-12 aspect-square rounded-full"
+                className="h-12 w-12 max-sm:h-6 max-sm:w-6 aspect-square rounded-full"
               />
             }
           />
         </div>
-        <div className="absolute top-8 -right-20 ">
+        <div className="absolute top-8 -right-20 max-sm:-right-4">
           <FloatingPane
             text="Free Counselling"
             color="bg-[#FE621D]"
             icon={
-              <BsPatchCheck className="h-12 w-12 aspect-square rounded-full text-white" />
+              <BsPatchCheck className="h-12 w-12 max-sm:h-6 max-sm:w-6 aspect-square rounded-full text-white" />
             }
           />
         </div>
@@ -77,9 +81,15 @@ type Props = {
 const FloatingPane = (props: Props) => {
   const { color, icon, text, width = "w-3/5" } = props;
   return (
-    <div className="flex items-center rounded-full h-24 bg-black box-border min-w-72">
-      <div className={`${color} ml-5 rounded-full h-16 p-2`}>{icon}</div>
-      <p className={`text-white  ml-4 box-border font-semibold w-3/5`}>
+    <div className="flex items-center justify-center rounded-full h-24 max-sm:h-12 bg-black box-border min-w-72 max-sm:min-w-40">
+      <div
+        className={`${color} ml-5 rounded-full h-16 p-2 max-sm:p-1 max-sm:h-8 max-sm:w-8 flex max-sm:items-center max-sm:ml-1`}
+      >
+        {icon}
+      </div>
+      <p
+        className={`text-white  ml-4 box-border font-semibold w-3/5 max-sm:text-xs max-sm:ml-2`}
+      >
         {text}
       </p>
     </div>

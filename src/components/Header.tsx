@@ -111,7 +111,7 @@ const Header = () => {
           </button>
         </div>
         {mobileExpand && (
-          <div className="w-full flex flex-col items-center justify-between font-semibold text-4xl h-[50%] mt-24 overflow-auto">
+          <div className="w-full flex flex-col items-center justify-between font-semibold text-4xl max-md:text-2xl h-[50%] max-md:h-[40%] mt-24 overflow-auto">
             {items.map((i) => (
               <Link
                 onClick={() => setMobileExpand(false)}

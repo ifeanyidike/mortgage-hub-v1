@@ -34,15 +34,15 @@ export default async function Home() {
           <Image
             src={HeroDesktop}
             alt="hero image"
-            className="h-full max-[1300px]:h-auto max-[1300px]:w-[450px] max-[800px]:w-[350px] "
+            className="h-full max-[1300px]:h-auto max-[1300px]:w-[450px] max-[800px]:w-[350px] max-sm:w-72"
             style={{ transform: "rotateY(180deg)" }}
           />
           <div
             className=" absolute top-[8%] left-6 z-10 w-[700px] max-[1300px]:w-[450px] max-[1300px]:top-0
-          aspect-square border-2 border-white rounded-full pointer-events-none"
+          aspect-square border-2 border-white rounded-full pointer-events-none max-sm:w-64"
           ></div>
 
-          <div className="absolute top-[580px] left-[680px] max-[1300px]:top-0 max-[1300px]:left-64">
+          <div className="absolute top-[580px] left-[680px] max-[1300px]:top-0 max-[1300px]:left-64 max-sm:left-28">
             <div className=" absolute">
               <HomeChatBubble
                 text="You are approved for Home"
@@ -63,7 +63,7 @@ export default async function Home() {
               />
             </div>
 
-            <div className="absolute left-24 top-64">
+            <div className="absolute left-24 top-64 max-sm:left-10">
               <HomeChatBubble
                 text="WOW! u weren’t kidding about AI"
                 color="#FFFFFF"
@@ -77,11 +77,11 @@ export default async function Home() {
         <div className="absolute right-0 top-0 flex p-0 m-0 max-[1300px]:static order-1 ">
           <div className="flex flex-col max-[1550px]:px-20 max-[1360px]:px-14 max-[500px]:px-4 w-1/2 max-[1300px]:w-full max-[1300px]:pt-16 pt-32 px-32 box-border ml-auto gap-14 leading-tight">
             <h2
-              className={`text-[70px] max-[1360px]:text-6xl max-[1300px]:text-7xl max-[500px]:text-[50px] max-[1300px]:font-medium`}
+              className={`text-[70px] max-[1360px]:text-6xl max-[1300px]:text-7xl max-sm:text-4xl max-[1300px]:font-medium`}
             >
               Mortgage Hub Makes Home Possible
             </h2>
-            <p className="text-2xl max-[1300px]:text-3xl max-[1300px]:text-2xl">
+            <p className="text-2xl max-[1300px]:text-xl">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore
               corporis vero fugiat aut quam quidem, id quod? Ab, amet. Vitae?
             </p>
@@ -98,9 +98,11 @@ export default async function Home() {
 
       <section className="lg:pt-24 pb-16 pt-16 flex flex-col gap-16 overflow-hidden">
         <div className="flex flex-col justify-center items-center text-center gap-4">
-          <h2 className="text-4xl">Lateum Sit Ad Lorem Ipsum</h2>
+          <h2 className="text-4xl max-md:text-3xl max-sm:text-2xl">
+            Lateum Sit Ad Lorem Ipsum
+          </h2>
           <div>
-            <p className="uppercase text-lg">
+            <p className="uppercase text-lg max-md:text-base max-sm:text-xs">
               Lorem ipsum dolor sit amet consectetur.
             </p>
             <small>Lorem ipsum, dolor sit amet consectetur adipisicing.</small>
