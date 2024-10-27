@@ -53,7 +53,7 @@ export default async function Home() {
               />
             </div>
 
-            <div className="absolute left-32 top-36">
+            <div className="absolute left-24 top-36">
               <HomeChatBubble
                 text="Mom i got appoved!"
                 color="#3185FC"
@@ -63,7 +63,7 @@ export default async function Home() {
               />
             </div>
 
-            <div className="absolute left-24 top-64 max-sm:left-5">
+            <div className="absolute left-24 top-64 max-sm:left-0">
               <HomeChatBubble
                 text="WOW! u weren't kidding about AI"
                 color="#FFFFFF"
