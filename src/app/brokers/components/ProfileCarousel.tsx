@@ -267,7 +267,7 @@ export default function ProfileCarousel() {
         </motion.ul>
         <button
           type="button"
-          className="absolute left-[24%] top-1/3"
+          className="absolute left-[24%] max-sm:left-[5%] top-1/3"
           onClick={scrollPrev}
           disabled={!canScrollPrev}
         >
@@ -275,7 +275,7 @@ export default function ProfileCarousel() {
         </button>
         <button
           type="button"
-          className="absolute right-[24%] top-1/3"
+          className="absolute right-[24%] max-sm:right-[5%] top-1/3"
           onClick={scrollNext}
           disabled={!canScrollNext}
         >
@@ -301,9 +301,9 @@ const ProfileItem = (props: ItemProps) => {
       onClick={(e) => {
         router.push(`/brokers/${id}`);
       }}
-      className="min-w-96 h-auto rounded-[50px] rounded-bl-none bg-gray-200 px-14 py-8 flex flex-col gap-8"
+      className="min-w-96 max-sm:min-w-[350px] h-auto rounded-[50px] rounded-bl-none bg-gray-200 px-14 max-sm:px-6 py-8 flex flex-col gap-8"
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center max-sm:gap-8">
         <div className="flex p-2 rounded-full rounded-br-none bg-white w-fit">
           {[...Array(5).keys()].map((i) => (
             <GoStarFill

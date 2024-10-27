@@ -36,7 +36,7 @@ const Hero = () => {
           text="CHILLED & RELAXED"
           color="text-black"
           bg="bg-[#ADBDFF]"
-          textPos={{ x: "-left-40", y: "top-[40%]" }}
+          textPos={{ x: "-left-28 lg:-left-40 ", y: "top-[40%]" }}
           pos={{ x: "lg:right-0 right-[18%]", y: "top-0" }}
         />
         <ImageComponent
