@@ -215,7 +215,7 @@ export default function ProfileCarousel() {
       <div className="relative overflow-hidden">
         <motion.ul
           ref={containerRef}
-          className="flex sm:cursor-none items-start"
+          className="flex cursor-pointer sm:cursor-none items-start"
           style={{
             x: animatedX,
           }}
@@ -243,7 +243,7 @@ export default function ProfileCarousel() {
             return (
               <motion.li
                 layout
-                key={profile.id}
+                key={profile!.id}
                 //@ts-expect-error //Not expecting an error
                 ref={(el) => (itemsRef.current[index] = el)}
                 className={cn(
@@ -259,9 +259,9 @@ export default function ProfileCarousel() {
                 }}
               >
                 <ProfileItem
-                  {...profile}
+                  {...profile!}
                   isDragging={isDragging}
-                  rating={profile.rating as ItemProps["rating"]}
+                  rating={profile!.rating as ItemProps["rating"]}
                 />
               </motion.li>
             );
@@ -322,13 +322,14 @@ const ProfileItem = (props: ItemProps) => {
       </div>
       <span className="text-2xl">Definitum Broker</span>
       <h3 className="font-extrabold text-2xl text-gray-500">{name}</h3>
-      <p className="-mt-4">{description}</p>
+      <p className="-mt-4 line-clamp-3">{description}</p>
       <Image
         src={imgSrc}
-        alt=""
+        alt={name}
         width={350}
         height={300}
         className="w-full h-auto"
+        draggable={false}
       />
 
       <div className="flex gap-4 ml-auto">

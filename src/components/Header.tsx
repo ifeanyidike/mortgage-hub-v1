@@ -164,7 +164,7 @@ const Header = (props: Props) => {
       {/* Desktop Header */}
       <div
         className={cn(
-          "w-full my-auto flex px-20 py-12 items-center bg-transparent font-[family-name:var(--font-montserrat)] max-lg:hidden",
+          "w-full my-auto flex px-32 py-12 items-center bg-transparent font-[family-name:var(--font-montserrat)] max-lg:hidden",
           props.bgColor
         )}
       >
@@ -180,7 +180,11 @@ const Header = (props: Props) => {
           </Link>
           <div className="w-4/5 flex justify-between items-end text-lg font-semibold px-24">
             {items.map((i) => (
-              <Link key={i.key} href={`/${i.key}`} className="text-black">
+              <Link
+                key={i.key}
+                href={`/${i.key}`}
+                className="text-black hover:text-[#3185FC]"
+              >
                 <motion.span
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
@@ -190,14 +194,30 @@ const Header = (props: Props) => {
               </Link>
             ))}
           </div>
+
           {!session?.user ? (
-            <Button
-              shape="round"
-              className="uppercase !bg-[#f0f0f0] !border !border-black"
-            >
-              <a href="/login">Log-in | Register</a>
-            </Button>
+            <div className="rounded-full text-[14px] bg-[#f0f0f0] font-mono border border-black whitespace-nowrap px-[10px] py-1">
+              <a
+                href="/login"
+                className="text-black uppercase hover:text-[#3185FC] hover:font-bold"
+              >
+                Login
+              </a>{" "}
+              |{" "}
+              <a
+                href="/register"
+                className="text-black uppercase hover:text-[#3185FC] hover:font-bold"
+              >
+                Register
+              </a>
+            </div>
           ) : (
+            // <Button
+            //   shape="round"
+            //   className="uppercase !bg-[#f0f0f0] !border !border-black"
+            // >
+            //   <a href="/login">Log-in | Register</a>
+            // </Button>
             <Button
               shape="round"
               className="uppercase !bg-[#f0f0f0] !border !border-black"
