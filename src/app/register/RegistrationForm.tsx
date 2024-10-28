@@ -40,27 +40,27 @@ const RegistrationForm = () => {
     };
   }, []);
 
-  // async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-  //   console.log("submitting...");
-  //   e.preventDefault();
-  //   const formData = new FormData(e.currentTarget);
-  //   const data = Object.fromEntries(formData);
-  //   try {
-  //     const response = await axios.post("/api/auth/register", { ...data });
-  //     if (response.status === 201) router.push("/login");
-  //   } catch (error: any) {
-  //     if (axios.isAxiosError(error)) {
-  //       const serializedError = customError.serializeAxiosError(error);
-  //       setError(serializedError.message);
-  //       console.log(
-  //         "Serialized Axios error:",
-  //         JSON.stringify(serializedError, null, 2)
-  //       );
-  //     } else {
-  //       console.error("Unknown error:", error);
-  //     }
-  //   }
-  // }
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    console.log("submitting...");
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+    try {
+      const response = await axios.post("/api/auth/register", { ...data });
+      if (response.status === 201) router.push("/login");
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        const serializedError = customError.serializeAxiosError(error);
+        setError(serializedError.message);
+        console.log(
+          "Serialized Axios error:",
+          JSON.stringify(serializedError, null, 2)
+        );
+      } else {
+        console.error("Unknown error:", error);
+      }
+    }
+  }
   return (
     <div className=" h-screen">
       <div
@@ -85,14 +85,14 @@ const RegistrationForm = () => {
           defaultActiveKey="user"
           size="large"
           className={cn(
-            "!font-[family-name:var(--font-montserrat)] !w-full",
+            "!font-[family-name:var(--font-montserrat)] w-3/5 !w-full",
             email && "!hidden"
           )}
           items={options.map((t) => ({
             key: t.value,
             label: (
               <button
-                className="!text-base lg:!text-[24px] font-bold mr-5 lg:!mr-10"
+                className="!text-sm xs:text-base lg:!text-[24px] font-bold mr-5 lg:!mr-10"
                 onClick={() => setRole(t.value as "broker" | "user")}
               >
                 {t.label}
@@ -145,10 +145,10 @@ const RegistrationForm = () => {
             {role} registration
           </h2>
           <form
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             className={cn(
               "flex flex-col gap-12 border border-red-500",
-              "bg-gray-100 py-12 lg:px-20 px-10 rounded-3xl border border-gray-300"
+              "bg-gray-100 py-12 lg:px-20 px-5 rounded-3xl border border-gray-300"
             )}
           >
             <div className="flex flex-col gap-2">
