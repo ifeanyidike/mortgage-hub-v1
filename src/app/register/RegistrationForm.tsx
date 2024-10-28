@@ -99,9 +99,9 @@ const RegistrationForm = () => {
               </button>
             ),
             children: (
-              <div className="flex flex-col gap-4 pt-4 items-center lg:w-4/5 mx-auto">
+              <div className="flex flex-col gap-6 pt-6 items-center lg:w-4/5 mx-auto">
                 <SocialLoginForm role={role} />
-                <p>Or</p>
+                <p>OR</p>
                 <Input
                   type="email"
                   name="email"
