@@ -223,9 +223,13 @@ const Header = (props: Props) => {
           mobileExpand ? "bg-[#f0f0f0]" : props.bgColor
         )}
       >
-        <div className="flex justify-between px-10 py-12 items-center w-full">
+        <div className="flex justify-between px-4 lg:px-10 py-12 items-center w-full">
           <Link onClick={() => setMobileExpand(false)} href="/">
-            <Image src={Logo} alt="Mortgage Hub Logo" />
+            <Image
+              src={Logo}
+              alt="Mortgage Hub Logo"
+              className="w-64 lg:w-80"
+            />
           </Link>
           <button
             className="cursor-pointer"
@@ -245,7 +249,7 @@ const Header = (props: Props) => {
             <motion.div
               initial={{ y: -100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -150, opacity: 0 }}
+              // exit={{ y: -150, opacity: 0 }}
               transition={{ duration: 0.4 }}
               className="w-full flex flex-col items-center justify-between text-4xl font-semibold h-[40%] mt-24 overflow-auto "
             >
