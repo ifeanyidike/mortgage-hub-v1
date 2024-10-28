@@ -228,7 +228,7 @@ const Header = (props: Props) => {
             <Image
               src={Logo}
               alt="Mortgage Hub Logo"
-              className="w-64 lg:w-80"
+              className="w-60 lg:w-80"
             />
           </Link>
           <button
@@ -236,9 +236,9 @@ const Header = (props: Props) => {
             onClick={() => setMobileExpand(!mobileExpand)}
           >
             {!mobileExpand ? (
-              <MenuOutlined className="text-4xl" />
+              <MenuOutlined className="text-3xl" />
             ) : (
-              <CloseOutlined className="text-4xl" />
+              <CloseOutlined className="text-3xl" />
             )}
           </button>
         </div>
@@ -251,7 +251,7 @@ const Header = (props: Props) => {
               animate={{ y: 0, opacity: 1 }}
               // exit={{ y: -150, opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="w-full flex flex-col items-center justify-between text-4xl font-semibold h-[40%] mt-24 overflow-auto "
+              className="w-full flex flex-col items-center justify-between text-2xl font-semibold h-[40%] mt-12 overflow-auto "
             >
               {items.map((i) => (
                 <Link
