@@ -13,17 +13,17 @@ export default function Page({ params }: { params: { id: string } }) {
     return <div className="p-32 text-center text-4xl">Profile not found.</div>;
   return (
     <main>
-      <section className="lg:px-32 py-16 px-16 bg-gray-200 overflow-scroll">
+      <section className="lg:px-32 py-16 px-4 bg-gray-200 overflow-scroll">
         <h2 className="text-3xl border-b border-black">Broker Profile</h2>
-        <div className="flex lg:justify-between mt-8 lg:flex-row flex-col gap-8">
+        <div className="flex lg:justify-between mt-8 lg:flex-row flex-col gap-8 min-w-96">
           <Image
             src={profile?.imgSrc}
             width={500}
             height={300}
-            className="w-auto max-w-[300px] h-auto max-h-[400px] order-1 self-center lg:self-start"
+            className="h-auto max-w-[400px] max-h-[400px] order-1 self-center lg:self-start"
             alt={profile.name}
           />
-          <div className="xl:px-16 p-8 bg-white rounded-3xl gap-6 flex flex-col w-full lg:w-1/2 order-3 lg:order-2">
+          <div className="xl:px-16 p-8 bg-white rounded-3xl gap-6 flex flex-col w-full lg:w-1/2 order-3 lg:order-2 mx-auto">
             <h3 className="text-3xl font-bold">{profile.name}</h3>
             {profile.workPlace && (
               <span className="uppercase">Broker at {profile.workPlace}</span>
@@ -54,7 +54,7 @@ export default function Page({ params }: { params: { id: string } }) {
               </Button>
             </div>
           </div>
-          <div className="bg-white rounded-3xl p-8 gap-6 flex flex-col order-2 lg:order-3">
+          <div className="bg-white rounded-3xl p-8 gap-6 flex flex-col order-2 lg:order-3 min-w-80 lg:max-w-[400px] w-full mx-auto">
             <span className="text-xl uppercase">User Rating</span>
             <div className="flex p-2 rounded-full rounded-br-none bg-white w-fit border border-gray-300">
               {[...Array(5).keys()].map((i) => (

@@ -38,7 +38,6 @@ export default async function RootLayout({
           className={`${montserrat.variable} antialiased font-[family-name:var(--font-montserrat)]`}
         >
           <AntdRegistry>
-            <Header />
             {children}
             <Footer />
           </AntdRegistry>

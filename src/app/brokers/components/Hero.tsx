@@ -7,17 +7,16 @@ import SmilingGlasses from "@/app/assets/Images/smiling-with-glasses.png";
 import { StaticImageData } from "next/image";
 import Image from "next/image";
 import BrokersHomeSelect from "./BrokersHomeSelect";
+import { cn } from "@/app/utils";
 
 const Hero = () => {
   return (
     <div
-      className="w-full lg:h-[950px] h-[1700px] bg-[url('/assets/images/brokers-background.png')] 
-    bg-center bg-cover bg-no-repeat bg-gray-150
-    px-32
-    max-lg:px-8
-    flex flex-col
-    overflow-hidden
-   "
+      className={cn(
+        "w-full lg:h-[950px] h-[1700px] bg-[url('/assets/images/brokers-background.png')]",
+        "bg-center bg-cover bg-no-repeat bg-gray-150",
+        "px-32 max-lg:px-8 flex flex-col overflow-hidden"
+      )}
     >
       <h2 className="text-6xl text-black text-center pt-16">
         Find A Broker On Your Vibe

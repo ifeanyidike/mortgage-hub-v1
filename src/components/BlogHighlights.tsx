@@ -8,10 +8,10 @@ import { BsArrowRight } from "react-icons/bs";
 const BlogHighlights = () => {
   return (
     <div className="w-full px-24 max-2xl:px-8">
-      <div className="font-semibold text-3xl">
-        LEBIS IUR{" "}
+      <div className="uppercase font-semibold text-xl md:2xl lg:text-3xl ">
+        Homebuying Made{" "}
         <span className="text-[#3EBA97] border-b-4 border-[#3EBA97]">
-          SEQUASSITIN <DownOutlined />
+          Simple <DownOutlined />
         </span>
       </div>
       {/* w-full flex mt-4 gap-24 max-lg:flex-col max-2xl:gap-8 max-lg:gap-16  max-md:gap-8 max-lg:max-h-max max-h-[800px] */}
@@ -20,33 +20,33 @@ const BlogHighlights = () => {
         <div className="w-full 1-5xl:w-1/2 relative overflow-hidden">
           <Image
             src={BlogDiscussion}
-            alt="Debis iu aute qui de debis iur sequassitin prerum es que que"
+            alt="Home buying made simple."
             className="!w-full h-full rounded-xl aspect-square"
           />
           <div className="absolute bottom-10 left-5 text-white ">
             <p className="font-semibold text-xl">
-              Debis iu aute qui de debis iur sequassitin prerum es que que
+              Get insights and tips from industry experts.
             </p>
             <Link href="#" className="flex items-center gap-2 text-sm">
               Read more <BsArrowRight />
             </Link>
           </div>
         </div>
-        <div className="flex flex-col gap-4 max-lg:gap-4 items-center max-lg:items-stretch justify-center ">
+        <div className="flex flex-col gap-4 max-lg:gap-4 max-lg:items-stretch justify-center ">
           <ItemPane
-            title="lorem"
-            text="Agnatem aute qui de debis iur sequassitin prerum es que que et re neseque ?"
+            title="5 Tips for First-Time Buyers"
+            text="Explore essential advice for those stepping into homeownership for the first time."
             time="5 min"
           />
           <ItemPane
-            title="lorem"
-            text="Agnatem aute qui de debis iur sequassitin prerum es que que et re neseque ?"
+            title="Budgeting for a New Home"
+            text="Learn effective budgeting strategies for your home-buying journey."
             time="5 min"
             hasShadow
           />
           <ItemPane
-            title="lorem"
-            text="Agnatem aute qui de debis iur sequassitin prerum es que que et re neseque ?"
+            title="Understanding Mortgage Rates"
+            text="Make sense of current rates and how they impact your monthly payments."
             time="5 min"
           />
         </div>

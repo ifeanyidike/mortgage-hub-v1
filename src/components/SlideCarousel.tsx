@@ -5,6 +5,7 @@ import { motion, PanInfo, useMotionValue, useSpring } from "framer-motion";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import { cn } from "@/app/utils";
 const START_INDEX = 1;
 const DRAG_THRESHOLD = 550;
 const FALLBACK_WIDTH = 509;
@@ -28,9 +29,6 @@ const articles = [
 ];
 
 // this function is used to combine (conditional) classNames and uses clsx and tailwind-merge
-function cn(...inputs: any[]) {
-  return twMerge(clsx(inputs));
-}
 
 export default function SlideCarousel() {
   const containerRef = useRef<HTMLUListElement>(null);

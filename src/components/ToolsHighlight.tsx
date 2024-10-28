@@ -19,31 +19,31 @@ const ToolsHighlight = () => {
         <div className="flex max-lg:flex-col gap-8 max-lg:gap-14">
           <ToolsPane
             icon={<Image src={Tools6} alt="" className="-ml-16" />}
-            text="Con Eumquatur"
+            text="Consolidate Debt Calculator"
           />
           <ToolsPane
             icon={<Image src={Tools3} alt="" className="-ml-16" />}
-            text="Ellorerum Hilla"
+            text="Affordability Calculator"
           />
         </div>
         <div className="flex max-lg:flex-col gap-8  max-lg:gap-14">
           <ToolsPane
             icon={<Image src={Tools5} alt="" className="-ml-16" />}
-            text="Pro muatur"
+            text="Property Analyzer"
           />
           <ToolsPane
             icon={<Image src={Tools2} alt="" className="-ml-16" />}
-            text="Eate molupta"
+            text="Mortgage Calculator"
           />
         </div>
         <div className="flex max-lg:flex-col gap-8  max-lg:gap-14">
           <ToolsPane
             icon={<Image src={Tools4} alt="" className="-ml-16" />}
-            text="Invellorer Hilla"
+            text="Investment Estimator"
           />
           <ToolsPane
             icon={<Image src={Tools1} alt="" className="-ml-16" />}
-            text="Quis Eate lupta"
+            text="Quick Rate Finder"
           />
         </div>
       </div>
@@ -71,7 +71,7 @@ const ToolsPane = (props: Props) => {
   const { icon, text } = props;
 
   return (
-    <div className="rounded-xl flex gap-4 h-24   min-w-96 max-lg:w-full max-lg:min-w-[600px] max-sm:min-w-96 px-10 items-center bg-[#3185FC]">
+    <div className="rounded-xl flex gap-4 h-24  w-80 md:w-96 lg:w-[450px]  px-10 items-center bg-[#3185FC]">
       {icon}
       <span className="font-medium text-xl -ml-8">{text}</span>
     </div>

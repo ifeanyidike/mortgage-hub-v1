@@ -56,7 +56,7 @@ const rates = {
 const data = [locations, loanType, rates];
 
 const BrokersHomeSelect = () => {
-  return <GroupSelect data={data} btnColor="!bg-black" mb="mb-10" />;
+  return <GroupSelect data={data} btnColor="!bg-black" mb="-mt-16" />;
 };
 
 export default BrokersHomeSelect;

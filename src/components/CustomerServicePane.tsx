@@ -16,8 +16,7 @@ const CustomerServicePane = () => {
         </div>
         <h3 className="text-6xl">Contact Us</h3>
         <p>
-          Lupti occatus, simeniatur re quis reptiatur agnatem aute qui de debis
-          iur sequassitin prerum es que
+          Looking for advice? Chat with our AI Genie for tailored mortgage tips!
         </p>
         <button className="flex w-fit uppercase text-white gap-4 items-center !bg-[#21334C] !py-2 px-8 rounded-full">
           <Image

@@ -10,21 +10,21 @@ const StatPane = () => {
       <StatDetail
         icon={<Image src={Figure3} alt="" />}
         stat="205k+"
-        info="Duit mon droit"
+        info="Families Assisted"
       />
       <div className="max-lg:hidden w-[0.5px] h-48 mt-16 bg-white"></div>
 
       <StatDetail
         icon={<Image src={Figure2} alt="" />}
         stat="700+"
-        info="Droit et el"
+        info="Mortgage Experts"
       />
       <div className="max-lg:hidden w-[0.5px] h-48 mt-16 bg-white"></div>
 
       <StatDetail
         icon={<Image src={Figure1} alt="" />}
         stat="Thousands"
-        info="Macadona ad infinit"
+        info="Lenders Available"
       />
     </div>
   );

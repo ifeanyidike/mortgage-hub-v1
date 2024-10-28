@@ -29,7 +29,7 @@ const HomeAIPane = () => {
           alt=""
           className="max-sm:max-w-80 max-sm:mx-auto"
         />
-        <div className="absolute -top-8 -left-40 max-sm:-left-8">
+        <div className="absolute -top-8 -left-40 max-sm:-left-8 max-lg:-left-20 max-md:-left-14">
           <FloatingPane
             text="Down Payment Assistance"
             color="bg-[#3EBA97]"
@@ -42,7 +42,7 @@ const HomeAIPane = () => {
             }
           />
         </div>
-        <div className="absolute bottom-7 -left-20 max-sm:-left-4">
+        <div className="absolute bottom-7 -left-20 max-sm:-left-4 max-lg:-left-14 max-md:-left-10">
           <FloatingPane
             text="Term Extensions"
             color="bg-[#82A6BF]"
@@ -56,7 +56,7 @@ const HomeAIPane = () => {
             }
           />
         </div>
-        <div className="absolute top-8 -right-20 max-sm:-right-4">
+        <div className="absolute top-8 -right-20 max-sm:-right-4 max-lg:-right-14 max-md:-right-10">
           <FloatingPane
             text="Free Counselling"
             color="bg-[#FE621D]"
@@ -81,9 +81,9 @@ type Props = {
 const FloatingPane = (props: Props) => {
   const { color, icon, text, width = "w-3/5" } = props;
   return (
-    <div className="flex items-center justify-center rounded-full h-24 max-sm:h-12 bg-black box-border min-w-72 max-sm:min-w-40">
+    <div className="flex items-center justify-center rounded-full h-24 max-lg:h-20 max-md:h-16 max-sm:h-12 bg-black box-border min-w-72 max-sm:min-w-40 max-lg:min-w-56">
       <div
-        className={`${color} ml-5 rounded-full h-16 p-2 max-sm:p-1 max-sm:h-8 max-sm:w-8 flex max-sm:items-center max-sm:ml-1`}
+        className={`${color} ml-5 rounded-full h-16 p-2 max-sm:p-1 max-sm:h-8 max-sm:w-8 max-lg:h-12 max-lg:w-12 max-md:h-10 max-md:w-10 flex items-center max-sm:ml-1`}
       >
         {icon}
       </div>

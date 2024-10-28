@@ -11,11 +11,11 @@ const HouseTransfer = () => {
   return (
     <div className="px-32 py-16 max-xl:px-8 text-center flex flex-col items-center justify-center gap-12 bg-[#3185FC] text-white">
       <div className="flex gap-4 flex-col">
-        <h3 className="text-5xl">Lateum Sit Ad Lorem Ipsum</h3>
-        <p className="uppercase text-xl">
-          AGNATEM AUTE QUI DE DEBIS IUR SEQUASSITIN
-        </p>
-        <small className="text-base">Prerum es que que et re neseque ?</small>
+        <h3 className="text-5xl">Mortgage Solutions Tailored for You</h3>
+        <p className="uppercase text-xl">Find the Right Loan, Every Time</p>
+        <small className="text-base">
+          Are you looking for a mortgage that aligns with your unique needs?
+        </small>
         <Button
           type="primary"
           shape="round"
@@ -53,9 +53,11 @@ const HouseTransfer = () => {
           className="max-w-[400px] max-h-[500px] max-xl:max-h-72 max-xl:max-w-64 max-lg:max-h-52 max-lg:max-w-44 max-md:max-h-36 max-md:max-w-28"
         />
       </div>
-      <p className="text-xl mt-8 min-w-80 max-w-[700px]  font-medium ">
-        Lupti occatus, simeniatur re quis reptiatur AGnatem aute qui de
-        debissimeniatur re quis reptiatur AGnatem aute qui de debis
+      <p className="text-xl mt-8 min-w-80 max-w-[900px]  font-medium ">
+        With a wide range of flexible options, we make it easy to find the
+        perfect mortgage. Whether you’re a first-time buyer, upgrading, or
+        refinancing, our team has you covered with expert advice and unmatched
+        support.
       </p>
     </div>
   );

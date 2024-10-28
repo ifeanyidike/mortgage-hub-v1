@@ -14,6 +14,7 @@ import { twMerge } from "tailwind-merge";
 import { profiles } from "./data";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { LeftArrow } from "@/app/assets/SvgComponents";
 
 const START_INDEX = 1;
 const DRAG_THRESHOLD = 550;
@@ -187,7 +188,7 @@ export default function ProfileCarousel() {
     <div className="group container mx-auto">
       <motion.div
         className={cn(
-          "pointer-events-none absolute z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          "hidden sm:block pointer-events-none absolute z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         )}
         style={{
           width: CURSOR_SIZE,
@@ -199,7 +200,7 @@ export default function ProfileCarousel() {
         <motion.div
           layout
           className={cn(
-            "grid h-full place-items-center rounded-full bg-[#ADBDFF]",
+            "grid h-full place-items-center rounded-full bg-[#ADBDFF] ",
             hoverType === "click" && "absolute inset-5 h-auto"
           )}
         >
@@ -214,7 +215,7 @@ export default function ProfileCarousel() {
       <div className="relative overflow-hidden">
         <motion.ul
           ref={containerRef}
-          className="flex cursor-none items-start"
+          className="flex sm:cursor-none items-start"
           style={{
             x: animatedX,
           }}
@@ -259,6 +260,7 @@ export default function ProfileCarousel() {
               >
                 <ProfileItem
                   {...profile}
+                  isDragging={isDragging}
                   rating={profile.rating as ItemProps["rating"]}
                 />
               </motion.li>
@@ -271,15 +273,16 @@ export default function ProfileCarousel() {
           onClick={scrollPrev}
           disabled={!canScrollPrev}
         >
-          <FaLongArrowAltLeft className="h-10 w-10" />
+          <LeftArrow className="h-10 w-10" />
         </button>
         <button
           type="button"
           className="absolute right-[24%] max-sm:right-[5%] top-1/3"
           onClick={scrollNext}
           disabled={!canScrollNext}
+          style={{ transform: "rotate(180deg" }}
         >
-          <FaLongArrowAltRight className="h-10 w-10" />
+          <LeftArrow className="h-10 w-10" />
         </button>
       </div>
     </div>
@@ -292,13 +295,15 @@ type ItemProps = {
   name: string;
   description: string;
   imgSrc: string;
+  isDragging: boolean;
 };
 const ProfileItem = (props: ItemProps) => {
   const router = useRouter();
-  const { id, rating, name, description, imgSrc } = props;
+  const { id, rating, name, description, imgSrc, isDragging } = props;
   return (
     <div
       onClick={(e) => {
+        if (isDragging) return;
         router.push(`/brokers/${id}`);
       }}
       className="min-w-96 max-sm:min-w-[350px] h-auto rounded-[50px] rounded-bl-none bg-gray-200 px-14 max-sm:px-6 py-8 flex flex-col gap-8"

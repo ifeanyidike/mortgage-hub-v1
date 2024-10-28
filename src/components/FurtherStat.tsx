@@ -14,24 +14,25 @@ const FurtherStat = () => {
       </div>
       <div className="w-1/2 flex flex-col max-lg:w-full">
         <h3 className="text-3xl font-semibold text-left max-sm:text-2xl">
-          Ad situem felored invicto ad ipsum alores dores sit ateum braclilius
+          Trusted by thousands, with a proven track record in the mortgage
+          industry
         </h3>
         <div className="flex max-lg:flex-col justify-around max-lg:justify-start max-lg:gap-8 items-center max-lg:items-start mt-20">
           <StatPane
             stat="30+"
-            text="Lorem ipsum dolor"
+            text="Years of Combined Experience"
             color="border-[#3EBA97]"
           />
           <StatPane
             stat="42+"
-            text="Lorem ipsum dolor"
+            text="Mortgage Experts on Our Team"
             color="border-[#3185FC]"
           />
         </div>
-        <div className="flex justify-center max-lg:mt-8 max-lg:justify-start">
+        <div className="flex lg:justify-center lg:mt-8 justify-start">
           <StatPane
             stat="64"
-            text="Lorem ipsum dolor"
+            text="Exclusive Mortgage Programs"
             color="border-[#82A6BF]"
           />
         </div>
