@@ -159,6 +159,49 @@ const Header = (props: Props) => {
   const { data: session } = useSession();
   const [mobileExpand, setMobileExpand] = useState(false);
 
+  function handleAuth() {
+    return (
+      <>
+        {!session?.user ? (
+          <div className="rounded-full text-[14px] bg-[#f0f0f0] font-mono border border-black whitespace-nowrap px-[10px] py-1">
+            <a
+              href="/login"
+              className="text-black uppercase hover:text-[#3185FC] hover:font-bold"
+            >
+              Login
+            </a>{" "}
+            |{" "}
+            <a
+              href="/register"
+              className="text-black uppercase hover:text-[#3185FC] hover:font-bold"
+            >
+              Register
+            </a>
+          </div>
+        ) : (
+          // <Button
+          //   shape="round"
+          //   className="uppercase !bg-[#f0f0f0] !border !border-black"
+          // >
+          //   <a href="/login">Log-in | Register</a>
+          // </Button>
+          <Button
+            shape="round"
+            className="uppercase !bg-[#f0f0f0] !border !border-black"
+            onClick={async () => {
+              if (session.user) {
+                await signOut();
+                await handleLogout();
+              }
+            }}
+          >
+            Logout
+          </Button>
+        )}
+      </>
+    );
+  }
+
   return (
     <>
       {/* Desktop Header */}
@@ -195,42 +238,7 @@ const Header = (props: Props) => {
             ))}
           </div>
 
-          {!session?.user ? (
-            <div className="rounded-full text-[14px] bg-[#f0f0f0] font-mono border border-black whitespace-nowrap px-[10px] py-1">
-              <a
-                href="/login"
-                className="text-black uppercase hover:text-[#3185FC] hover:font-bold"
-              >
-                Login
-              </a>{" "}
-              |{" "}
-              <a
-                href="/register"
-                className="text-black uppercase hover:text-[#3185FC] hover:font-bold"
-              >
-                Register
-              </a>
-            </div>
-          ) : (
-            // <Button
-            //   shape="round"
-            //   className="uppercase !bg-[#f0f0f0] !border !border-black"
-            // >
-            //   <a href="/login">Log-in | Register</a>
-            // </Button>
-            <Button
-              shape="round"
-              className="uppercase !bg-[#f0f0f0] !border !border-black"
-              onClick={async () => {
-                if (session.user) {
-                  await signOut();
-                  await handleLogout();
-                }
-              }}
-            >
-              Logout
-            </Button>
-          )}
+          {handleAuth()}
         </Flex>
       </div>
 
@@ -288,6 +296,7 @@ const Header = (props: Props) => {
                   </motion.span>
                 </Link>
               ))}
+              {handleAuth()}
             </motion.div>
           )}
         </AnimatePresence>

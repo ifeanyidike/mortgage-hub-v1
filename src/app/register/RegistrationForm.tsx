@@ -40,27 +40,27 @@ const RegistrationForm = () => {
     };
   }, []);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    console.log("submitting...");
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
-    try {
-      const response = await axios.post("/api/auth/register", { ...data });
-      if (response.status === 201) router.push("/login");
-    } catch (error: any) {
-      if (axios.isAxiosError(error)) {
-        const serializedError = customError.serializeAxiosError(error);
-        setError(serializedError.message);
-        console.log(
-          "Serialized Axios error:",
-          JSON.stringify(serializedError, null, 2)
-        );
-      } else {
-        console.error("Unknown error:", error);
-      }
-    }
-  }
+  // async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   console.log("submitting...");
+  //   e.preventDefault();
+  //   const formData = new FormData(e.currentTarget);
+  //   const data = Object.fromEntries(formData);
+  //   try {
+  //     const response = await axios.post("/api/auth/register", { ...data });
+  //     if (response.status === 201) router.push("/login");
+  //   } catch (error: any) {
+  //     if (axios.isAxiosError(error)) {
+  //       const serializedError = customError.serializeAxiosError(error);
+  //       setError(serializedError.message);
+  //       console.log(
+  //         "Serialized Axios error:",
+  //         JSON.stringify(serializedError, null, 2)
+  //       );
+  //     } else {
+  //       console.error("Unknown error:", error);
+  //     }
+  //   }
+  // }
   return (
     <div className=" h-screen">
       <div
@@ -145,7 +145,7 @@ const RegistrationForm = () => {
             {role} registration
           </h2>
           <form
-            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
             className={cn(
               "flex flex-col gap-12 border border-red-500",
               "bg-gray-100 py-12 lg:px-20 px-10 rounded-3xl border border-gray-300"
