@@ -17,6 +17,8 @@ import {
   BsPersonSquare,
 } from "react-icons/bs";
 import { BiCalendarX } from "react-icons/bi";
+import { upload_brokers } from "@/actions/bulkBrokerUpload";
+import { fetchAllBrokers, fetchBrokersByFields } from "@/actions/brokers";
 
 const options = [
   { label: "Register as a broker", value: "broker" },
@@ -63,6 +65,19 @@ const RegistrationForm = () => {
   }
   return (
     <div className=" h-screen">
+      {/* <button onClick={() => upload_brokers()}>Bulk Uplaod Brokers</button> */}
+      <button
+        onClick={async () => {
+          const brokers = await fetchBrokersByFields(
+            "Edmonton",
+            "Alberta",
+            "Mortgage Agent"
+          );
+          console.log(brokers);
+        }}
+      >
+        Fetch brokers
+      </button>
       <div
         className={cn("flex flex-col items-center", email ? "mt-2" : "mt-32")}
       >

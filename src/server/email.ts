@@ -42,6 +42,48 @@ class Email {
 
     console.log(`Preview URL: `, result);
   }
+
+  public async sendBrokerMagicLink(
+    email: string,
+    brokerName: string,
+    token: string
+  ) {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.ETHEREAL_USER_NAME,
+        pass: process.env.ETHEREAL_PASSWORD,
+      },
+    });
+
+    console.log(
+      process.env.ETHEREAL_USER_NAME,
+      "process.env.ETHEREAL_USER_NAME",
+      process.env.ETHEREAL_PASSWORD
+    );
+
+    const claimAccountUrl = `http://localhost:3000/claim_account/token?token=${token}`;
+    const pathname = path.resolve(
+      process.cwd(),
+      "email-templates",
+      "claimi-broker-account.html"
+    );
+
+    let template = await fs.readFile(pathname, "utf-8");
+    template = template.replace("{{brokerName}}", brokerName);
+    template = template.replace("{{claimAccountUrl}}", claimAccountUrl);
+
+    const result = await transporter.sendMail({
+      from: '"Your App" <no-reply@yourapp.com>',
+      to: email,
+      subject: "Claim Your Brokers Account",
+      html: template,
+    });
+
+    console.log(`Preview URL: `, result);
+  }
 }
 
 export const emailService = new Email();

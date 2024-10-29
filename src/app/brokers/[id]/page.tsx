@@ -1,5 +1,5 @@
 import React from "react";
-import { profiles } from "../components/data";
+import { profiles, reviews as fake_reviews } from "../components/data";
 import Image from "next/image";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { FiPhoneCall } from "react-icons/fi";
@@ -11,14 +11,16 @@ import {
   BiLogoInstagram,
   BiSolidQuoteAltLeft,
 } from "react-icons/bi";
-import { cn } from "@/app/utils";
+import { cn, getRandomItems } from "@/app/utils";
 import { FaXTwitter } from "react-icons/fa6";
 import BlogHighlights from "@/components/BlogHighlights";
 import HomeAIPane from "@/components/HomeAIPane";
 import CustomerServicePane from "@/components/CustomerServicePane";
+import { fetchBroker } from "@/actions/brokers";
 
-export default function Page({ params }: { params: { id: string } }) {
-  const profile = profiles.find((p) => p!.id === params.id);
+export default async function Page({ params }: { params: { id: string } }) {
+  const profile = await fetchBroker(params.id);
+  console.log("profile", profile);
   const contentStyle: React.CSSProperties = {
     height: "160px",
     color: "#fff",
@@ -27,6 +29,11 @@ export default function Page({ params }: { params: { id: string } }) {
     background: "#364d79",
     width: 800,
   };
+  const reviews = getRandomItems(fake_reviews, 8);
+  const rating = Math.round(
+    fake_reviews.reduce((acc, curr) => acc + curr.rating, 0) /
+      fake_reviews.length
+  );
 
   if (!profile)
     return <div className="p-32 text-center text-4xl">Profile not found.</div>;
@@ -34,20 +41,20 @@ export default function Page({ params }: { params: { id: string } }) {
     <>
       <Header bgColor="bg-gray-200" />
       <main>
-        <section className="lg:px-32 py-16 px-4 bg-gray-200 overflow-scroll">
+        <section className="1-5xl:px-32 py-16 px-4 bg-gray-200 overflow-scroll">
           <h2 className="text-3xl border-b border-black">Broker Profile</h2>
           <div className="flex lg:justify-between mt-8 lg:flex-row flex-col gap-8 min-w-72 xs:min-w-96">
             <Image
-              src={profile?.imgSrc}
+              src={profile?.picture!}
               width={500}
               height={300}
               className="h-auto max-w-72 max-h-72 xs:max-w-[400px] xs:max-h-[400px] order-1 self-center lg:self-start"
-              alt={profile.name}
+              alt={profile.name!}
             />
             <div className="xl:px-16 p-8 bg-white rounded-3xl gap-6 flex flex-col justify-between w-full lg:w-1/2 order-3 lg:order-2 mx-auto">
               <h3 className="text-3xl font-bold">{profile.name}</h3>
-              {profile.workPlace && (
-                <span className="uppercase">Broker at {profile.workPlace}</span>
+              {profile.company && (
+                <span className="uppercase">Broker at {profile.company}</span>
               )}
               <p>{profile.description}</p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -80,35 +87,35 @@ export default function Page({ params }: { params: { id: string } }) {
               <div className="flex p-2 rounded-full rounded-br-none bg-white w-fit border border-gray-300">
                 {[...Array(5).keys()].map((i) => (
                   <GoStarFill
-                    color={profile.rating - i > 0 ? "#FE621D" : ""}
+                    color={rating - i > 0 ? "#FE621D" : ""}
                     size={24}
                     key={i}
                   />
                 ))}
               </div>
-              <p>based on {profile.reviews.length} reviews</p>
+              <p>based on {reviews.length} reviews</p>
               <div className="flex flex-col">
-                <span className="font-bold">{profile.flightsMade}</span>
+                <span className="font-bold">{profile.role}</span>
                 <p>flights made</p>
               </div>
               <div className="flex flex-col">
-                <span className="font-bold">{profile.yearStarted}</span>
+                <span className="font-bold">{profile.lic}</span>
                 <p>work since</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-8 min-w-72 xs:min-w-96 lg:px-32 pt-8 pb-16 px-4 bg-gray-200 overflow-hidden">
+        <section className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-8 min-w-72 xs:min-w-96 1-5xl:px-32 pt-8 pb-16 px-4 bg-gray-200 overflow-hidden">
           <div className="h-auto max-w-[400px] min-w-96 order-2 lg:order-1 self-center lg:self-start  flex flex-col gap-10 border">
             <div className="flex flex-col gap-1">
               <h4>Broker ID</h4>
-              <span className="font-bold">{profile.slug}</span>
+              <span className="font-bold">{profile.broker_id}</span>
             </div>
 
             <div className="flex flex-col gap-1">
               <h4>Preferred Locations</h4>
-              {profile.preferredLocations.map((p) => (
+              {profile.service_areas?.map((p) => (
                 <span className="font-bold" key={p}>
                   {p}
                 </span>
@@ -117,11 +124,11 @@ export default function Page({ params }: { params: { id: string } }) {
 
             <div className="flex flex-col gap-1">
               <h4>Contact</h4>
-              <span className="font-bold">{profile.phoneNumber}</span>
+              <span className="font-bold">{profile.phone}</span>
             </div>
             <div className="flex flex-col gap-1">
               <h4>Location</h4>
-              <span className="font-bold">{profile.location}</span>
+              <span className="font-bold">{profile.location?.address}</span>
             </div>
 
             <div className="flex gap-4">
@@ -144,7 +151,7 @@ export default function Page({ params }: { params: { id: string } }) {
               )}
               autoplay
             >
-              {profile.reviews.map((review) => (
+              {reviews.map((review) => (
                 <div key={review.id} className="!flex flex-col gap-4 h-full">
                   <div className="!flex flex-col lg:flex-row gap-2">
                     <div className="w-fit">

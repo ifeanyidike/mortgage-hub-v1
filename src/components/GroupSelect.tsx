@@ -1,10 +1,8 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Select, Space } from "antd";
-
-const handleChange = (value: string, key: string) => {
-  console.log(`selected ${value} - ${key}`);
-};
+import { runInAction } from "mobx";
+import { brokerStore } from "@/app/store/brokerStore";
 
 type Props = {
   mb?: string;
@@ -21,6 +19,16 @@ type Props = {
 
 const GroupSelect = (props: Props) => {
   const { data, btnColor = "", mb = "mb-40" } = props;
+  const [searchState, setSearchState] = useState({
+    province: "",
+    city: "",
+    broker_type: "",
+  });
+
+  const handleChange = (value: string, key: string) => {
+    console.log(`selected ${value} - ${key}`);
+    setSearchState((prevState) => ({ ...prevState, [key]: value }));
+  };
   return (
     <div className={`mt-auto ${mb} mx-auto`}>
       <Space
@@ -51,6 +59,12 @@ const GroupSelect = (props: Props) => {
           size="large"
           style={{ height: 50 }}
           className={`uppercase text-white w-40 mx-auto !font-bold !text-xl ${btnColor}`}
+          onClick={async () => {
+            runInAction(() => {
+              const { province, city, broker_type } = searchState;
+              brokerStore.searchBrokers(city, province, broker_type);
+            });
+          }}
         >
           Search
         </Button>

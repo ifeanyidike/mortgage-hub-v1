@@ -1,5 +1,11 @@
 import DB from "@/lib/db";
-import { ExistingUser, ExistingUserWithPword, UserUpdate } from "@/types/db";
+import {
+  ExistingUser,
+  ExistingUserWithPword,
+  NewBroker,
+  NewUser,
+  UserUpdate,
+} from "@/types/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { customError } from "./error";
@@ -7,6 +13,7 @@ import { emailService } from "./email";
 import accountService from "./account";
 import { supabase } from "@/lib/supabase";
 import { RealtimePostgresChangesPayload } from "@supabase/supabase-js";
+import Verification from "./Verification";
 
 class User extends DB {
   constructor() {
@@ -218,6 +225,95 @@ class User extends DB {
       accessToken: tokens.access_token,
       refreshToken: tokens.refresh_token,
     };
+  }
+
+  public async bulkUploadBroker(data: (NewUser & NewBroker)[]) {
+    let batch_size = 100;
+    // for (let i = 0; i < data.length; i += batch_size) {
+    //   let batch = data.slice(i, i + batch_size);
+    //   const grouped_data = batch.map((b) => {
+    //     const claim = Verification.generateClaimToken();
+    //     const userInfo = {
+    //       email: b.email,
+    //       name: b.name,
+    //       profile_photo: b.profile_photo,
+    //       account_status: "pending_claim",
+    //       ...claim,
+    //     };
+
+    //     const brokerInfo = {
+    //       user_id: b.user_id,
+    //       company: b.company,
+    //       title: b.title,
+    //       lic: b.lic,
+    //       location: b.location,
+    //       service_areas: b.service_areas,
+    //       description: b.description,
+    //       picture: b.picture,
+    //       fax: b.fax,
+    //       postal_code: b.postal_code,
+    //       website: b.website,
+    //       social_links: b.social_links,
+    //       broker_id: b.broker_id,
+    //       is_company: b.is_company,
+    //       broker_type: b.broker_type,
+    //       created_at: b.created_at,
+    //     };
+
+    //     return { ...b, ...claim };
+    //   });
+    //   await this.db.insertInto("users").values(batch).execute();
+    //   await this.db
+    //     .insertInto("brokers")
+    //     .values(batch.map((user) => ({ user_id: user.id })))
+    //     .execute();
+    // }
+    console.log("Entered");
+    try {
+      for (let d of data) {
+        const claim = Verification.generateClaimToken();
+        console.log("claim", claim);
+        const userInfo = {
+          email: d.email,
+          picture: d.picture,
+          role: "broker" as const,
+          account_status: "pending_claim" as const,
+          ...claim,
+        };
+
+        const [user] = await this.db
+          .insertInto("users")
+          .values(userInfo)
+          .returning("id")
+          .execute();
+        console.log("user", user);
+        const brokerInfo = {
+          user_id: user.id,
+          name: d.name,
+          company: d.company,
+          title: d.title,
+          lic: d.lic,
+          location: d.location,
+          service_areas: d.service_areas,
+          description: d.description,
+          fax: d.fax,
+          postal_code: d.postal_code,
+          website: d.website,
+          social_links: d.social_links,
+          broker_id: d.broker_id,
+          is_company: d.is_company,
+          broker_type: d.broker_type,
+        } as NewBroker;
+        const [broker] = await this.db
+          .insertInto("brokers")
+          .values(brokerInfo)
+          .returning("id")
+          .execute();
+        console.log("broker", broker);
+      }
+    } catch (error) {
+      console.log("error occurred", error);
+    }
   }
 }
 

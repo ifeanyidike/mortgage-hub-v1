@@ -11,10 +11,13 @@ import { GoStarFill } from "react-icons/go";
 import { motion, PanInfo, useMotionValue, useSpring } from "framer-motion";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { profiles } from "./data";
+// import { profiles } from "./data";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LeftArrow } from "@/app/assets/SvgComponents";
+import { Broker, ExistingUser } from "@/types/db";
+import { observer } from "mobx-react-lite";
+import { brokerStore } from "@/app/store/brokerStore";
 
 const START_INDEX = 1;
 const DRAG_THRESHOLD = 550;
@@ -25,7 +28,10 @@ function cn(...inputs: any[]) {
   return twMerge(clsx(inputs));
 }
 
-export default function ProfileCarousel() {
+type Props = {
+  topBrokers: Partial<(Broker & ExistingUser)[]>;
+};
+const ProfileCarousel = observer((props: Props) => {
   const containerRef = useRef<HTMLUListElement>(null);
   const itemsRef = useRef<(HTMLLIElement | null)[]>([]);
   const [hoverType, setHoverType] = useState<"prev" | "next" | "click" | null>(
@@ -37,6 +43,10 @@ export default function ProfileCarousel() {
     damping: 20,
     stiffness: 150,
   });
+
+  const [profiles, setProfiles] = useState<
+    Partial<(ExistingUser & Broker) | undefined>[]
+  >(props.topBrokers);
 
   const canScrollPrev = activeSlide > 0;
   const canScrollNext = activeSlide < profiles.length - 1;
@@ -54,6 +64,10 @@ export default function ProfileCarousel() {
     stiffness: 400,
     mass: 0.1,
   });
+
+  useEffect(() => {
+    setProfiles(brokerStore.brokers);
+  }, [brokerStore.brokers]);
 
   // Ensures active slide is centered on mobile
   useEffect(() => {
@@ -184,8 +198,16 @@ export default function ProfileCarousel() {
     }
   }
 
+  if (!profiles.length)
+    return (
+      <div className="p-32 py-48 mx-auto text-bold text-3xl text-center">
+        The search does not match any broker in the database. Please search
+        again.
+      </div>
+    );
+
   return (
-    <div className="group container mx-auto">
+    <div className="group container mx-auto relative">
       <motion.div
         className={cn(
           "hidden sm:block pointer-events-none absolute z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -240,6 +262,7 @@ export default function ProfileCarousel() {
         >
           {profiles.map((profile, index) => {
             const active = index === activeSlide;
+
             return (
               <motion.li
                 layout
@@ -255,58 +278,56 @@ export default function ProfileCarousel() {
                   duration: 0.4,
                 }}
                 style={{
-                  flexBasis: active ? "40%" : "30%",
+                  flexBasis: active ? "33%" : "30%",
                 }}
               >
                 <ProfileItem
-                  {...profile!}
+                  // {...profile!}
+                  rating={5}
+                  profile={profile}
                   isDragging={isDragging}
-                  rating={profile!.rating as ItemProps["rating"]}
                 />
               </motion.li>
             );
           })}
         </motion.ul>
-        <button
-          type="button"
-          className="absolute left-[24%] max-sm:left-[5%] top-1/3"
-          onClick={scrollPrev}
-          disabled={!canScrollPrev}
-        >
-          <LeftArrow className="h-10 w-10" />
-        </button>
-        <button
-          type="button"
-          className="absolute right-[24%] max-sm:right-[5%] top-1/3"
-          onClick={scrollNext}
-          disabled={!canScrollNext}
-          style={{ transform: "rotate(180deg" }}
-        >
-          <LeftArrow className="h-10 w-10" />
-        </button>
       </div>
+      <button
+        type="button"
+        className="absolute -left-5 md:left-[20%] sm:left-[15%] lg:left-[28%] top-1/3 text-gray-500 hover:text-[#4D4D4D]"
+        onClick={scrollPrev}
+        disabled={!canScrollPrev}
+      >
+        <LeftArrow className="h-10 w-10" />
+      </button>
+      <button
+        type="button"
+        className="absolute -right-5 md:right-[20%] sm:right-[15%] lg:right-[28%] top-1/3 text-gray-500 hover:text-[#4D4D4D]"
+        onClick={scrollNext}
+        disabled={!canScrollNext}
+        style={{ transform: "rotate(180deg" }}
+      >
+        <LeftArrow className="h-10 w-10" />
+      </button>
     </div>
   );
-}
+});
 
 type ItemProps = {
-  id: string;
-  rating: 1 | 2 | 3 | 4 | 5;
-  name: string;
-  description: string;
-  imgSrc: string;
+  profile: Partial<(ExistingUser & Broker) | undefined>;
   isDragging: boolean;
+  rating: number;
 };
 const ProfileItem = (props: ItemProps) => {
   const router = useRouter();
-  const { id, rating, name, description, imgSrc, isDragging } = props;
+  const { rating, profile, isDragging } = props;
   return (
     <div
       onClick={(e) => {
         if (isDragging) return;
-        router.push(`/brokers/${id}`);
+        router.push(`/brokers/${profile!.id}`);
       }}
-      className="min-w-96 max-sm:min-w-[350px] h-auto rounded-[50px] rounded-bl-none bg-gray-200 px-14 max-sm:px-6 py-8 flex flex-col gap-8"
+      className="max-xs:min-w-80 md:min-w-96 sm:min-w-[350px] max-w-[600px] h-auto rounded-[50px] rounded-bl-none bg-gray-200 px-14 max-sm:px-6 py-8 flex flex-col gap-8"
     >
       <div className="flex justify-between items-center max-sm:gap-8">
         <div className="flex p-2 rounded-full rounded-br-none bg-white w-fit">
@@ -320,15 +341,15 @@ const ProfileItem = (props: ItemProps) => {
         </div>
         <span className="uppercase text-xl">User rating</span>
       </div>
-      <span className="text-2xl">Definitum Broker</span>
-      <h3 className="font-extrabold text-2xl text-gray-500">{name}</h3>
-      <p className="-mt-4 line-clamp-3">{description}</p>
+      <span className="text-2xl">{profile?.broker_type}</span>
+      <h3 className="font-extrabold text-2xl text-gray-500">{profile!.name}</h3>
+      <p className="-mt-4 line-clamp-3">{profile!.description}</p>
       <Image
-        src={imgSrc}
-        alt={name}
+        src={profile!.picture!}
+        alt={profile!.name!}
         width={350}
         height={300}
-        className="w-full h-auto"
+        className="w-auto h-auto max-h-96 rounded-xl"
         draggable={false}
       />
 
@@ -343,3 +364,5 @@ const ProfileItem = (props: ItemProps) => {
     </div>
   );
 };
+
+export default ProfileCarousel;

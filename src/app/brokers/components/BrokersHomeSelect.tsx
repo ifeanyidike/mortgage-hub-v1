@@ -1,59 +1,80 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Select, Space } from "antd";
 import GroupSelect from "@/components/GroupSelect";
 import { constants } from "buffer";
 
-const handleChange = (value: string, key: string) => {
-  console.log(`selected ${value} - ${key}`);
-};
-
-const locations = {
-  key: "location",
-  placeholder: "Location",
+const province = {
+  key: "province",
+  placeholder: "Province",
   options: [
     { label: "Ontario", value: "Ontario" },
-    { label: "Quebec", value: "Quebec" },
-    { label: "Newfoundland and Labrador", value: "Newfoundland and Labrador" },
-    { label: "British Columbia", value: "British Columbia" },
-    { label: "Manitoba", value: "Manitoba" },
-    { label: "Saskatchewan", value: "Saskatchewan" },
+    // { label: "Quebec", value: "Quebec" },
+    // { label: "Newfoundland and Labrador", value: "Newfoundland and Labrador" },
+    // { label: "British Columbia", value: "British Columbia" },
+    // { label: "Manitoba", value: "Manitoba" },
+    // { label: "Saskatchewan", value: "Saskatchewan" },
     { label: "Alberta", value: "Alberta" },
-    { label: "Northwest Territories", value: "Northwest Territories" },
-    { label: "Yukon", value: "Yukon" },
-    { label: "Nunavut", value: "Nunavut" },
-    { label: "New Brunswick", value: "New Brunswick" },
-    { label: "Prince Edward Island", value: "Prince Edward Island" },
-    { label: "Nova Scotia", value: "Nova Scotia" },
-    { label: "Newfoundland and Labrador", value: "Newfoundland and Labrador" },
-    { label: "Saskatchewan", value: "Saskatchewan" },
-    { label: "Manitoba", value: "Manitoba" },
+    // { label: "Northwest Territories", value: "Northwest Territories" },
+    // { label: "Yukon", value: "Yukon" },
+    // { label: "Nunavut", value: "Nunavut" },
+    // { label: "New Brunswick", value: "New Brunswick" },
+    // { label: "Prince Edward Island", value: "Prince Edward Island" },
+    // { label: "Nova Scotia", value: "Nova Scotia" },
+    // { label: "Newfoundland and Labrador", value: "Newfoundland and Labrador" },
+    // { label: "Saskatchewan", value: "Saskatchewan" },
+    // { label: "Manitoba", value: "Manitoba" },
   ],
 };
 
-const loanType = {
-  key: "loanType",
-  placeholder: "Loan type",
+const city = {
+  key: "city",
+  placeholder: "City",
   options: [
-    { label: "Home Improvement", value: "home-improvement" },
-    { label: "Refinance", value: "refinance" },
-    { label: "Purchase", value: "purchase" },
-    { label: "Second-hand", value: "second-hand" },
-    { label: "Business", value: "business" },
-    { label: "Other", value: "other" },
-  ],
-};
-const rates = {
-  key: "rates",
-  placeholder: "Rates",
-  options: [
-    { label: "Fixed", value: "fixed" },
-    { label: "Variable", value: "variable" },
-    { label: "Negotiable", value: "negotiable" },
+    { label: "Toronto", value: "Toronto" },
+    // { label: "Ottawa", value: "Ottawa" },
+    // { label: "Montreal", value: "Montreal" },
+    // { label: "Quebec City", value: "Quebec City" },
+    { label: "Vancouver", value: "Vancouver" },
+    { label: "Edmonton", value: "Edmonton" },
+    { label: "Mississauga", value: "Mississauga" },
+    // { label: "Winnipeg", value: "Winnipeg" },
+    // { label: "Regina", value: "Regina" },
+    // { label: "Saskatoon", value: "Saskatoon" },
+    // { label: "Halifax", value: "Halifax" },
+    // { label: "St. John's", value: "St. John's" },
+    // { label: "Charlottetown", value: "Charlottetown" },
+    // { label: "Fredericton", value: "Fredericton" },
+    // { label: "Gatineau", value: "Gatineau" },
+    // { label: "London", value: "London" },
+    // { label: "Ottawa", value: "Ottawa" },
+    // { label: "Montreal", value: "Montreal" },
+    // { label: "Quebec City", value: "Quebec City" },
+    // { label: "Vancouver", value: "Vancouver" },
+    // { label: "Edmonton", value: "Edmonton" },
+    // { label: "Winnipeg", value: "Winnipeg" },
+    // { label: "Regina", value: "Regina" },
+    // { label: "Saskatoon", value: "Saskatoon" },
+    // { label: "Halifax", value: "Halifax" },
+    // { label: "St. John's", value: "St. John's" },
+    // { label: "Charlottetown", value: "Charlottetown" },
+    // { label: "Fredericton", value: "Fredericton" },
+    // { label: "Gatineau", value: "Gatineau" },
   ],
 };
 
-const data = [locations, loanType, rates];
+const brokerType = {
+  key: "broker_type",
+  placeholder: "Broker Type",
+  options: [
+    { label: "Mortgage Associate", value: "Mortgage Associate" },
+    { label: "Mortgage Planner", value: "Mortgage Planner" },
+    { label: "Mortgage Agent", value: "Mortgage Agent" },
+    { label: "Mortgage Agent Level 1", value: "Mortgage Agent Level 1" },
+  ],
+};
+
+const data = [province, city, brokerType];
 
 const BrokersHomeSelect = () => {
   return <GroupSelect data={data} btnColor="!bg-black" mb="-mt-16" />;

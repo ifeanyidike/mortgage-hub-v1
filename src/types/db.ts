@@ -29,9 +29,10 @@ export interface UserTable {
   password: string | null;
   email: string;
   role?: "user" | "broker" | "lender";
-  profile_photo: string | null;
+  picture: string | null;
   is_email_verified?: boolean;
   is_phone_verified?: boolean;
+  phone: string | null;
 
   // You can specify a different type for each operation (select, insert and
   // update) using the `ColumnType<SelectType, InsertType, UpdateType>`
@@ -40,6 +41,10 @@ export interface UserTable {
   // can never be updated:
   created_at: Generated<Date>;
   updated_at: Date | null;
+  account_status: "pending_claim" | "claimed" | null;
+  claim_token: string | null;
+  claimed_at: Date | null;
+  claim_token_expires_at: Date | null;
 
   // You can specify JSON columns using the `JSONColumnType` wrapper.
   // It is a shorthand for `ColumnType<T, string, string>`, where T
@@ -86,9 +91,21 @@ export interface BrokerTable {
   id: Generated<string>;
   user_id: string;
   name: string;
-  phone: string;
-  contact_email: string | null;
   company: string | null;
+  title: string | null;
+  lic: string | null;
+  location: Record<"address" | "city" | "province", string> | null;
+  service_areas: string[] | null;
+  description: string | null;
+  fax: string | null;
+  postal_code: string | null;
+  website: string | null;
+  social_links: Partial<
+    Record<"facebook" | "instagram" | "x" | "linkedin" | "custom_link", string>
+  > | null;
+  broker_id: string | null;
+  is_company: string | null;
+  broker_type: string | null;
   created_at: Date;
 }
 

@@ -6,15 +6,17 @@ import Hero from "./components/Hero";
 import ProfileCarousel from "./components/ProfileCarousel";
 import PersonalTestimonial from "@/components/PersonalTestimonial";
 import Header from "@/components/Header";
+import { fetchTopFiveBrokers } from "@/actions/brokers";
 
-const Lenders = () => {
+const Brokers = async () => {
+  const topBrokers = await fetchTopFiveBrokers();
   return (
     <>
       <Header bgColor="bg-transparent" />
       <main>
         <Hero />
         <section className="py-32">
-          <ProfileCarousel />
+          <ProfileCarousel topBrokers={topBrokers as any} />
           <PersonalTestimonial
             title="Stacy Used Mortgage Hub Broker Directory"
             description="I had 3 amazing brokers fighting for my mortgage business."
@@ -33,4 +35,4 @@ const Lenders = () => {
   );
 };
 
-export default Lenders;
+export default Brokers;

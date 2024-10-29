@@ -4,6 +4,7 @@ import speakeasy from "speakeasy";
 import QRCode from "qrcode";
 import crypto from "crypto";
 import twilio, { Twilio } from "twilio";
+import { addDays, addHours } from "date-fns";
 
 class Verification extends DB {
   private APP_NAME = "Mortgage Hub";
@@ -126,6 +127,13 @@ class Verification extends DB {
     console.log("verification", verification);
     return verification;
     //   .then((verification_check) => console.log(verification_check.status));
+  }
+
+  public generateClaimToken() {
+    const token = crypto.randomBytes(32).toString("hex");
+    const claim_token_hash = this.encrypt(token);
+    const expiresAt = addDays(new Date(), 7);
+    return { claim_token: claim_token_hash, claim_token_expires_at: expiresAt };
   }
 }
 
