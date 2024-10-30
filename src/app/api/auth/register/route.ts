@@ -37,7 +37,9 @@ export const POST = async (req: NextRequest) => {
     const createdUser = await user.createOne(
       body.email,
       body.password,
-      body.role
+      body.role,
+      body.dob,
+      body.name
     );
 
     return NextResponse.json(createdUser, { status: 201 });
