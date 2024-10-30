@@ -56,19 +56,23 @@ export default async function Page({ params }: { params: { id: string } }) {
               {profile.company && (
                 <span className="uppercase">Broker at {profile.company}</span>
               )}
-              <p>{profile.description}</p>
+              <p className="leading-8 first-letter:float-left first-letter:text-7xl first-letter:pr-4 first-letter:font-black first-letter:text-red-500">
+                {profile.description}
+              </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  type="primary"
-                  shape="round"
-                  size={"large"}
-                  className="!py-2"
-                >
-                  <div className="bg-[#3EBA97] p-[6px] rounded-full">
-                    <FiPhoneCall />
-                  </div>
-                  Call Me
-                </Button>
+                <a href={`tel:${profile.phone}`}>
+                  <Button
+                    type="primary"
+                    shape="round"
+                    size={"large"}
+                    className="!py-2"
+                  >
+                    <div className="bg-[#3EBA97] p-[6px] rounded-full">
+                      <FiPhoneCall />
+                    </div>
+                    Call Me
+                  </Button>
+                </a>
                 <Button
                   type="primary"
                   shape="round"

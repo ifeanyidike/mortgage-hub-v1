@@ -338,7 +338,7 @@ I look forward to helping you achieve your financial and homeownership goals.`,
       city: "Edmonton",
       province: "Alberta",
     },
-    phone: "780.970.2141",
+    phone: "780-970-2141",
     description: `Hello and welcome! Throughout my years in the mortgage industry, I have helped many people achieve their dreams of home ownership and financial security. I develop mortgage plans for my clients that often begin with their first purchase and carries them to their next mortgage need, whether itâ€™s for a trade up home, real estate investing, vacation property, or debt consolidation. And thatâ€™s probably why my business is built primarily through referrals from satisfied clients.
 
 With access to more than 50 financial institutions â€“ including major banks, credit unions, trusts and other national and regional lenders â€“ I can get mortgage financing for almost any situation, although my service is more than just placing your mortgage with a lender. There are no fees for my consultations, planning and mortgage placement (oac). The lender we decide on pays compensation for the services and solution provided, and only after your mortgage has closed.

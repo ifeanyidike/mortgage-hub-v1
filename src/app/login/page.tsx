@@ -2,21 +2,17 @@ import React from "react";
 import LoginForm from "../login/LoginForm";
 import Logout from "../login/Logout";
 import Link from "next/link";
+import Header from "@/components/Header";
 
-const Auth = () => {
+const Login = () => {
   return (
-    <div className="grid place-items-center h-screen">
-      <div>
+    <>
+      <Header bgColor="bg-transparent" />
+      <div className="flex flex-col justify-center items-center p-4 font-[family-name:var(--font-montserrat)]">
         <LoginForm />
-        <p className="py-6">
-          Don&apos;t have an account?
-          <Link className="mx-2 underline" href="register">
-            Register
-          </Link>
-        </p>
       </div>
-    </div>
+    </>
   );
 };
 
-export default Auth;
+export default Login;

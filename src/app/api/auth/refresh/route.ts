@@ -4,6 +4,7 @@ import user from "@/server/user";
 export async function POST(req: NextRequest) {
   //   const { refreshToken } = await req.json();
   const authHeader = (req.headers as any).authorization;
+  console.log("req headers: ", req.headers);
   const refreshToken = authHeader && authHeader.split(" ")[1];
 
   if (!refreshToken) {

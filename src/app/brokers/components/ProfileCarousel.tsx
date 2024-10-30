@@ -66,7 +66,9 @@ const ProfileCarousel = observer((props: Props) => {
   });
 
   useEffect(() => {
-    setProfiles(brokerStore.brokers);
+    if (brokerStore.brokers) {
+      setProfiles(brokerStore.brokers);
+    }
   }, [brokerStore.brokers]);
 
   // Ensures active slide is centered on mobile
@@ -200,7 +202,7 @@ const ProfileCarousel = observer((props: Props) => {
 
   if (!profiles.length)
     return (
-      <div className="p-32 py-48 mx-auto text-bold text-3xl text-center">
+      <div className="px-8 py-16 lg:px-32 lg:py-48  mx-auto text-bold text-xl lg:text-3xl text-center">
         The search does not match any broker in the database. Please search
         again.
       </div>
@@ -292,23 +294,27 @@ const ProfileCarousel = observer((props: Props) => {
           })}
         </motion.ul>
       </div>
-      <button
-        type="button"
-        className="absolute -left-5 md:left-[20%] sm:left-[15%] lg:left-[28%] top-1/3 text-gray-500 hover:text-[#4D4D4D]"
-        onClick={scrollPrev}
-        disabled={!canScrollPrev}
-      >
-        <LeftArrow className="h-10 w-10" />
-      </button>
-      <button
-        type="button"
-        className="absolute -right-5 md:right-[20%] sm:right-[15%] lg:right-[28%] top-1/3 text-gray-500 hover:text-[#4D4D4D]"
-        onClick={scrollNext}
-        disabled={!canScrollNext}
-        style={{ transform: "rotate(180deg" }}
-      >
-        <LeftArrow className="h-10 w-10" />
-      </button>
+      {canScrollPrev && (
+        <button
+          type="button"
+          className="absolute -left-5 md:left-[20%] sm:left-[15%] lg:left-[28%] top-1/3 text-gray-500 hover:text-[#4D4D4D]"
+          onClick={scrollPrev}
+          disabled={!canScrollPrev}
+        >
+          <LeftArrow className="h-10 w-10" />
+        </button>
+      )}
+      {canScrollNext && (
+        <button
+          type="button"
+          className="absolute -right-5 md:right-[20%] sm:right-[15%] lg:right-[28%] top-1/3 text-gray-500 hover:text-[#4D4D4D]"
+          onClick={scrollNext}
+          disabled={!canScrollNext}
+          style={{ transform: "rotate(180deg" }}
+        >
+          <LeftArrow className="h-10 w-10" />
+        </button>
+      )}
     </div>
   );
 });

@@ -36,6 +36,7 @@ class Broker extends DB {
       .selectAll("brokers")
       .select([
         "users.email",
+        "users.name",
         "users.phone as phone",
         "users.picture as picture",
         "users.created_at as user_created_at",
@@ -52,6 +53,7 @@ class Broker extends DB {
       .selectAll("brokers")
       .select([
         "users.email",
+        "users.name",
         "users.phone as phone",
         "users.picture as picture",
         "users.created_at as user_created_at",
@@ -71,6 +73,7 @@ class Broker extends DB {
       .selectAll("brokers")
       .select([
         "users.email",
+        "users.name",
         "users.phone as phone",
         "users.picture as picture",
         "users.created_at as user_created_at",
@@ -96,6 +99,7 @@ class Broker extends DB {
       .selectAll("brokers")
       .select([
         "users.email",
+        "users.name",
         "users.phone as phone",
         "users.picture as picture",
         "users.created_at as user_created_at",

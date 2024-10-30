@@ -17,12 +17,33 @@ export class CustomError {
         message: "Password must contain at least one special character",
       });
 
-    // Define the email schema with Zod
     const emailSchema = z.string().email({ message: "Invalid email format" });
+
+    // Define the role schema with only "user" or "broker" as valid values
+    const roleSchema = z.enum(["user", "broker"], {
+      message: "Role must be either 'user' or 'broker'",
+    });
+
+    // Define the date of birth schema, ensuring it's a valid date string
+    const dobSchema = z.string().refine(
+      (value) => {
+        const date = new Date(value);
+        return date instanceof Date && !isNaN(date.getTime());
+      },
+      { message: "Date of birth must be a valid date" }
+    );
+
+    // Define the name schema with a minimum length requirement
+    const nameSchema = z
+      .string()
+      .min(2, { message: "Name must be at least 2 characters long" });
 
     return z.object({
       email: emailSchema,
       password: passwordSchema,
+      role: roleSchema,
+      dob: dobSchema,
+      name: nameSchema,
     });
   }
 
@@ -35,6 +56,32 @@ export class CustomError {
   public displayError(error: z.ZodError) {
     if (Array.isArray(error)) {
       return error[0].message;
+    }
+  }
+
+  private tryParseJSON(value: string): any {
+    try {
+      const parsed = JSON.parse(value);
+      if (typeof parsed === "object" && parsed !== null) {
+        return parsed;
+      }
+    } catch {}
+
+    return value;
+  }
+
+  public serializeError(error: Error) {
+    const errorMessage = this.tryParseJSON(error.message);
+    console.log("error message", errorMessage, typeof errorMessage);
+    if (typeof errorMessage === "string") {
+      if (
+        errorMessage?.includes("duplicate key value violates unique constraint")
+      ) {
+        return "Email already exists";
+      }
+    }
+    if (Array.isArray(errorMessage)) {
+      return errorMessage[0].message;
     }
   }
 

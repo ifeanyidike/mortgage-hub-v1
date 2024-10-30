@@ -6,6 +6,7 @@ import { AdapterSession } from "next-auth/adapters";
 import { jwtDecode } from "jwt-decode";
 import { JWT } from "next-auth/jwt";
 import { cookies } from "next/headers";
+import user from "./server/user";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   session: {
@@ -52,7 +53,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async jwt({ token, account, user }) {
-      // console.log("user", user);
+      console.log("user in jwt", user);
+      console.log("token in jwt", token);
+      console.log("account in jwt", account);
       if (token.accessToken) {
         const decodedToken = jwtDecode(token.accessToken as string);
         token.accessTokenExpires = decodedToken.exp! * 1000;
@@ -90,12 +93,14 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (Date.now() < exp) {
         return token;
       }
+
+      if (account?.provider === "google" || !account) return token;
       return refreshAccessToken(token);
     },
     async session({ session, token }) {
       // If the user has not been verified yet, return null
-      // console.log("session", session);
-      // console.log("token", token);
+      console.log("session in session", session);
+      console.log("token in session", token);
       const newSession = { ...session } as {
         user: any;
       } & AdapterSession &
@@ -103,8 +108,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
       newSession.accessToken = token.access_token as string;
       newSession.refreshToken = token.refresh_token as string;
-      newSession.user = token.user;
-
+      newSession.user = token.user || session.user;
+      console.log("new session", newSession);
       return newSession;
     },
   },
@@ -115,17 +120,19 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
 async function refreshAccessToken(token: JWT) {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/auth/refresh`, {
-      headers: {
-        Authorization: `Bearer ${token.refreshToken}`,
-      },
-    });
+    // const response = await fetch(`${process.env.BASE_URL}/api/auth/refresh`, {
+    //   headers: {
+    //     Authorization: `Bearer ${token.refreshToken}`,
+    //   },
+    // });
 
-    const tokens = await response.json();
+    // const tokens = await response.json();
 
-    if (!response.ok) {
-      throw tokens;
-    }
+    // if (!response.ok) {
+    //   throw tokens;
+    // }
+    console.log("token", token);
+    const tokens = await user.refreshToken(token.refreshToken as string);
 
     return {
       ...token,
@@ -133,6 +140,7 @@ async function refreshAccessToken(token: JWT) {
       refreshToken: tokens.refreshToken ?? token.refreshToken,
     };
   } catch (error) {
+    console.log("error", error);
     return {
       ...token,
       error: "RefreshAccessTokenError",

@@ -73,7 +73,16 @@ export const POST = async (req: NextRequest) => {
   const body = await req.json();
   console.log("body", body);
   try {
-    const createdUser = await user.createOne(body.email, body.password);
+    const role = body.role || "user";
+    const dob = body.dob;
+    const name = body.name;
+    const createdUser = await user.createOne(
+      body.email,
+      body.password,
+      role,
+      dob,
+      name
+    );
     console.log("createdUser", createdUser);
     return NextResponse.json(createdUser);
   } catch (error) {

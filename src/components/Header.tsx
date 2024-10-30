@@ -145,7 +145,7 @@ const Header = (props: Props) => {
               animate={{ y: 0, opacity: 1 }}
               // exit={{ y: -150, opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="w-full flex flex-col items-center justify-between text-2xl font-semibold h-[40%] mt-12 overflow-auto "
+              className="w-full flex flex-col items-center justify-between text-2xl font-semibold h-[60%] mt-12 overflow-auto "
             >
               {items.map((i) => (
                 <Link

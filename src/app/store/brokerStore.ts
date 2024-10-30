@@ -7,7 +7,7 @@ class BrokerStore {
     makeAutoObservable(this);
   }
 
-  brokers: BrokerUserData[] = [];
+  brokers: BrokerUserData[] | null = null;
   public async searchBrokers(city: string, province: string, title: string) {
     const brokers = await fetchBrokersByFields(city, province, title);
     this.brokers = brokers;

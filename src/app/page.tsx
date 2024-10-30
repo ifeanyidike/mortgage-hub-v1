@@ -24,7 +24,7 @@ export default async function Home() {
   // const brokers = await broker.getBrokers();
   // const session = await getSession();
   // console.log("session", session);
-  // const session = await auth();
+  const session = await auth();
 
   // if (!session?.user) redirect("/login");
   return (
@@ -79,7 +79,7 @@ export default async function Home() {
           <div className="absolute right-0 top-0 flex p-0 m-0 max-[1300px]:static order-1 ">
             <div className="flex flex-col max-[1550px]:px-20 max-[1360px]:px-14 max-[500px]:px-4 w-1/2 max-[1300px]:w-full max-[1300px]:pt-16 pt-32 px-32 box-border ml-auto gap-14 leading-tight">
               <h2
-                className={`text-[70px] max-[1360px]:text-6xl max-[1300px]:text-7xl max-sm:text-5xl max-[1300px]:font-medium`}
+                className={`text-[70px] max-[1360px]:text-6xl max-[1300px]:text-7xl max-sm:text-5xl max-[1300px]:font-medium !leading-[60px] lg:!leading-[70px]`}
               >
                 Mortgage Hub Makes Home Possible
               </h2>
@@ -91,11 +91,11 @@ export default async function Home() {
           </div>
 
           {/* {session?.user && (
-          <div className="text-black">
-            {JSON.stringify(session.user, null, 2)}
-            <Logout />
-          </div>
-        )} */}
+            <div className="text-black">
+              {JSON.stringify(session.user, null, 2)}
+              <Logout />
+            </div>
+          )} */}
         </section>
 
         <section className="lg:pt-24 pb-16 pt-16 flex flex-col gap-16 overflow-hidden">
@@ -121,7 +121,7 @@ export default async function Home() {
               Get started
             </Button>
           </div>
-          <div className="w-full flex flex-col justify-center items-center text-center">
+          <div className="w-full flex flex-col justify-center items-center text-center mx-auto overflow-hidden">
             <HomeCarousel />
           </div>
           <BlogHighlights />
@@ -145,7 +145,7 @@ export default async function Home() {
         <section>
           <ToolsHighlight />
         </section>
-        <section>
+        <section className="overflow-hidden">
           <NewImmigrantHighlight />
         </section>
       </main>

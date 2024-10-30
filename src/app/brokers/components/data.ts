@@ -546,7 +546,7 @@ export const reviews = [
   {
     id: crypto.randomUUID(),
     name: "Samantha Lee",
-    text: "I appreciated Mulbery’s attention to detail and clear communication.",
+    text: "I appreciated Mulbery's attention to detail and clear communication.",
     rating: 5,
     time: "3 days ago",
   },

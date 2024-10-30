@@ -33,6 +33,7 @@ export interface UserTable {
   is_email_verified?: boolean;
   is_phone_verified?: boolean;
   phone: string | null;
+  dob: string | null;
 
   // You can specify a different type for each operation (select, insert and
   // update) using the `ColumnType<SelectType, InsertType, UpdateType>`
@@ -90,7 +91,6 @@ export type AccountUpdate = Updateable<AccountTable>;
 export interface BrokerTable {
   id: Generated<string>;
   user_id: string;
-  name: string;
   company: string | null;
   title: string | null;
   lic: string | null;

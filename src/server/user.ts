@@ -49,15 +49,19 @@ class User extends DB {
   public async createOne(
     email: string,
     password: string,
-    role: "user" | "broker" = "user"
+    role: "user" | "broker" = "user",
+    dob: string,
+    name: string
   ) {
-    const data = customError.registerSchema().parse({ email, password });
+    const data = customError
+      .registerSchema()
+      .parse({ email, password, role, dob, name });
     console.log("data", data);
     const hash = await bcrypt.hash(data.password, 10);
-    console.log("this db", this.db);
+
     const [user] = await this.db
       .insertInto("users")
-      .values({ email: data.email, password: hash, role })
+      .values({ email: data.email, password: hash, role, dob, name })
       .returning("id")
       .execute();
     console.log("user", user);
@@ -234,7 +238,9 @@ class User extends DB {
         console.log("claim", claim);
         const userInfo = {
           email: d.email,
+          name: d.name,
           picture: d.picture,
+          phone: d.phone,
           role: "broker" as const,
           account_status: "pending_claim" as const,
           ...claim,
@@ -248,7 +254,6 @@ class User extends DB {
         console.log("user", user);
         const brokerInfo = {
           user_id: user.id,
-          name: d.name,
           company: d.company,
           title: d.title,
           lic: d.lic,

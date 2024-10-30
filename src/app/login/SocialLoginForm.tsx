@@ -2,9 +2,9 @@ import { handleSocialLogin } from "@/actions/auth";
 import cookies from "js-cookies";
 import React from "react";
 
-const SocialLoginForm = ({ role }: { role: string }) => {
+const SocialLoginForm = ({ role }: { role?: string }) => {
   const performAction = (formData: FormData) => {
-    formData.set("role", role);
+    if (role) formData.set("role", role);
     handleSocialLogin(formData);
   };
   return (
@@ -15,7 +15,7 @@ const SocialLoginForm = ({ role }: { role: string }) => {
         name="action"
         value="google"
       >
-        Sign in with Google
+        Continue with Google
       </button>
     </form>
   );
