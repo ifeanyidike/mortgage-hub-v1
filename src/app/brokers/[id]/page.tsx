@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <h2 className="text-3xl border-b border-black">Broker Profile</h2>
           <div className="flex lg:justify-between mt-8 lg:flex-row flex-col gap-8 min-w-72 xs:min-w-96">
             <Image
-              src={profile?.picture!}
+              src={profile?.picture || ""}
               width={500}
               height={300}
               className="h-auto max-w-72 max-h-72 xs:max-w-[400px] xs:max-h-[400px] order-1 self-center lg:self-start"

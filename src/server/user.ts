@@ -228,49 +228,8 @@ class User extends DB {
   }
 
   public async bulkUploadBroker(data: (NewUser & NewBroker)[]) {
-    let batch_size = 100;
-    // for (let i = 0; i < data.length; i += batch_size) {
-    //   let batch = data.slice(i, i + batch_size);
-    //   const grouped_data = batch.map((b) => {
-    //     const claim = Verification.generateClaimToken();
-    //     const userInfo = {
-    //       email: b.email,
-    //       name: b.name,
-    //       profile_photo: b.profile_photo,
-    //       account_status: "pending_claim",
-    //       ...claim,
-    //     };
-
-    //     const brokerInfo = {
-    //       user_id: b.user_id,
-    //       company: b.company,
-    //       title: b.title,
-    //       lic: b.lic,
-    //       location: b.location,
-    //       service_areas: b.service_areas,
-    //       description: b.description,
-    //       picture: b.picture,
-    //       fax: b.fax,
-    //       postal_code: b.postal_code,
-    //       website: b.website,
-    //       social_links: b.social_links,
-    //       broker_id: b.broker_id,
-    //       is_company: b.is_company,
-    //       broker_type: b.broker_type,
-    //       created_at: b.created_at,
-    //     };
-
-    //     return { ...b, ...claim };
-    //   });
-    //   await this.db.insertInto("users").values(batch).execute();
-    //   await this.db
-    //     .insertInto("brokers")
-    //     .values(batch.map((user) => ({ user_id: user.id })))
-    //     .execute();
-    // }
-    console.log("Entered");
     try {
-      for (let d of data) {
+      for (const d of data) {
         const claim = Verification.generateClaimToken();
         console.log("claim", claim);
         const userInfo = {
