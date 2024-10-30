@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/app/utils";
+import { usePathname } from "next/navigation";
 
 const items = [
   { label: "Home", key: "/" },
@@ -24,7 +25,7 @@ type Props = {
 const Header = (props: Props) => {
   const { data: session } = useSession();
   const [mobileExpand, setMobileExpand] = useState(false);
-
+  const pathname = usePathname();
   function handleAuth() {
     return (
       <>
@@ -92,7 +93,11 @@ const Header = (props: Props) => {
               <Link
                 key={i.key}
                 href={`/${i.key}`}
-                className="text-black hover:text-[#3185FC]"
+                className={cn(
+                  "text-black hover:text-[#3185FC]",
+                  pathname.includes(`/${i.key}`) &&
+                    "border-b-2 border-[black] hover:border-[#3185FC]"
+                )}
               >
                 <motion.span
                   whileHover={{ scale: 1.1 }}
@@ -151,7 +156,11 @@ const Header = (props: Props) => {
                 <Link
                   key={i.key}
                   href={`/${i.key}`}
-                  className="text-black"
+                  className={cn(
+                    "text-black",
+                    pathname.includes(`/${i.key}`) &&
+                      "border-b-2 border-[black] hover:border-[#3185FC]"
+                  )}
                   onClick={() => setMobileExpand(false)}
                 >
                   <motion.span

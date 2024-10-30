@@ -133,7 +133,7 @@ const RegistrationForm = () => {
             key: t.value,
             label: (
               <button
-                className="!text-[13px] xs:text-base lg:!text-[24px] font-bold mr-5 lg:!mr-10"
+                className="!text-sm xs:text-base lg:!text-[24px] font-bold mr-5 lg:!mr-10"
                 onClick={() => setRole(t.value as "broker" | "user")}
               >
                 {t.label}
