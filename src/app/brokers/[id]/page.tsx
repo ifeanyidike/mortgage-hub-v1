@@ -98,14 +98,32 @@ export default async function Page({ params }: { params: { id: string } }) {
                   />
                 ))}
               </div>
-              <p>based on {reviews.length} reviews</p>
+              <p>Based on {reviews.length} reviews</p>
               <div className="flex flex-col">
-                <span className="font-bold">{profile.role}</span>
-                <p>flights made</p>
+                <small className="uppercase">Broker Type</small>
+                <span className="font-bold">{profile.broker_type}</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-bold">{profile.lic}</span>
-                <p>work since</p>
+                <small className="uppercase">Company</small>
+                <span className="font-bold">{profile.company ?? "-"}</span>
+              </div>
+              <div className="flex flex-col">
+                <small className="uppercase">Website</small>
+                {profile.website ? (
+                  <a
+                    className="font-bold"
+                    href={profile.website}
+                    rel="noreferer noopener"
+                  >
+                    {profile.website}
+                  </a>
+                ) : (
+                  "-"
+                )}
+              </div>
+              <div className="flex flex-col">
+                <small className="uppercase">license No.</small>
+                <span className="font-bold">{profile.lic ?? "-"}</span>
               </div>
             </div>
           </div>
