@@ -20,7 +20,6 @@ import { fetchBroker } from "@/actions/brokers";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const profile = await fetchBroker(params.id);
-  console.log("profile", profile);
   const contentStyle: React.CSSProperties = {
     height: "160px",
     color: "#fff",
@@ -48,7 +47,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               src={profile?.picture || ""}
               width={500}
               height={300}
-              className="h-auto max-w-72 max-h-72 xs:max-w-[400px] xs:max-h-[400px] order-1 self-center lg:self-start"
+              className="h-auto max-w-72 max-h-72 xs:max-w-[400px] xs:max-h-[400px] order-1 self-center lg:self-start rounded-xl"
               alt={profile.name!}
             />
             <div className="xl:px-16 p-8 bg-white rounded-3xl gap-6 flex flex-col justify-between w-full lg:w-1/2 order-3 lg:order-2 mx-auto">

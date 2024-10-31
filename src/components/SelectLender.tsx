@@ -42,7 +42,7 @@ type Props = {
 const Pane = (props: Props) => {
   const { icon, text } = props;
   return (
-    <div className="rounded-xl bg-white p-8 flex items-center justify-between flex-col h-56 lg:h-80 pt-14 lg:pt-28">
+    <div className="rounded-xl bg-white p-8 flex items-center justify-between flex-col gap-4 lg:gap-0 h-40 lg:h-80 pt-8 lg:pt-28">
       <div className="flex">{icon}</div>
       <p className="text-3xl font-semibold max-lg:text-2xl max-md:text-xl max-sm:text-base text-center">
         {text}

@@ -4,7 +4,7 @@ import { Button, Flex } from "antd";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { handleLogout } from "@/actions/auth";
-import Logo from "@/app/assets/logo1.png";
+import Logo from "@/app/assets/logo3.png";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -79,16 +79,16 @@ const Header = (props: Props) => {
         )}
       >
         <Flex justify="space-between" align="center" className="w-full">
-          <Link href="/" className="absolute left-10 top-4 z-[999999]">
+          <Link href="/" className="">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <Image src={Logo} alt="Mortgage Hub Logo" className="w-28" />
+              <Image src={Logo} alt="Mortgage Hub Logo" className="w-36" />
             </motion.div>
           </Link>
-          <div className="w-full 2xl:w-5/6 2xl:ml-auto flex justify-between items-end text-lg font-semibold px-8 1-5xl:px-24">
+          <div className="w-full 2xl:ml-auto flex justify-between items-end text-lg font-semibold px-8 1-5xl:px-24">
             {items.map((i) => (
               <Link
                 key={i.key}
@@ -123,16 +123,12 @@ const Header = (props: Props) => {
         )}
       >
         <div className="flex justify-between px-4 lg:px-10 py-12 items-center w-full">
-          <Link
-            onClick={() => setMobileExpand(false)}
-            href="/"
-            className="absolute left-4 top-4 z-[9999]"
-          >
+          <Link onClick={() => setMobileExpand(false)} href="/" className="">
             <Image
               src={Logo}
               alt="Mortgage Hub Logo"
               // className="w-60 lg:w-80"
-              className="w-24"
+              className="w-28"
             />
           </Link>
           <button

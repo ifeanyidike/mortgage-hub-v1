@@ -79,11 +79,11 @@ export default async function Home() {
           <div className="absolute right-0 top-0 flex p-0 m-0 max-[1300px]:static order-1 ">
             <div className="flex flex-col max-[1550px]:px-20 max-[1360px]:px-14 max-[500px]:px-4 w-1/2 max-[1300px]:w-full max-[1300px]:pt-16 pt-32 px-32 box-border ml-auto gap-14 leading-tight">
               <h2
-                className={`text-[70px] max-[1360px]:text-6xl max-[1300px]:text-7xl max-sm:text-5xl max-[1300px]:font-medium !leading-[60px] lg:!leading-[70px]`}
+                className={`text-5xl max-[1360px]:text-4xl max-[1300px]:text-5xl max-sm:text-5xl max-[1300px]:font-medium !leading-[60px] lg:!leading-[70px]`}
               >
                 Mortgage Hub Makes Home Possible
               </h2>
-              <p className="text-2xl max-[1300px]:text-xl">
+              <p className="text-xl max-[1300px]:text-lg">
                 Discover personalized mortgage solutions and financial tools
                 designed to make homeownership more accessible.
               </p>
