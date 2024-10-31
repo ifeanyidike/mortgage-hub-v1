@@ -73,17 +73,19 @@ export default async function Page({ params }: { params: { id: string } }) {
                     Call Me
                   </Button>
                 </a>
-                <Button
-                  type="primary"
-                  shape="round"
-                  size={"large"}
-                  className="!py-2"
-                >
-                  <div className="bg-[#3EBA97] p-[6px] rounded-full">
-                    <IoChatbubblesOutline />
-                  </div>
-                  Chat With Me
-                </Button>
+                <div>
+                  <Button
+                    type="primary"
+                    shape="round"
+                    size={"large"}
+                    className="!py-2"
+                  >
+                    <div className="bg-[#3EBA97] p-[6px] rounded-full">
+                      <IoChatbubblesOutline />
+                    </div>
+                    Chat With Me
+                  </Button>
+                </div>
               </div>
             </div>
             <div className="bg-white rounded-3xl p-8 gap-6 flex flex-col order-2 lg:order-3 min-w-80 lg:max-w-[400px] w-full mx-auto">
