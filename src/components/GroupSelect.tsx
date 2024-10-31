@@ -15,20 +15,22 @@ type Props = {
       value: string;
     }[];
   }[];
+  onChangeCb: (value: string, key: string) => void;
+  onSearchCb: () => void;
 };
 
 const GroupSelect = (props: Props) => {
   const { data, btnColor = "", mb = "mb-40" } = props;
-  const [searchState, setSearchState] = useState({
-    province: "",
-    city: "",
-    broker_type: "",
-  });
+  // const [searchState, setSearchState] = useState({
+  //   province: "",
+  //   city: "",
+  //   broker_type: "",
+  // });
 
-  const handleChange = (value: string, key: string) => {
-    console.log(`selected ${value} - ${key}`);
-    setSearchState((prevState) => ({ ...prevState, [key]: value }));
-  };
+  // const handleChange = (value: string, key: string) => {
+  //   console.log(`selected ${value} - ${key}`);
+  //   setSearchState((prevState) => ({ ...prevState, [key]: value }));
+  // };
   return (
     <div className={`mt-auto ${mb} mx-auto`}>
       <Space
@@ -46,7 +48,7 @@ const GroupSelect = (props: Props) => {
             }}
             className="!placeholder-black !border !rounded-lg !text-black group-select"
             allowClear
-            onChange={(value) => handleChange(value, d.key)}
+            onChange={(value) => props.onChangeCb(value, d.key)}
             placeholder={d.placeholder}
             options={d.options}
             key={d.key}
@@ -61,8 +63,7 @@ const GroupSelect = (props: Props) => {
           className={`uppercase text-white w-40 mx-auto !font-bold !text-xl ${btnColor}`}
           onClick={async () => {
             runInAction(() => {
-              const { province, city, broker_type } = searchState;
-              brokerStore.searchBrokers(city, province, broker_type);
+              props.onSearchCb();
             });
           }}
         >

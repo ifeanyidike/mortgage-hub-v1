@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button, Select, Space } from "antd";
 import GroupSelect from "@/components/GroupSelect";
 import { constants } from "buffer";
+import { brokerStore } from "@/app/store/brokerStore";
 
 const province = {
   key: "province",
@@ -77,7 +78,26 @@ const brokerType = {
 const data = [province, city, brokerType];
 
 const BrokersHomeSelect = () => {
-  return <GroupSelect data={data} btnColor="!bg-black" mb="-mt-16" />;
+  const [searchState, setSearchState] = useState({
+    province: "",
+    city: "",
+    broker_type: "",
+  });
+  return (
+    <GroupSelect
+      data={data}
+      btnColor="!bg-black"
+      mb="-mt-16"
+      onChangeCb={(value: string, key: string) => {
+        console.log(`selected ${value} - ${key}`);
+        setSearchState((prevState) => ({ ...prevState, [key]: value }));
+      }}
+      onSearchCb={() => {
+        const { province, city, broker_type } = searchState;
+        brokerStore.searchBrokers(city, province, broker_type);
+      }}
+    />
+  );
 };
 
 export default BrokersHomeSelect;

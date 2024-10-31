@@ -17,3 +17,14 @@ export function getRandomItems<T>(arr: T[], numItems: number): T[] {
   // Return the first `numItems` elements
   return result.slice(0, numItems);
 }
+
+export const checkWordsInString = (str: string, search: string) => {
+  const lowercaseStr = str.toLowerCase();
+  const wordsInSearch = (search.toLowerCase().match(/\w+/g) || []) as string[];
+  // const wordsInStr = (lowercaseStr.match(/\w+/g) || []) as string[];
+
+  for (const word of wordsInSearch) {
+    if (!lowercaseStr.includes(word)) return false;
+  }
+  return true;
+};

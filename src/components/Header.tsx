@@ -4,7 +4,7 @@ import { Button, Flex } from "antd";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { handleLogout } from "@/actions/auth";
-import Logo from "@/app/assets/logo.png";
+import Logo from "@/app/assets/logo1.png";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -79,16 +79,16 @@ const Header = (props: Props) => {
         )}
       >
         <Flex justify="space-between" align="center" className="w-full">
-          <Link href="/">
+          <Link href="/" className="absolute left-10 top-4 z-[999999]">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <Image src={Logo} alt="Mortgage Hub Logo" />
+              <Image src={Logo} alt="Mortgage Hub Logo" className="w-28" />
             </motion.div>
           </Link>
-          <div className="w-full flex justify-between items-end text-lg font-semibold px-8 1-5xl:px-24">
+          <div className="w-full 2xl:w-5/6 2xl:ml-auto flex justify-between items-end text-lg font-semibold px-8 1-5xl:px-24">
             {items.map((i) => (
               <Link
                 key={i.key}
@@ -123,15 +123,20 @@ const Header = (props: Props) => {
         )}
       >
         <div className="flex justify-between px-4 lg:px-10 py-12 items-center w-full">
-          <Link onClick={() => setMobileExpand(false)} href="/">
+          <Link
+            onClick={() => setMobileExpand(false)}
+            href="/"
+            className="absolute left-4 top-4 z-[9999]"
+          >
             <Image
               src={Logo}
               alt="Mortgage Hub Logo"
-              className="w-60 lg:w-80"
+              // className="w-60 lg:w-80"
+              className="w-24"
             />
           </Link>
           <button
-            className="cursor-pointer"
+            className="cursor-pointer ml-auto"
             onClick={() => setMobileExpand(!mobileExpand)}
           >
             {!mobileExpand ? (

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import SocialLoginForm from "../login/SocialLoginForm";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { Button, DatePicker, Input, message, Tabs } from "antd";
 import { MdEmail } from "react-icons/md";
 import { customError } from "@/server/error";

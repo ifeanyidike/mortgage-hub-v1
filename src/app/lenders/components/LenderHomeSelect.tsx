@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Select, Space } from "antd";
 import GroupSelect from "@/components/GroupSelect";
+import { useRouter } from "next/navigation";
 
 const handleChange = (value: string, key: string) => {
   console.log(`selected ${value} - ${key}`);
@@ -11,6 +12,7 @@ const locations = {
   key: "location",
   placeholder: "Location",
   options: [
+    { label: "Anywhere in Canada", value: "" },
     { label: "Ontario", value: "Ontario" },
     { label: "Quebec", value: "Quebec" },
     { label: "Newfoundland and Labrador", value: "Newfoundland and Labrador" },
@@ -34,8 +36,13 @@ const lenderType = {
   key: "lenderType",
   placeholder: "Lender type",
   options: [
-    { label: "Private lender", value: "private" },
-    { label: "Public lender", value: "public" },
+    { label: "All", value: "" },
+    { label: "Private lender", value: "private lender" },
+    { label: "Direct lender", value: "direct lender" },
+    { label: "Mortgage broker", value: "mortgage broker" },
+    { label: "Mortgage Investment Corporation", value: "mortgage investment" },
+    { label: "Credit Union", value: "credit union" },
+    { label: "Trust Company", value: "trust company" },
   ],
 };
 
@@ -43,6 +50,7 @@ const reviews = {
   key: "reviews",
   placeholder: "Reviews",
   options: [
+    { label: "All", value: "" },
     { label: "5 stars", value: "5" },
     { label: "4 stars", value: "4" },
     { label: "3 stars", value: "3" },
@@ -54,7 +62,26 @@ const reviews = {
 const data = [locations, lenderType, reviews];
 
 const LenderHomeSelect = () => {
-  return <GroupSelect data={data} />;
+  const router = useRouter();
+  const [searchState, setSearchState] = useState({
+    location: "",
+    lenderType: "",
+    rating: "",
+  });
+  return (
+    <GroupSelect
+      data={data}
+      onChangeCb={(value: string, key: string) => {
+        console.log(`selected ${value} - ${key}`);
+        setSearchState((prevState) => ({ ...prevState, [key]: value }));
+      }}
+      onSearchCb={() => {
+        router.push(
+          `/lenders/search?location=${searchState.location}&lenderType=${searchState.lenderType}&rating=${searchState.rating}`
+        );
+      }}
+    />
+  );
 };
 
 export default LenderHomeSelect;
