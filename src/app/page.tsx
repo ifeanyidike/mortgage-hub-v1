@@ -76,8 +76,8 @@ export default async function Home() {
               </div>
             </div>
           </div>
-          <div className="absolute right-0 top-0 flex p-0 m-0 max-[1300px]:static order-1 ">
-            <div className="flex flex-col max-[1550px]:px-20 max-[1360px]:px-14 max-[500px]:px-4 w-1/2 max-[1300px]:w-full max-[1300px]:pt-16 pt-32 px-32 box-border ml-auto gap-14 leading-tight">
+          <div className="absolute right-0 2xl:right-20 top-0 flex p-0 m-0 max-[1300px]:static order-1 ">
+            <div className="flex flex-col max-[1550px]:px-20 max-[1360px]:px-14 max-[500px]:px-4 w-1/2 max-[1300px]:w-full max-[1300px]:pt-16 pt-32 px-32  box-border ml-auto gap-14 leading-tight">
               <h2
                 className={`text-5xl max-[1360px]:text-4xl max-[1300px]:text-5xl max-sm:text-5xl max-[1300px]:font-medium !leading-[60px] lg:!leading-[70px]`}
               >
