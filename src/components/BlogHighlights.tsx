@@ -116,7 +116,7 @@ const BlogHighlights = () => {
         </div>
 
         {/* Right column with list items */}
-        <div className="flex flex-col gap-6 lg:justify-around overflow-y-auto max-h-[550px]">
+        <div className="flex flex-col gap-6 lg:justify-around overflow-y-auto max-h-600 lg:max-h-[550px]">
           <ItemPane
             title="5 Tips for First-Time Buyers"
             text="Explore essential advice for those stepping into homeownership for the first time."
@@ -127,11 +127,6 @@ const BlogHighlights = () => {
             text="Learn effective budgeting strategies for your home-buying journey."
             time="5 min"
             hasShadow
-          />
-          <ItemPane
-            title="Understanding Mortgage Rates"
-            text="Make sense of current rates and how they impact your monthly payments."
-            time="5 min"
           />
           <ItemPane
             title="Understanding Mortgage Rates"
