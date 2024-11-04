@@ -95,8 +95,8 @@ export default function HomeHeroSection() {
 
         <CtaButton
           classes="!mt-10 !bg-gray-800 !text-white hover:!bg-[#266ace]"
-          text="Find a lender"
-          href="/lenders"
+          text="Find a Broker"
+          href="/brokers"
         />
       </motion.div>
     </section>

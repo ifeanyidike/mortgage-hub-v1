@@ -159,20 +159,12 @@ const HomeCarouselItem: React.FC<ItemProps> = ({ img, caption }) => {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="flex flex-col items-center gap-4 h-[400px] max-sm:h-[380px] mb-8"
+      className="flex flex-col items-center gap-4 md:h-[400px] h-[350px] mb-4"
     >
       <div className="relative h-72 w-72 max-sm:h-64 max-sm:w-64 rounded-full overflow-hidden border-4 border-gray-300 shadow-md">
         <Image src={img} alt={caption} layout="fill" objectFit="cover" />
       </div>
-      <p className="text-xl font-semibold text-gray-700">{caption}</p>
-      {/* <Button
-        type="default"
-        shape="round"
-        size="small"
-        className="uppercase bg-gray-800 text-white hover:bg-gray-700 shadow-md px-6 py-2"
-      >
-        Learn More
-      </Button> */}
+
       <CtaButton
         classes="!bg-white !text-white hover:!bg-[#266ace]  !uppercase !py-1 !shadow-md  !hover:bg-gray-700 !text-gray-800 !text-sm hover:!text-white"
         text="Learn more"

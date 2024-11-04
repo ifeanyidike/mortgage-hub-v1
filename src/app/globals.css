@@ -315,3 +315,12 @@ body {
     width: 100%; /* Full width on mobile */
   }
 }
+
+@media (max-height: 932px) and (max-width: 500px) {
+  .lender-hero-section .lender-hero-cta {
+    padding: 50px auto !important;
+  }
+  .lender-hero-section .lender-hero-cta-image {
+    display: none;
+  }
+}

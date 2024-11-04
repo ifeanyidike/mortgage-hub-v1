@@ -39,7 +39,7 @@ const HomeAIPane = () => {
         <CtaButton
           classes="!bg-gray-800 !text-white hover:!bg-[#266ace]"
           text="Learn more"
-          href="/broker"
+          href="/ai-genie"
         />
       </div>
 

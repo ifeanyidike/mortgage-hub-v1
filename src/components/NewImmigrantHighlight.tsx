@@ -98,7 +98,7 @@ const NewImmigrantHighlight: React.FC = () => {
         <CtaButton
           classes="!bg-gray-800 !text-white hover:!bg-[#266ace] !shadow-lg hover:!shadow-xl !transform hover:!scale-105"
           text="Get Started"
-          href="/broker"
+          href="/new-immigrants"
         />
       </div>
     </div>

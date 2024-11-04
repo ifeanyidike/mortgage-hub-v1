@@ -314,7 +314,7 @@ const Page = () => {
             {/* Sidebar for filters */}
             <aside className="sidebar bg-gray-100 p-4 rounded-lg shadow-md">
               <CtaButton
-                classes="!bg-gray-800 !text-white hover:!bg-[#266ace] !py-6 !text-base !mr-auto"
+                classes="!bg-gray-800 !text-white !font-bold hover:!bg-[#266ace] !py-6 !text-base !mr-auto"
                 bodyStyle="justify-start"
                 text="New search"
                 href="/lenders"

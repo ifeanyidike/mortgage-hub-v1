@@ -141,8 +141,8 @@ const HouseTransfer = () => {
 
         <CtaButton
           classes=" !bg-gray-800 !text-white hover:!bg-[#266ace]"
-          text="Read more"
-          href="/lenders"
+          text="Learn more"
+          href="/brokers"
         />
       </div>
 
