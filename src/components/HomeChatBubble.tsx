@@ -30,9 +30,7 @@ const HomeChatBubble = (props: Props) => {
         boxShadow: hasShadow ? "5px 10px 15px rgba(0, 0, 0, 0.3)" : "",
       }}
     >
-      <p className="text-black text-[22px] max-sm:text-base font-medium">
-        {text}
-      </p>
+      <p className="text-black text-sm md:text-base font-medium">{text}</p>
       <small
         className={`${
           color.toLowerCase() === "#ffffff" ? "text-black" : "text-white"
