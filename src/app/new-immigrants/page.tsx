@@ -28,7 +28,7 @@ const NewImmigrants = () => {
             }
             actionText="Free Seminar Workshop"
             src="/assets/images/farnaz-story.png"
-            link="/"
+            link="/new-immigrants/seminar/registration"
           />
         </section>
 
