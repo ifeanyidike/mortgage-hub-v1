@@ -1004,7 +1004,7 @@ const Page = () => {
                       width={150}
                       height={100}
                       className={cn(
-                        "object-contain  rounded-lg shadow-md mb-4 w-full h-28",
+                        "object-contain  rounded-lg shadow-md mb-4 w-full h-24",
                         (lender.name.includes("Home Trust") ||
                           lender.name === "MCAN Mortgage Corporation") &&
                           "bg-gray-500"
@@ -1031,7 +1031,9 @@ const Page = () => {
                       ))}
                     </div>
                     <p className="text-gray-500 text-sm overflow-hidden text-ellipsis">
-                      {lender.reviews[0]?.reviewText.slice(0, 100)}...
+                      {lender.reviews[0]?.reviewText.length <= 150
+                        ? lender.reviews[0]?.reviewText
+                        : lender.reviews[0]?.reviewText.slice(0, 150) + "..."}
                     </p>
                   </motion.div>
                 ))}
