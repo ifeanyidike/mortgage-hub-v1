@@ -121,6 +121,7 @@ const SeminarRegistrationForm = () => {
             <Radio.Group size="large" onChange={() => {}}>
               {field.options?.map((option) => (
                 <Radio
+                  key={option}
                   className="!font-[family-name:var(--font-montserrat)]"
                   value={option}
                 >
