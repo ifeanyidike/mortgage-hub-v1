@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ReactNode } from "react";
 import NewSeminarRegistrationBanner from "@/app/assets/Images/new-seminar-reg-banner.png";
-import { Select } from "antd";
+import { Radio, Select } from "antd";
 
 // Form Field Interface for strong typing
 interface FormField {
@@ -109,6 +109,7 @@ const SeminarRegistrationForm = () => {
             <Select
               size="large"
               style={{ width: "100%", height: "50px" }}
+              className="!font-[family-name:var(--font-montserrat)]"
               allowClear
               options={field.options?.map((option) => ({
                 label: option,
@@ -117,16 +118,16 @@ const SeminarRegistrationForm = () => {
               placeholder={field.placeholder}
             />
           ) : (
-            <Select
-              size="large"
-              style={{ width: "100%", height: "50px" }}
-              allowClear
-              options={field.options?.map((option) => ({
-                label: option,
-                value: option.toLowerCase(),
-              }))}
-              placeholder={field.placeholder}
-            />
+            <Radio.Group size="large" onChange={() => {}}>
+              {field.options?.map((option) => (
+                <Radio
+                  className="!font-[family-name:var(--font-montserrat)]"
+                  value={option}
+                >
+                  {option}
+                </Radio>
+              ))}
+            </Radio.Group>
           )}
         </div>
       ))}
