@@ -84,7 +84,7 @@ const OurOffersSection = () => {
       }}
     >
       {/* Semi-transparent overlay for better readability */}
-      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute inset-0 bg-black/30" />
 
       {/* Header */}
       <div className="absolute top-0 left-0 w-full bg-white/40">
@@ -99,11 +99,11 @@ const OurOffersSection = () => {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-3xl font-bold mb-16 px-6 max-w-[500px] z-10"
         >
-          As a New Immigrant, You'll Want Some Help With...
+          As a New Immigrant, You&apos;ll Want Some Help With...
         </motion.h2>
 
         {/* Items */}
-        <div className="flex flex-col justify-center max-md:mx-auto gap-4 px-6">
+        <div className="flex flex-col justify-center max-md:mx-auto gap-4 z-10 px-6">
           <ItemPane
             icon={<CreditScoreIcon />}
             text="Building a Strong Credit Score"
