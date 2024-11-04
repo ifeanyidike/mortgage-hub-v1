@@ -74,7 +74,7 @@ const PersonalTestimonial: React.FC<Props> = ({
   return (
     <div
       className={cn(
-        "flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 p-8 lg:p-20 xl:px-36",
+        "flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 p-8 lg:p-16 lg:mt-16",
         "bg-gradient-to-br from-gray-50 to-gray-200 shadow-md max-w-screen-xl mx-auto",
         "rounded-none lg:rounded-[100px] lg:rounded-tl-none lg:rounded-br-none"
       )}
@@ -102,7 +102,7 @@ const PersonalTestimonial: React.FC<Props> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+        <h2 className="text-3xl md:text-3xl font-bold text-gray-800">
           {title}
         </h2>
 
@@ -122,7 +122,7 @@ const PersonalTestimonial: React.FC<Props> = ({
         {/* Statistic Display */}
         <div className="flex items-center gap-4 mt-4">
           <motion.span
-            className="text-4xl font-extrabold text-[#21334C]"
+            className="text-3xl font-extrabold text-[#21334C]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}

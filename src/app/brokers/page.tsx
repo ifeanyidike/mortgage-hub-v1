@@ -10,7 +10,6 @@ import { fetchTopFiveBrokers } from "@/actions/brokers";
 
 const Brokers = async () => {
   const topBrokers = await fetchTopFiveBrokers();
-  console.log("top brokers: ", topBrokers);
   return (
     <>
       <Header bgColor="bg-transparent" />

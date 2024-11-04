@@ -8,9 +8,10 @@ type Props = {
   href: string;
   classes: string;
   text: string;
+  bodyStyle?: string;
 };
 const CtaButton = (props: Props) => {
-  const { href, classes, text } = props;
+  const { href, classes, text, bodyStyle = "justify-center" } = props;
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
@@ -21,14 +22,14 @@ const CtaButton = (props: Props) => {
         type: "spring",
         stiffness: 150,
       }}
-      className="flex justify-center"
+      className={`flex ${bodyStyle}`}
     >
       <Link href={href}>
         <Button
           size="large"
           shape="round"
           className={cn(
-            "!py-8 !px-8 !text-xl !flex !items-center !gap-4 shadow-md transition-all duration-200",
+            "!p-8 !text-xl !flex !items-center !gap-4 shadow-md transition-all duration-200",
             classes
           )}
         >
