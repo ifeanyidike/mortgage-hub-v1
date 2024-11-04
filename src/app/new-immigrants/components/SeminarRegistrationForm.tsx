@@ -73,7 +73,7 @@ const SeminarRegistrationForm = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="lg:px-16 mb-16"
+      className="md:px-16 mb-16"
     >
       <h3 className="text-xl font-extrabold text-gray-800 mb-8">{title}</h3>
       {fields.map((field) => (
@@ -142,12 +142,12 @@ const SeminarRegistrationForm = () => {
 
       {/* Registration Form */}
       <motion.div
-        className="bg-[#F2F2F2] md:rounded-[80px] shadow-lg w-full p-16 md:p-12 mt-12 relative"
+        className="bg-[#F2F2F2] md:rounded-[80px] shadow-lg w-full p-8 md:p-12 mt-12 relative"
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h3 className="text-base bg-[#FE621D] px-4 py-2 rounded text-white mb-6 absolute -top-4 left-12 md:left-20">
+        <h3 className="text-base bg-[#FE621D] px-4 py-2 rounded text-white mb-8 absolute -top-4 left-8 md:left-20">
           Attendee 1
         </h3>
         <Section title="Personal Information" fields={personalInfoFields} />
