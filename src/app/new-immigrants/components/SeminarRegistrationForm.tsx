@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ReactNode } from "react";
 import NewSeminarRegistrationBanner from "@/app/assets/Images/new-seminar-reg-banner.png";
+import { Select } from "antd";
 
 // Form Field Interface for strong typing
 interface FormField {
@@ -41,7 +42,22 @@ const SeminarRegistrationForm = () => {
       label: "State/Province",
       placeholder: "Select your state",
       type: "select",
-      options: ["State 1", "State 2"],
+      options: [
+        // Canada Province
+        "Alberta",
+        "British Columbia",
+        "Manitoba",
+        "New Brunswick",
+        "Newfoundland and Labrador",
+        "Northwest Territories",
+        "Nova Scotia",
+        "Nunavut",
+        "Ontario",
+        "Prince Edward Island",
+        "Quebec",
+        "Saskatchewan",
+        "Yukon",
+      ],
     },
     {
       label: "Zip/Postal Code",
@@ -90,25 +106,27 @@ const SeminarRegistrationForm = () => {
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
             />
           ) : field.type === "select" ? (
-            <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-              {field.options?.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+            <Select
+              size="large"
+              style={{ width: "100%", height: "50px" }}
+              allowClear
+              options={field.options?.map((option) => ({
+                label: option,
+                value: option.toLowerCase(),
+              }))}
+              placeholder={field.placeholder}
+            />
           ) : (
-            field.options?.map((option) => (
-              <label key={option} className="inline-flex items-center mr-4">
-                <input
-                  type="radio"
-                  name={field.label}
-                  value={option}
-                  className="mr-2"
-                />
-                {option}
-              </label>
-            ))
+            <Select
+              size="large"
+              style={{ width: "100%", height: "50px" }}
+              allowClear
+              options={field.options?.map((option) => ({
+                label: option,
+                value: option.toLowerCase(),
+              }))}
+              placeholder={field.placeholder}
+            />
           )}
         </div>
       ))}
@@ -142,7 +160,7 @@ const SeminarRegistrationForm = () => {
 
       {/* Registration Form */}
       <motion.div
-        className="bg-[#F2F2F2] md:rounded-[80px] shadow-lg w-full p-8 md:p-12 mt-12 relative"
+        className="bg-[#F2F2F2] md:rounded-[80px] shadow-lg w-full p-8 pt-16 lg:pt-8 md:p-12 mt-12 relative"
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
