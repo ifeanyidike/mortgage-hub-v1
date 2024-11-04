@@ -58,27 +58,27 @@ import Figure3 from "@/app/assets/icons/Figures-icon-3.svg";
 
 const StatPane = () => {
   return (
-    <div className="max-h-screen bg-[#21334C] pt-0 pb-8 lg:py-16 flex justify-around items-center text-center gap-2 lg:flex-row lg:gap-8 flex-col">
+    <div className="max-h-screen bg-[#21334C] pt-8 pb-16 lg:py-16 flex justify-around items-center text-center gap-2 lg:flex-row lg:gap-8 flex-col">
       <StatDetail
         icon={<Image src={Figure3} alt="Families Assisted Icon" />}
-        stat="205k+"
-        info="Families Assisted"
+        stat="2000"
+        info="Lenders"
       />
 
       <motion.div className="hidden lg:block w-[1px] h-48 bg-gray-300"></motion.div>
 
       <StatDetail
         icon={<Image src={Figure2} alt="Mortgage Experts Icon" />}
-        stat="700+"
-        info="Mortgage Experts"
+        stat="50k+"
+        info="Brokers"
       />
 
       <motion.div className="hidden lg:block w-[1px] h-48 bg-gray-300"></motion.div>
 
       <StatDetail
         icon={<Image src={Figure1} alt="Lenders Available Icon" />}
-        stat="Thousands"
-        info="Lenders Available"
+        stat="Millions served"
+        info=""
       />
     </div>
   );

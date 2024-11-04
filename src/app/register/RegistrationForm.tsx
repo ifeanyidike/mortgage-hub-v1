@@ -13,6 +13,7 @@ import { BsPersonFillX } from "react-icons/bs";
 import { BiCalendarX } from "react-icons/bi";
 import Link from "next/link";
 import { registerUser } from "@/actions/auth";
+import { motion } from "framer-motion";
 
 const options = [
   { label: "Register as a broker", value: "broker" },
@@ -100,27 +101,15 @@ const RegistrationForm = () => {
       >
         Fetch brokers
       </button> */}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         className={cn(
           "flex flex-col items-center",
           email === null ? "mt-4" : "mt-2"
         )}
       >
-        {/* <Radio.Group
-            block
-            options={options}
-            defaultValue="user"
-            optionType="button"
-            buttonStyle="solid"
-            className="!w-full !text-3xl !font-[family-name:var(--font-montserrat)]"
-            style={{
-              fontFamily: "Montserrat",
-              fontWeight: 700,
-              fontSize: 48,
-            }}
-            name="role"
-            onChange={(e) => setRole(e.target.value)}
-          /> */}
         <Tabs
           defaultActiveKey="user"
           size="large"
@@ -171,7 +160,10 @@ const RegistrationForm = () => {
         />
         {email === null && redirectToLogin()}
 
-        <main
+        <motion.main
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
           className={cn(
             "my-5 gap-5 w-full  xs:w-[400px] sm:w-[550px] md:w-[650px] lg:w-[850px] xl:w-[1000px]  p-3 rounded-md",
             " text-black !font-[family-name:var(--font-montserrat)]",
@@ -189,7 +181,7 @@ const RegistrationForm = () => {
           <form
             onSubmit={handleSubmit}
             className={cn(
-              "flex flex-col gap-12",
+              "flex flex-col gap-6",
               "bg-gray-100 py-12 lg:px-20 px-5 rounded-3xl lg:rounded-[80px] border border-gray-300"
             )}
           >
@@ -329,8 +321,8 @@ const RegistrationForm = () => {
 
             {redirectToLogin()}
           </form>
-        </main>
-      </div>
+        </motion.main>
+      </motion.div>
     </div>
   );
 };

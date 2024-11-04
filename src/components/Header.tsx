@@ -118,7 +118,7 @@ const Header = (props: Props) => {
         className={cn(
           "w-full font-[family-name:var(--font-montserrat)] lg:hidden ",
           // props.bgColor,
-          mobileExpand && "fixed h-screen z-20",
+          mobileExpand && "fixed h-screen z-50",
           mobileExpand ? "bg-[#f0f0f0]" : props.bgColor
         )}
       >

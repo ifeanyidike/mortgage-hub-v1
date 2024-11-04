@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { ReactNode } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { VscQuote } from "react-icons/vsc";
@@ -9,22 +9,24 @@ import CtaButton from "./CtaButton";
 type Props = {
   title: string;
   description: string;
-  stat: string;
-  statText: string;
+  icon: ReactNode;
+  actionText: string;
   src: string;
+  link: string;
 };
 
-const PersonalTestimonial: React.FC<Props> = ({
+const PersonalTestimonialWithIcon: React.FC<Props> = ({
   title,
   description,
-  stat,
-  statText,
+  icon,
+  actionText,
+  link,
   src,
 }) => {
   return (
     <div
       className={cn(
-        "flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 p-8 lg:p-16 lg:mt-16",
+        "flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 p-8 py-16 lg:p-16 lg:mt-16",
         "bg-gradient-to-br from-gray-50 to-gray-200 shadow-md max-w-screen-xl mx-auto",
         "rounded-none lg:rounded-[100px] lg:rounded-tl-none lg:rounded-br-none"
       )}
@@ -71,31 +73,23 @@ const PersonalTestimonial: React.FC<Props> = ({
 
         {/* Statistic Display */}
         <div className="flex items-center gap-4 mt-4">
-          <motion.span
-            className="text-3xl font-extrabold text-[#21334C]"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+          <motion.div
+            className="text-3xl font-extrabold text-[#21334C] flex items-center"
+            // initial={{ opacity: 0, scale: 0.9 }}
+            // animate={{ opacity: 1, scale: 1 }}
+            // transition={{ delay: 0.4, duration: 0.6 }}
           >
-            {stat}
-          </motion.span>
-          <motion.span
-            className="text-lg text-gray-600 border-b-4 border-[#FE621D] font-semibold"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-          >
-            {statText}
-          </motion.span>
+            {icon}
+          </motion.div>
+          <CtaButton
+            classes="!bg-gray-800 !text-white hover:!bg-[#266ace]"
+            text={actionText}
+            href={link}
+          />
         </div>
-        <CtaButton
-          classes="!bg-gray-800 !mt-8 !text-white hover:!bg-[#266ace]"
-          text="Find a broker"
-          href="/broker"
-        />
       </motion.div>
     </div>
   );
 };
 
-export default PersonalTestimonial;
+export default PersonalTestimonialWithIcon;
