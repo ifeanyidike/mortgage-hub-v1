@@ -87,7 +87,7 @@ const BrokersHomeSelect = () => {
     <GroupSelect
       data={data}
       btnColor="!bg-black"
-      mb="-mt-16"
+      mb="!mt-6 lg:!mt-2"
       onChangeCb={(value: string, key: string) => {
         console.log(`selected ${value} - ${key}`);
         setSearchState((prevState) => ({ ...prevState, [key]: value }));

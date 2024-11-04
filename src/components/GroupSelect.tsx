@@ -36,7 +36,7 @@ const GroupSelect = (props: Props) => {
       <Space
         wrap
         size="large"
-        className="flex flex-col gap-8 mt-24 md:flex-row flex-wrap lg:items-center lg:justify-center lg:content-center"
+        className="flex flex-col gap-8 md:flex-row flex-wrap lg:items-center lg:justify-center lg:content-center"
       >
         {data.map((d) => (
           <Select

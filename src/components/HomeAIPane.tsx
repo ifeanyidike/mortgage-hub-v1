@@ -1,35 +1,63 @@
+"use client";
 import { Button } from "antd";
+import Image from "next/image";
 import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
 import HappyReadingAI from "@/app/assets/Images/happy-reading-ai.png";
-import Image, { StaticImageData } from "next/image";
 import MortgageAssistance from "@/app/assets/icons/Mortgage_assistance_WHITE.svg";
 import CreditScore from "@/app/assets/icons/CreditScore.svg";
 import { BsPatchCheck } from "react-icons/bs";
+import CtaButton from "./CtaButton";
 
 const HomeAIPane = () => {
   return (
-    <div className="flex items-center justify-between py-32 px-32 max-xl:px-16 max-lg:flex-col-reverse max-lg:px-8">
-      <div className="flex flex-col gap-8 items-center max-xl:max-w-80 justify-center mr-auto max-xl:mx-auto max-lg:mt-8 max-lg:max-w-[90%]">
-        <h4 className="text-4xl">Mortgage Hub AI Hooks You Up</h4>
-        <p className="text-xl">
-          Find out about $50,000 Down Payment Assistant.
-        </p>
-        <Button
-          type="primary"
-          shape="round"
-          size="middle"
-          className="uppercase text-white w-40 mx-auto"
+    <div className="flex items-center pt-24 pb-12 lg:pt-32 lg:pb-24 px-8 lg:px-16 flex-col-reverse lg:flex-row gap-8 justify-center lg:gap-48">
+      <div className="flex flex-col gap-8 items-center max-w-lg justify-center text-center max-lg:mt-8 lg:max-w-[400px]">
+        <h4 className="text-3xl font-bold text-left">
+          Mortgage Hub AI Hooks You Up
+        </h4>
+        <motion.p
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="text-base hidden lg:block text-left"
         >
-          Lorem Ipsum
-        </Button>
+          Discover valuable insights on how you could qualify for up to $50,000
+          in Down Payment Assistance. Take the first step toward affordable
+          homeownership with guidance tailored to help you unlock this
+          opportunity!
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="lg:hidden text-base text-left"
+        >
+          Discover how our $50,000 Down Payment Assistance can make your dream
+          home a reality.
+        </motion.p>
+        <CtaButton
+          classes="!bg-gray-800 !text-white hover:!bg-[#266ace]"
+          text="Learn more"
+          href="/broker"
+        />
       </div>
-      <div className="w-1/2 max-w-[600px] max-sm:max-w-[400px] max-lg:w-full relative">
+
+      {/* Right Section with Image and Floating Buttons */}
+      <div className="w-1/2 max-w-[400px] relative flex items-center justify-center max-lg:w-full">
         <Image
           src={HappyReadingAI}
-          alt=""
-          className="max-sm:max-w-80 max-sm:mx-auto"
+          alt="AI Assistance"
+          className="w-full max-sm:max-w-80"
         />
-        <div className="absolute -top-8 -left-40 max-sm:-left-8 max-lg:-left-20 max-md:-left-14">
+
+        {/* Floating Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="absolute -top-8 -left-24 max-sm:-left-4"
+        >
           <FloatingPane
             text="Down Payment Assistance"
             color="bg-[#3EBA97]"
@@ -37,34 +65,45 @@ const HomeAIPane = () => {
               <Image
                 src={MortgageAssistance}
                 alt=""
-                className="h-12 w-12 max-sm:h-6 max-sm:w-6 aspect-square rounded-full"
+                className="h-10 w-10 max-sm:h-6 max-sm:w-6"
               />
             }
           />
-        </div>
-        <div className="absolute bottom-7 -left-20 max-sm:-left-4 max-lg:-left-14 max-md:-left-10">
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          className="absolute bottom-0 -left-24 max-sm:bottom-0 max-sm:-left-4"
+        >
           <FloatingPane
             text="Term Extensions"
             color="bg-[#82A6BF]"
-            width="1/2"
             icon={
               <Image
                 src={CreditScore}
                 alt=""
-                className="h-12 w-12 max-sm:h-6 max-sm:w-6 aspect-square rounded-full"
+                className="h-10 w-10 max-sm:h-6 max-sm:w-6"
               />
             }
           />
-        </div>
-        <div className="absolute top-8 -right-20 max-sm:-right-4 max-lg:-right-14 max-md:-right-10">
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
+          className="absolute top-36 -right-10 max-sm:top-28 max-sm:-right-6"
+        >
           <FloatingPane
             text="Free Counselling"
             color="bg-[#FE621D]"
             icon={
-              <BsPatchCheck className="h-12 w-12 max-sm:h-6 max-sm:w-6 aspect-square rounded-full text-white" />
+              <BsPatchCheck className="h-10 w-10 max-sm:h-6 max-sm:w-6 text-white" />
             }
           />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -76,22 +115,14 @@ type Props = {
   color: string;
   icon?: ReactNode;
   text: string;
-  width?: string;
 };
-const FloatingPane = (props: Props) => {
-  const { color, icon, text, width = "w-3/5" } = props;
-  return (
-    <div className="flex items-center justify-center rounded-full h-24 max-lg:h-20 max-md:h-16 max-sm:h-12 bg-black box-border min-w-72 max-sm:min-w-40 max-lg:min-w-56">
-      <div
-        className={`${color} ml-5 rounded-full h-16 p-2 max-sm:p-1 max-sm:h-8 max-sm:w-8 max-lg:h-12 max-lg:w-12 max-md:h-10 max-md:w-10 flex items-center max-sm:ml-1`}
-      >
-        {icon}
-      </div>
-      <p
-        className={`text-white  ml-4 box-border font-semibold w-3/5 max-sm:text-xs max-sm:ml-2`}
-      >
-        {text}
-      </p>
+const FloatingPane = ({ color, icon, text }: Props) => (
+  <div className="flex items-center justify-start rounded-full h-16 max-sm:h-12 bg-black px-4 shadow-lg">
+    <div
+      className={`flex items-center justify-center rounded-full ${color} p-2 mr-3`}
+    >
+      {icon}
     </div>
-  );
-};
+    <p className="text-white font-semibold max-sm:text-xs">{text}</p>
+  </div>
+);

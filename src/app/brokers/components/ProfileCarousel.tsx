@@ -1,7 +1,7 @@
 "use client";
 import { HeartFilled } from "@ant-design/icons";
 import Image from "next/image";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, FC } from "react";
 import {
   FaHeart,
   FaLongArrowAltLeft,
@@ -202,14 +202,14 @@ const ProfileCarousel = observer((props: Props) => {
 
   if (!profiles.length)
     return (
-      <div className="px-8 py-16 lg:px-32 lg:py-48  mx-auto text-bold text-xl lg:text-3xl text-center">
+      <div className="px-8 py-16 lg:px-32 lg:py-48  mx-auto text-bold text-xl lg:text-2xl text-center">
         The search does not match any broker in the database. Please search
         again.
       </div>
     );
 
   return (
-    <div className="group container mx-auto relative">
+    <div className="group container mx-auto relative my-8">
       <motion.div
         className={cn(
           "hidden sm:block pointer-events-none absolute z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -236,7 +236,7 @@ const ProfileCarousel = observer((props: Props) => {
           </motion.span>
         </motion.div>
       </motion.div>
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden py-2">
         <motion.ul
           ref={containerRef}
           className="flex cursor-pointer sm:cursor-none items-start"
@@ -272,15 +272,12 @@ const ProfileCarousel = observer((props: Props) => {
                 //@ts-expect-error //Not expecting an error
                 ref={(el) => (itemsRef.current[index] = el)}
                 className={cn(
-                  "group relative shrink-0 select-none px-3 transition-opacity duration-300",
-                  !active && "opacity-30"
+                  "group relative shrink-0 select-none px-3 transition-opacity duration-300 basis-80",
+                  !active ? "opacity-30 md:basis-[30%]" : " md:basis-1/3"
                 )}
                 transition={{
                   ease: "easeInOut",
                   duration: 0.4,
-                }}
-                style={{
-                  flexBasis: active ? "33%" : "30%",
                 }}
               >
                 <ProfileItem
@@ -324,50 +321,154 @@ type ItemProps = {
   isDragging: boolean;
   rating: number;
 };
-const ProfileItem = (props: ItemProps) => {
+// const ProfileItem = (props: ItemProps) => {
+//   const router = useRouter();
+//   const { rating, profile, isDragging } = props;
+//   return (
+//     <div
+//       onClick={(e) => {
+//         if (isDragging) return;
+//         router.push(`/brokers/${profile!.id}`);
+//       }}
+//       className="max-xs:min-w-80 md:min-w-96 sm:min-w-[350px] max-w-[600px] h-auto rounded-[50px] rounded-bl-none bg-gray-200 px-14 max-sm:px-6 py-8 flex flex-col gap-8"
+//     >
+//       <div className="flex justify-between items-center max-sm:gap-8">
+//         <div className="flex p-2 rounded-full rounded-br-none bg-white w-fit">
+//           {[...Array(5).keys()].map((i) => (
+//             <GoStarFill
+//               color={rating - i > 0 ? "#FE621D" : ""}
+//               size={24}
+//               key={i}
+//             />
+//           ))}
+//         </div>
+//         <span className="uppercase text-xl">User rating</span>
+//       </div>
+//       <span className="text-2xl">{profile?.broker_type}</span>
+//       <h3 className="font-extrabold text-2xl text-gray-500">{profile!.name}</h3>
+//       <p className="-mt-4 line-clamp-3">{profile!.description}</p>
+//       <Image
+//         src={profile!.picture!}
+//         alt={profile!.name!}
+//         width={350}
+//         height={300}
+//         className="w-auto h-auto max-h-96 rounded-xl"
+//         draggable={false}
+//       />
+
+//       <div className="flex gap-4 ml-auto">
+//         <button className="w-14 h-14 bg-white rounded-full flex items-center justify-center">
+//           <GoStarFill color="#ADBDFF" className="!w-3/5 !h-3/5 mt-1" />
+//         </button>
+//         <button className="w-14 h-14 bg-white rounded-full flex items-center justify-center">
+//           <FaHeart color="#ADBDFF" className="!w-3/5 !h-3/5 mt-1" />
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+const ProfileItem: FC<ItemProps> = ({ profile, isDragging, rating }) => {
   const router = useRouter();
-  const { rating, profile, isDragging } = props;
+
   return (
-    <div
-      onClick={(e) => {
-        if (isDragging) return;
-        router.push(`/brokers/${profile!.id}`);
+    <motion.div
+      onClick={() => {
+        if (!isDragging) router.push(`/brokers/${profile!.id}`);
       }}
-      className="max-xs:min-w-80 md:min-w-96 sm:min-w-[350px] max-w-[600px] h-auto rounded-[50px] rounded-bl-none bg-gray-200 px-14 max-sm:px-6 py-8 flex flex-col gap-8"
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="md:min-w-[350px] max-w-[600px] w-full h-auto rounded-3xl shadow-xl bg-white p-6 sm:p-8 flex flex-col gap-4 transition-all hover:shadow-2xl border border-gray-300"
     >
-      <div className="flex justify-between items-center max-sm:gap-8">
-        <div className="flex p-2 rounded-full rounded-br-none bg-white w-fit">
-          {[...Array(5).keys()].map((i) => (
+      {/* Header: User Rating */}
+      <motion.div
+        className="flex justify-between items-center"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+      >
+        <div className="flex gap-1 items-center bg-gray-100 p-2 rounded-full">
+          {[...Array(5)].map((_, i) => (
             <GoStarFill
-              color={rating - i > 0 ? "#FE621D" : ""}
-              size={24}
               key={i}
+              color={rating - i > 0 ? "#FE621D" : "#E4E4E4"}
+              size={20}
             />
           ))}
         </div>
-        <span className="uppercase text-xl">User rating</span>
-      </div>
-      <span className="text-2xl">{profile?.broker_type}</span>
-      <h3 className="font-extrabold text-2xl text-gray-500">{profile!.name}</h3>
-      <p className="-mt-4 line-clamp-3">{profile!.description}</p>
-      <Image
-        src={profile!.picture!}
-        alt={profile!.name!}
-        width={350}
-        height={300}
-        className="w-auto h-auto max-h-96 rounded-xl"
-        draggable={false}
-      />
+        <span className="text-gray-500 text-sm font-semibold uppercase tracking-wide">
+          User Rating
+        </span>
+      </motion.div>
 
-      <div className="flex gap-4 ml-auto">
-        <button className="w-14 h-14 bg-white rounded-full flex items-center justify-center">
-          <GoStarFill color="#ADBDFF" className="!w-3/5 !h-3/5 mt-1" />
+      {/* Broker Type */}
+      <motion.span
+        className="text-lg font-medium text-gray-600"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.15 }}
+      >
+        {profile?.broker_type ?? "Broker"}
+      </motion.span>
+
+      {/* Broker Name */}
+      <motion.h3
+        className="font-bold text-2xl text-gray-800"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        {profile?.name}
+      </motion.h3>
+
+      {/* Description */}
+      <motion.p
+        className="text-gray-500 text-sm line-clamp-3 mt-1"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25 }}
+      >
+        {profile?.description ?? "No description available."}
+      </motion.p>
+
+      {/* Profile Image */}
+      <motion.div
+        className="mt-4"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        <Image
+          src={profile?.picture ?? "/default-avatar.png"}
+          alt={profile?.name ?? "Profile Picture"}
+          width={300}
+          height={300}
+          className="w-full h-auto rounded-xl object-cover max-h-72"
+          draggable={false}
+        />
+      </motion.div>
+
+      {/* Action Buttons */}
+      <motion.div
+        className="flex gap-4 mt-6 self-end"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.35 }}
+      >
+        <button
+          className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center transition-all hover:bg-gray-200"
+          aria-label="Favorite"
+        >
+          <FaHeart color="#FE621D" className="w-6 h-6" />
         </button>
-        <button className="w-14 h-14 bg-white rounded-full flex items-center justify-center">
-          <FaHeart color="#ADBDFF" className="!w-3/5 !h-3/5 mt-1" />
+        <button
+          className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center transition-all hover:bg-gray-200"
+          aria-label="Rate"
+        >
+          <GoStarFill color="#FE621D" className="w-6 h-6" />
         </button>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

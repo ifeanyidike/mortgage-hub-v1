@@ -304,7 +304,7 @@ body {
 }
 
 .carousel-container {
-  max-width: 1300px; /* Max width for larger screens */
+  max-width: 1100px; /* Max width for larger screens */
   margin: 0 auto !important;
   width: fit-content;
   padding: 0 15px; /* Padding for smaller screens */

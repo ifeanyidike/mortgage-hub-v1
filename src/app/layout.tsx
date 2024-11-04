@@ -35,7 +35,7 @@ export default async function RootLayout({
     <html lang="en">
       <SessionProvider session={session}>
         <body
-          className={`${montserrat.variable} antialiased font-[family-name:var(--font-montserrat)]`}
+          className={`${montserrat.variable} antialiased font-[family-name:var(--font-montserrat)] `}
         >
           <AntdRegistry>
             {children}

@@ -14,9 +14,9 @@ const Brokers = async () => {
   return (
     <>
       <Header bgColor="bg-transparent" />
-      <main>
+      <main className="max-w-screen-xl mx-auto">
         <Hero />
-        <section className="py-32">
+        <section className="py-16">
           <ProfileCarousel topBrokers={topBrokers as any} />
           <PersonalTestimonial
             title="Stacy Used Mortgage Hub Broker Directory"
@@ -26,8 +26,10 @@ const Brokers = async () => {
             src="/assets/images/fair-skinned.png"
           />
         </section>
-        <section className="flex flex-col gap-8 overflow-hidden">
-          <BlogHighlights />
+        <section className="flex flex-col overflow-hidden pb-8">
+          <div className="px-8">
+            <BlogHighlights />
+          </div>
           <HomeAIPane />
           <CustomerServicePane />
         </section>

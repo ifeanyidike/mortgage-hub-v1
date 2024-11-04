@@ -30,7 +30,7 @@ const Header = (props: Props) => {
     return (
       <>
         {!session?.user ? (
-          <div className="rounded-full text-[14px] bg-[#f0f0f0] font-mono border border-black whitespace-nowrap px-[10px] py-1">
+          <div className="rounded-full text-xs bg-[#f0f0f0] font-mono border border-black whitespace-nowrap px-[10px] py-2">
             <a
               href="/login"
               className="text-black uppercase hover:text-[#3185FC] hover:font-bold"
@@ -74,21 +74,21 @@ const Header = (props: Props) => {
       {/* Desktop Header */}
       <div
         className={cn(
-          "w-full my-auto flex px-8  1-5xl:px-32 py-12  items-center bg-transparent font-[family-name:var(--font-montserrat)] max-lg:hidden",
+          " max-w-screen-xl mx-auto my-auto flex py-4  items-center bg-transparent font-[family-name:var(--font-montserrat)] max-lg:hidden",
           props.bgColor
         )}
       >
-        <Flex justify="space-between" align="center" className="w-full">
+        <Flex align="end" className="w-full px-8 ">
           <Link href="/" className="">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <Image src={Logo} alt="Mortgage Hub Logo" className="w-36" />
+              <Image src={Logo} alt="Mortgage Hub Logo" className="w-32" />
             </motion.div>
           </Link>
-          <div className="w-full 2xl:ml-auto flex justify-between items-end text-lg font-semibold px-8 1-5xl:px-24">
+          <div className="w-full 2xl:ml-auto flex justify-between items-end text-base font-semibold px-12 1-5xl:px-24">
             {items.map((i) => (
               <Link
                 key={i.key}
@@ -122,7 +122,7 @@ const Header = (props: Props) => {
           mobileExpand ? "bg-[#f0f0f0]" : props.bgColor
         )}
       >
-        <div className="flex justify-between px-4 lg:px-10 py-12 items-center w-full">
+        <div className="flex justify-between px-4 lg:px-10 py-8 items-center w-full">
           <Link onClick={() => setMobileExpand(false)} href="/" className="">
             <Image
               src={Logo}
