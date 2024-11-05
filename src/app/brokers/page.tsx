@@ -6,10 +6,10 @@ import Hero from "./components/Hero";
 import ProfileCarousel from "./components/ProfileCarousel";
 import PersonalTestimonial from "@/components/PersonalTestimonial";
 import Header from "@/components/Header";
-import { fetchTopFiveBrokers } from "@/actions/brokers";
+import { fetchTopTenBrokers } from "@/actions/brokers";
 
 const Brokers = async () => {
-  const topBrokers = await fetchTopFiveBrokers();
+  const topBrokers = await fetchTopTenBrokers();
   return (
     <>
       <Header bgColor="bg-transparent" />

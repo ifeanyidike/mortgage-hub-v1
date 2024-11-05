@@ -4,7 +4,7 @@ import broker from "@/server/broker";
 import { Broker, ExistingUser } from "@/types/db";
 import { BrokerUserData } from "@/types/general";
 
-export async function fetchTopFiveBrokers() {
+export async function fetchTopTenBrokers() {
   return await broker.getTopBrokers();
 }
 

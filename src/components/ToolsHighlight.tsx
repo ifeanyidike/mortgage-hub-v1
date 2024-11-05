@@ -192,8 +192,8 @@ const ToolsHighlight: FC = () => (
           <Image src={Calculator} alt="Calculator Icon" className="w-10 h-10" />
         </span>
         <div>
-          <p className="uppercase font-bold text-xl">Hilla Tempo</p>
-          <span className="text-sm">Quadarest latimia</span>
+          <p className="uppercase font-bold text-xl">Marco Diego</p>
+          <span className="text-sm">Happy Customer</span>
         </div>
       </motion.div>
     </motion.div>

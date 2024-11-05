@@ -321,52 +321,6 @@ type ItemProps = {
   isDragging: boolean;
   rating: number;
 };
-// const ProfileItem = (props: ItemProps) => {
-//   const router = useRouter();
-//   const { rating, profile, isDragging } = props;
-//   return (
-//     <div
-//       onClick={(e) => {
-//         if (isDragging) return;
-//         router.push(`/brokers/${profile!.id}`);
-//       }}
-//       className="max-xs:min-w-80 md:min-w-96 sm:min-w-[350px] max-w-[600px] h-auto rounded-[50px] rounded-bl-none bg-gray-200 px-14 max-sm:px-6 py-8 flex flex-col gap-8"
-//     >
-//       <div className="flex justify-between items-center max-sm:gap-8">
-//         <div className="flex p-2 rounded-full rounded-br-none bg-white w-fit">
-//           {[...Array(5).keys()].map((i) => (
-//             <GoStarFill
-//               color={rating - i > 0 ? "#FE621D" : ""}
-//               size={24}
-//               key={i}
-//             />
-//           ))}
-//         </div>
-//         <span className="uppercase text-xl">User rating</span>
-//       </div>
-//       <span className="text-2xl">{profile?.broker_type}</span>
-//       <h3 className="font-extrabold text-2xl text-gray-500">{profile!.name}</h3>
-//       <p className="-mt-4 line-clamp-3">{profile!.description}</p>
-//       <Image
-//         src={profile!.picture!}
-//         alt={profile!.name!}
-//         width={350}
-//         height={300}
-//         className="w-auto h-auto max-h-96 rounded-xl"
-//         draggable={false}
-//       />
-
-//       <div className="flex gap-4 ml-auto">
-//         <button className="w-14 h-14 bg-white rounded-full flex items-center justify-center">
-//           <GoStarFill color="#ADBDFF" className="!w-3/5 !h-3/5 mt-1" />
-//         </button>
-//         <button className="w-14 h-14 bg-white rounded-full flex items-center justify-center">
-//           <FaHeart color="#ADBDFF" className="!w-3/5 !h-3/5 mt-1" />
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
 
 const ProfileItem: FC<ItemProps> = ({ profile, isDragging, rating }) => {
   const router = useRouter();

@@ -4,6 +4,8 @@ import { Button, Select, Space } from "antd";
 import GroupSelect from "@/components/GroupSelect";
 import { constants } from "buffer";
 import { brokerStore } from "@/app/store/brokerStore";
+import { Router } from "next/router";
+import { useRouter } from "next/navigation";
 
 const province = {
   key: "province",
@@ -78,6 +80,7 @@ const brokerType = {
 const data = [province, city, brokerType];
 
 const BrokersHomeSelect = () => {
+  const router = useRouter();
   const [searchState, setSearchState] = useState({
     province: "",
     city: "",
@@ -94,7 +97,8 @@ const BrokersHomeSelect = () => {
       }}
       onSearchCb={() => {
         const { province, city, broker_type } = searchState;
-        brokerStore.searchBrokers(city, province, broker_type);
+        router.push(`/brokers/search`);
+        // brokerStore.searchBrokers(city, province, broker_type);
       }}
     />
   );

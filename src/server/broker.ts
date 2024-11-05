@@ -42,7 +42,7 @@ class Broker extends DB {
         "users.created_at as user_created_at",
         "users.updated_at as user_updated_at",
       ] as any)
-      .limit(5)
+      .limit(10)
       .execute();
   }
 

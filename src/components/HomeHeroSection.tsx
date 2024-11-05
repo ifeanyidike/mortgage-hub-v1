@@ -10,7 +10,7 @@ export default function HomeHeroSection() {
   return (
     <section
       style={{ maxHeight: "calc(100vh - 80px)" }}
-      className="w-full overflow-clip lg:overflow-visible  relative flex flex-col lg:flex-row items-center gap-10 pt-0 pb-0 p-8 lg:pr-0 lg:pt-4 "
+      className="w-full overflow-clip  relative flex flex-col lg:flex-row items-center gap-10 pt-0 pb-0 p-8 lg:pr-0 lg:pt-4 "
     >
       {/* Hero Image Section */}
       <motion.div

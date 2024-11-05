@@ -16,7 +16,7 @@ const items = [
   { label: "Lenders", key: "lenders" },
   { label: "Brokers", key: "brokers" },
   { label: "New Immigrants", key: "new-immigrants" },
-  { label: "AI Genie", key: "ai" },
+  { label: "AI Genie", key: "ai-genie" },
 ];
 
 type Props = {

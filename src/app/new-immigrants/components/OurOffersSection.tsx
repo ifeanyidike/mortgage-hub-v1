@@ -92,7 +92,7 @@ const OurOffersSection = () => {
       </div>
 
       {/* Title */}
-      <div className="flex-col flex lg:flex-row max-w-screen-xl lg:mt-auto mb-20 mx-auto w-full justify-around items-start ">
+      <div className="flex-col flex lg:flex-row max-w-screen-xl mb-15 mx-auto w-full justify-around items-start ">
         <motion.h2
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

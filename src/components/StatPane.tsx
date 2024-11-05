@@ -56,7 +56,7 @@ const StatDetail = (props: Props) => {
       >
         {icon}
       </motion.div>
-      <h5 className="text-2xl font-extrabold">{stat}</h5>
+      <h5 className="text-2xl font-bold">{stat}</h5>
       <span className="text-base font-medium text-gray-300">{info}</span>
     </motion.div>
   );
