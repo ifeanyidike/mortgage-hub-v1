@@ -29,7 +29,7 @@ const PersonalTestimonial: React.FC<Props> = ({
     <div
       className={cn(
         "flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 p-8 lg:p-16 lg:mt-16",
-        "bg-gradient-to-br from-gray-50 to-gray-200 shadow-md max-w-screen-xl mx-auto",
+        "bg-gradient-to-br from-gray-50 to-gray-200 shadow-md",
         "rounded-none lg:rounded-[100px] lg:rounded-tl-none lg:rounded-br-none"
       )}
     >
