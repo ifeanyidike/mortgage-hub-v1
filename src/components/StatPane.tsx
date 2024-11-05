@@ -5,13 +5,29 @@ import { motion } from "framer-motion";
 import Figure1 from "@/app/assets/icons/Figures-icon-1.svg";
 import Figure2 from "@/app/assets/icons/Figures-icon-2.svg";
 import Figure3 from "@/app/assets/icons/Figures-icon-3.svg";
+import { Statistic, StatisticProps } from "antd";
+import CountUp from "react-countup";
+
+const formatter: StatisticProps["formatter"] = (value) => (
+  <CountUp
+    className="!text-white !font-[family-name:var(--font-montserrat)]"
+    end={value as number}
+    separator=","
+  />
+);
 
 const StatPane = () => {
   return (
     <div className="max-h-screen bg-[#21334C] pt-8 pb-16 lg:py-16 flex justify-around items-center text-center gap-2 lg:flex-row lg:gap-8 flex-col">
       <StatDetail
         icon={<Image src={Figure3} alt="Families Assisted Icon" />}
-        stat="2000"
+        stat={
+          <Statistic
+            className="!text-white"
+            value={2000}
+            formatter={formatter}
+          />
+        }
         info="Lenders"
       />
 
@@ -19,7 +35,13 @@ const StatPane = () => {
 
       <StatDetail
         icon={<Image src={Figure2} alt="Mortgage Experts Icon" />}
-        stat="50k+"
+        stat={
+          <Statistic
+            className="!text-white"
+            value={50000}
+            formatter={formatter}
+          />
+        }
         info="Brokers"
       />
 
@@ -36,7 +58,7 @@ const StatPane = () => {
 
 type Props = {
   icon: ReactNode;
-  stat: string;
+  stat: ReactNode;
   info: string;
 };
 

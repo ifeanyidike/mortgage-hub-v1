@@ -73,14 +73,14 @@ const BrokerProfile: React.FC<ProfileProps> = ({
               {profile.description}
             </p> */}
             <ExpandableDescription description={profile.description!} />
-            <div className="flex gap-2 lg:gap-4 mt-2">
-              <a href={`tel:${profile.phone}`} className="w-full">
-                <button className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#3EBA97] text-white rounded-full shadow hover:bg-green-600 transition">
+            <div className="flex gap-2 lg:gap-4 mt-2 xs:flex-row flex-col">
+              <a href={`tel:${profile.phone}`} className="w-full max-w-32">
+                <button className="flex items-center justify-center gap-2 w-full max-w-32 py-3 px-4 bg-[#3EBA97] text-white rounded-full shadow hover:bg-green-600 transition">
                   <FiPhoneCall size={20} />
                   <p className="text-sm">Call Me</p>
                 </button>
               </a>
-              <button className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#3EBA97] text-white rounded-full shadow hover:bg-green-600 transition">
+              <button className="flex items-center max-w-40 justify-center gap-2 w-full py-3 px-4 bg-[#3EBA97] text-white rounded-full shadow hover:bg-green-600 transition">
                 <IoChatbubblesOutline size={20} />
                 <p className="text-sm">Chat With Me</p>
               </button>

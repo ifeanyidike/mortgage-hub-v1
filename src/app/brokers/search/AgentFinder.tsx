@@ -1,9 +1,15 @@
 "use client";
+import { brokerStore } from "@/app/store/brokerStore";
 import { checkWordsInString } from "@/app/utils";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { BrokerUserData } from "@/types/general";
 import { Pagination, Select } from "antd";
 import { motion } from "framer-motion";
+import { runInAction } from "mobx";
+import { observer } from "mobx-react-lite";
 import Image from "next/image";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaMapMarkerAlt, FaSearchLocation } from "react-icons/fa";
 import {
@@ -15,134 +21,122 @@ import {
   FaRegClock,
 } from "react-icons/fa6";
 
-const agents = [
-  {
-    id: 1,
-    name: "Jon Fonseca",
-    agency: "Jon Fonseca Real Estate",
-    experience: "16 years in business",
-    closings: 385,
-    location: "Halifax, NS",
-    closingsInArea: 22,
-    avgDaysOnMarket: 47,
-    soldToListRatio: "98%",
-    profilePic: "/assets/images/smiling-handsome.png",
-  },
-  {
-    id: 2,
-    name: "Mulbury Smith",
-    agency: "Jon Fonseca Real Estate",
-    experience: "16 years in business",
-    closings: 385,
-    location: "Halifax, NS",
-    closingsInArea: 22,
-    avgDaysOnMarket: 47,
-    soldToListRatio: "98%",
-    profilePic: "/assets/images/smiling-beauty.png",
-  },
-  {
-    id: 3,
-    name: "Jon Fonseca",
-    agency: "Jon Fonseca Real Estate",
-    experience: "16 years in business",
-    closings: 385,
-    location: "Halifax, NS",
-    closingsInArea: 22,
-    avgDaysOnMarket: 47,
-    soldToListRatio: "98%",
-    profilePic: "/assets/images/smiling-handsome.png",
-  },
-  {
-    id: 4,
-    name: "Mulbury Smith",
-    agency: "Jon Fonseca Real Estate",
-    experience: "16 years in business",
-    closings: 385,
-    location: "Halifax, NS",
-    closingsInArea: 22,
-    avgDaysOnMarket: 47,
-    soldToListRatio: "98%",
-    profilePic: "/assets/images/smiling-beauty.png",
-  },
-  {
-    id: 5,
-    name: "Jon Fonseca",
-    agency: "Jon Fonseca Real Estate",
-    experience: "16 years in business",
-    closings: 385,
-    location: "Halifax, NS",
-    closingsInArea: 22,
-    avgDaysOnMarket: 47,
-    soldToListRatio: "98%",
-    profilePic: "/assets/images/smiling-handsome.png",
-  },
-  {
-    id: 6,
-    name: "Mulbury Smith",
-    agency: "Jon Fonseca Real Estate",
-    experience: "16 years in business",
-    closings: 385,
-    location: "Halifax, NS",
-    closingsInArea: 22,
-    avgDaysOnMarket: 47,
-    soldToListRatio: "98%",
-    profilePic: "/assets/images/smiling-beauty.png",
-  },
-  {
-    id: 7,
-    name: "Jon Fonseca",
-    agency: "Jon Fonseca Real Estate",
-    experience: "16 years in business",
-    closings: 385,
-    location: "Halifax, NS",
-    closingsInArea: 22,
-    avgDaysOnMarket: 47,
-    soldToListRatio: "98%",
-    profilePic: "/assets/images/smiling-handsome.png",
-  },
-  {
-    id: 8,
-    name: "Mulbury Smith",
-    agency: "Jon Fonseca Real Estate",
-    experience: "16 years in business",
-    closings: 385,
-    location: "Halifax, NS",
-    closingsInArea: 22,
-    avgDaysOnMarket: 47,
-    soldToListRatio: "98%",
-    profilePic: "/assets/images/smiling-beauty.png",
-  },
-];
+// const agents = [
+//   {
+//     id: 1,
+//     name: "Jon Fonseca",
+//     agency: "Jon Fonseca Real Estate",
+//     experience: "16 years in business",
+//     closings: 385,
+//     location: "Halifax, NS",
+//     closingsInArea: 22,
+//     avgDaysOnMarket: 47,
+//     soldToListRatio: "98%",
+//     profilePic: "/assets/images/smiling-handsome.png",
+//   },
+//   {
+//     id: 2,
+//     name: "Mulbury Smith",
+//     agency: "Jon Fonseca Real Estate",
+//     experience: "16 years in business",
+//     closings: 385,
+//     location: "Halifax, NS",
+//     closingsInArea: 22,
+//     avgDaysOnMarket: 47,
+//     soldToListRatio: "98%",
+//     profilePic: "/assets/images/smiling-beauty.png",
+//   },
+//   {
+//     id: 3,
+//     name: "Jon Fonseca",
+//     agency: "Jon Fonseca Real Estate",
+//     experience: "16 years in business",
+//     closings: 385,
+//     location: "Halifax, NS",
+//     closingsInArea: 22,
+//     avgDaysOnMarket: 47,
+//     soldToListRatio: "98%",
+//     profilePic: "/assets/images/smiling-handsome.png",
+//   },
+//   {
+//     id: 4,
+//     name: "Mulbury Smith",
+//     agency: "Jon Fonseca Real Estate",
+//     experience: "16 years in business",
+//     closings: 385,
+//     location: "Halifax, NS",
+//     closingsInArea: 22,
+//     avgDaysOnMarket: 47,
+//     soldToListRatio: "98%",
+//     profilePic: "/assets/images/smiling-beauty.png",
+//   },
+//   {
+//     id: 5,
+//     name: "Jon Fonseca",
+//     agency: "Jon Fonseca Real Estate",
+//     experience: "16 years in business",
+//     closings: 385,
+//     location: "Halifax, NS",
+//     closingsInArea: 22,
+//     avgDaysOnMarket: 47,
+//     soldToListRatio: "98%",
+//     profilePic: "/assets/images/smiling-handsome.png",
+//   },
+//   {
+//     id: 6,
+//     name: "Mulbury Smith",
+//     agency: "Jon Fonseca Real Estate",
+//     experience: "16 years in business",
+//     closings: 385,
+//     location: "Halifax, NS",
+//     closingsInArea: 22,
+//     avgDaysOnMarket: 47,
+//     soldToListRatio: "98%",
+//     profilePic: "/assets/images/smiling-beauty.png",
+//   },
+//   {
+//     id: 7,
+//     name: "Jon Fonseca",
+//     agency: "Jon Fonseca Real Estate",
+//     experience: "16 years in business",
+//     closings: 385,
+//     location: "Halifax, NS",
+//     closingsInArea: 22,
+//     avgDaysOnMarket: 47,
+//     soldToListRatio: "98%",
+//     profilePic: "/assets/images/smiling-handsome.png",
+//   },
+//   {
+//     id: 8,
+//     name: "Mulbury Smith",
+//     agency: "Jon Fonseca Real Estate",
+//     experience: "16 years in business",
+//     closings: 385,
+//     location: "Halifax, NS",
+//     closingsInArea: 22,
+//     avgDaysOnMarket: 47,
+//     soldToListRatio: "98%",
+//     profilePic: "/assets/images/smiling-beauty.png",
+//   },
+// ];
 
-export default function AgentFinder() {
+const AgentFinder = observer(() => {
   const [selectedFilter, setSelectedFilter] = useState("Buyer");
   const [currentPage, setCurrentPage] = useState(1);
+  const params = useSearchParams();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const itemsPerPage = isDesktop ? 4 : 3;
 
-  //   useEffect(() => {
-  //     const lenderType = params.get("lenderType");
-  //     const location = params.get("location");
-  //     const rating = params.get("rating");
+  useEffect(() => {
+    const province = params.get("province") as string;
+    const city = params.get("city") as string;
+    const broker_type = params.get("broker_type") as string;
+    runInAction(async () => {
+      await brokerStore.searchBrokers(city, province, broker_type);
+    });
+  }, []);
 
-  //     const _filteredLenders = lenders.filter((lender) => {
-  //       const lenderTypeCheck = lenderType
-  //         ? checkWordsInString(lender.lenderType, lenderType)
-  //         : true;
-  //       const locationCheck = location
-  //         ? checkWordsInString(lender.location, location)
-  //         : true;
-  //       const totalRating = lender.reviews.reduce(
-  //         (acc, curr) => acc + curr.rating,
-  //         0
-  //       );
-  //       const averageRating = totalRating / lender.reviews.length;
-  //       const ratingCheck = rating ? parseInt(rating) >= averageRating : true;
-  //       return lenderTypeCheck && locationCheck && ratingCheck;
-  //     });
-
-  //     setLenderList(_filteredLenders);
-  //   }, []);
+  const agents = brokerStore.brokers || [];
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedAgents = agents.slice(startIndex, startIndex + itemsPerPage);
@@ -193,9 +187,13 @@ export default function AgentFinder() {
 
             {/* Agent Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {paginatedAgents.map((agent) => (
-                <AgentCard key={agent.id} agent={agent} />
-              ))}
+              {Boolean(agents.length) ? (
+                paginatedAgents.map((agent, index) => (
+                  <AgentCard key={agent.id} agent={agent} index={index} />
+                ))
+              ) : (
+                <p>No result matches the search. Try again</p>
+              )}
             </div>
             <Pagination
               current={currentPage}
@@ -209,20 +207,23 @@ export default function AgentFinder() {
       </div>
     </section>
   );
-}
+});
+
+export default AgentFinder;
 
 type CardProps = {
-  agent: (typeof agents)[0];
+  agent: BrokerUserData;
+  index: number;
 };
 
-const AgentCard = ({ agent }: CardProps) => {
+const AgentCard = ({ agent, index }: CardProps) => {
   return (
     <motion.div
       key={agent.id}
       className="relative flex flex-col items-center bg-white rounded-xl shadow-lg px-8 py-10 transform transition hover:shadow-2xl hover:-translate-y-2 border border-gray-300 overflow-hidden"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: agent.id * 0.08 }}
+      transition={{ duration: 0.6, delay: (index + 1) * 0.08 }}
       whileHover={{ scale: 1.02 }}
     >
       {/* Background Gradient */}
@@ -236,7 +237,7 @@ const AgentCard = ({ agent }: CardProps) => {
         transition={{ delay: 0.3 }}
       >
         <Image
-          src={agent.profilePic}
+          src={agent.picture!}
           alt={`${agent.name}'s profile picture`}
           width={144}
           height={144}
@@ -247,10 +248,10 @@ const AgentCard = ({ agent }: CardProps) => {
       {/* Agent Info */}
       <div className="text-center mb-6 space-y-2">
         <h2 className="text-2xl font-bold text-gray-800">{agent.name}</h2>
-        <p className="text-sm font-medium text-gray-500">{agent.agency}</p>
+        <p className="text-sm font-medium text-gray-500">{agent.company!}</p>
         <p className="text-xs text-gray-600 italic">
-          <FaHandshake className="inline mr-1 text-blue-500" />{" "}
-          {agent.experience}
+          <FaHandshake className="inline mr-1 text-blue-500" /> 16 years
+          {/* {agent.experience} */}
         </p>
       </div>
 
@@ -261,7 +262,7 @@ const AgentCard = ({ agent }: CardProps) => {
             <FaMapMarkerAlt className="mr-1 text-blue-500" /> Location
           </p>
           <p className="text-base font-semibold text-gray-800">
-            {agent.location}
+            {agent.location?.city}
           </p>
         </div>
         <div className="flex-1">
@@ -269,7 +270,8 @@ const AgentCard = ({ agent }: CardProps) => {
             <FaRegClock className="mr-1 text-blue-500" /> Avg. on Market
           </p>
           <p className="text-base font-semibold text-gray-800">
-            {agent.avgDaysOnMarket} days
+            47 days
+            {/* {agent.avgDaysOnMarket} days */}
           </p>
         </div>
         <div className="flex-1">
@@ -277,25 +279,31 @@ const AgentCard = ({ agent }: CardProps) => {
             <FaChartLine className="mr-1 text-blue-500" /> List Ratio
           </p>
           <p className="text-base font-semibold text-gray-800">
-            {agent.soldToListRatio}
+            98%
+            {/* {agent.soldToListRatio} */}
           </p>
         </div>
       </div>
 
       {/* Closings Info */}
       <p className="text-sm text-gray-600 mb-6">
-        <span className="font-semibold text-blue-600">{agent.closings}</span>{" "}
+        <span className="font-semibold text-blue-600">
+          22
+          {/* {agent.closings} */}
+        </span>{" "}
         closings in the last 12 months
       </p>
 
       {/* Buttons */}
       <div className="flex space-x-4">
-        <motion.button
-          className="flex items-center justify-center border border-blue-500 text-blue-500 rounded-full px-6 py-2 font-semibold hover:bg-blue-500 hover:text-white transition"
-          whileHover={{ scale: 1.05 }}
-        >
-          View Profile
-        </motion.button>
+        <Link href={`/brokers/${agent.id}`}>
+          <motion.button
+            className="flex items-center justify-center border border-blue-500 text-blue-500 rounded-full px-6 py-2 font-semibold hover:bg-blue-500 hover:text-white transition"
+            whileHover={{ scale: 1.05 }}
+          >
+            View Profile
+          </motion.button>
+        </Link>
         <motion.button
           className="flex items-center justify-center bg-blue-500 text-white rounded-full px-6 py-2 font-semibold hover:bg-blue-600 transition"
           whileHover={{ scale: 1.1 }}

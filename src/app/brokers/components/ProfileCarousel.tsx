@@ -65,11 +65,11 @@ const ProfileCarousel = observer((props: Props) => {
     mass: 0.1,
   });
 
-  useEffect(() => {
-    if (brokerStore.brokers) {
-      setProfiles(brokerStore.brokers);
-    }
-  }, [brokerStore.brokers]);
+  // useEffect(() => {
+  //   if (brokerStore.brokers) {
+  //     setProfiles(brokerStore.brokers);
+  //   }
+  // }, [brokerStore.brokers]);
 
   // Ensures active slide is centered on mobile
   useEffect(() => {

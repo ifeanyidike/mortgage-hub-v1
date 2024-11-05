@@ -62,12 +62,44 @@ class Broker extends DB {
       .execute();
   }
 
+  // public async getBrokersByFields(
+  //   city: string,
+  //   province: string,
+  //   title: string
+  // ) {
+  //   return await this.db
+  //     .selectFrom(this.tableName)
+  //     .innerJoin("users", "brokers.user_id" as `${string}.id`, "users.id")
+  //     .selectAll("brokers")
+  //     .select([
+  //       "users.email",
+  //       "users.name",
+  //       "users.phone as phone",
+  //       "users.picture as picture",
+  //       "users.created_at as user_created_at",
+  //       "users.updated_at as user_updated_at",
+  //     ] as any)
+  //     // .where((eb) =>
+  //     //   eb.and([
+  //     //     eb(this.traverseJSON(eb, "location", "city"), "is", city),
+  //     //     eb(this.traverseJSON(eb, "location", "province"), "is", province),
+  //     //     eb("title", "=", title),
+  //     //   ])
+  //     // )
+  //     // .where(sql`location`, "@>", this.json({ city, province }))
+  //     .where(sql`location->>'city' ILIKE ${"%" + city + "%"}` as any)
+  //     .where(sql`location->>'province' ILIKE ${"%" + province + "%"}` as any)
+  //     .where(sql`title ILIKE ${"%" + title + "%"}` as any)
+  //     .execute();
+  // }
+
   public async getBrokersByFields(
     city: string,
     province: string,
     title: string
   ) {
-    return await this.db
+    // Build the base query
+    let query = this.db
       .selectFrom(this.tableName)
       .innerJoin("users", "brokers.user_id" as `${string}.id`, "users.id")
       .selectAll("brokers")
@@ -78,18 +110,25 @@ class Broker extends DB {
         "users.picture as picture",
         "users.created_at as user_created_at",
         "users.updated_at as user_updated_at",
-      ] as any)
-      // .where((eb) =>
-      //   eb.and([
-      //     eb(this.traverseJSON(eb, "location", "city"), "is", city),
-      //     eb(this.traverseJSON(eb, "location", "province"), "is", province),
-      //     eb("title", "=", title),
-      //   ])
-      // )
-      // .where(sql`location`, "@>", this.json({ city, province }))
-      .where(sql`location->>'city' LIKE ${"%" + city + "%"}` as any)
-      .where(sql`location->>'province' LIKE ${"%" + province + "%"}` as any)
-      .execute();
+      ] as any);
+
+    // Conditionally add filters
+    if (city) {
+      query = query.where(
+        sql`location->>'city' ILIKE ${"%" + city + "%"}` as any
+      );
+    }
+    if (province) {
+      query = query.where(
+        sql`location->>'province' ILIKE ${"%" + province + "%"}` as any
+      );
+    }
+    if (title) {
+      query = query.where(sql`title ILIKE ${"%" + title + "%"}` as any);
+    }
+
+    // Execute the query
+    return await query.execute();
   }
 
   public async getBrokerById(id: string) {
