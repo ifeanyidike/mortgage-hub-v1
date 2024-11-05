@@ -148,59 +148,66 @@ export default function AgentFinder() {
   const paginatedAgents = agents.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div className="min-h-screen flex justify-center py-10 px-4 lg:px-2">
-      <motion.div
-        className="w-full flex flex-col lg:flex-row gap-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        {/* Sidebar Filters */}
-        <AgentFindSidebar
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
-        />
-
-        {/* Agents List */}
-        <main className="flex-grow">
-          <div className="flex justify-between items-center mb-8">
-            <p className="text-gray-600 text-base">
-              {" "}
-              {agents.length} agents found
-            </p>
-            <Select
-              size="large"
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-              }}
-              className="!placeholder-black !text-black !font-[family-name:var(--font-montserrat)]"
-              allowClear
-              onChange={(value) => {}}
-              placeholder="Search parameters..."
-              options={[
-                { label: "No. of closings in this area", value: "closings" },
-                { label: "Average time on market", value: "market-time" },
-                { label: "Sold-to-list price ratio", value: "price-ratio" },
-              ]}
-            />
-          </div>
-
-          {/* Agent Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {paginatedAgents.map((agent) => (
-              <AgentCard key={agent.id} agent={agent} />
-            ))}
-          </div>
-          <Pagination
-            current={currentPage}
-            pageSize={itemsPerPage}
-            total={agents.length}
-            onChange={(page) => setCurrentPage(page)}
-            className="!my-12 !mx-auto"
+    <section className="py-10 px-4 lg:px-2">
+      <h2 className="pb-8 font-semibold text-base lg:text-xl px-2 lg:px-8">
+        Looking for one of the 120 real estate agents in Halifax based on our
+        current data? Find the right agent for you using the search filters
+        below to start connecting.
+      </h2>
+      <div className="min-h-screen flex justify-center ">
+        <motion.div
+          className="w-full flex flex-col lg:flex-row gap-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Sidebar Filters */}
+          <AgentFindSidebar
+            selectedFilter={selectedFilter}
+            setSelectedFilter={setSelectedFilter}
           />
-        </main>
-      </motion.div>
-    </div>
+
+          {/* Agents List */}
+          <main className="flex-grow">
+            <div className="flex justify-between items-center mb-8">
+              <p className="text-gray-600 text-base">
+                {" "}
+                {agents.length} agents found
+              </p>
+              <Select
+                size="large"
+                style={{
+                  fontFamily: "Montserrat, sans-serif",
+                }}
+                className="!placeholder-black !text-black !font-[family-name:var(--font-montserrat)]"
+                allowClear
+                onChange={(value) => {}}
+                placeholder="Search parameters..."
+                options={[
+                  { label: "No. of closings in this area", value: "closings" },
+                  { label: "Average time on market", value: "market-time" },
+                  { label: "Sold-to-list price ratio", value: "price-ratio" },
+                ]}
+              />
+            </div>
+
+            {/* Agent Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {paginatedAgents.map((agent) => (
+                <AgentCard key={agent.id} agent={agent} />
+              ))}
+            </div>
+            <Pagination
+              current={currentPage}
+              pageSize={itemsPerPage}
+              total={agents.length}
+              onChange={(page) => setCurrentPage(page)}
+              className="!my-12 !mx-auto"
+            />
+          </main>
+        </motion.div>
+      </div>
+    </section>
   );
 }
 
@@ -319,7 +326,8 @@ const AgentFindSidebar = ({
       {/* Header */}
       <div className="text-center lg:text-left mb-8">
         <h1 className="text-2xl font-bold text-gray-800 mb-2 flex items-center justify-center lg:justify-start">
-          <FaFilter className="mr-2 text-blue-500" /> Broker Company
+          <FaFilter className="mr-2 text-blue-500" />
+          Filter Brokers
         </h1>
         <p className="text-gray-600">
           Use filters to find the right agent and start connecting.
