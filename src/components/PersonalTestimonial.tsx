@@ -12,6 +12,8 @@ type Props = {
   stat: string;
   statText: string;
   src: string;
+  ctaText?: string;
+  ctaLink?: string;
 };
 
 const PersonalTestimonial: React.FC<Props> = ({
@@ -20,6 +22,8 @@ const PersonalTestimonial: React.FC<Props> = ({
   stat,
   statText,
   src,
+  ctaText = "Find a broker",
+  ctaLink = "/brokers",
 }) => {
   return (
     <div
@@ -90,8 +94,8 @@ const PersonalTestimonial: React.FC<Props> = ({
         </div>
         <CtaButton
           classes="!bg-gray-800 !mt-8 !text-white hover:!bg-[#266ace]"
-          text="Find a broker"
-          href="/broker"
+          text={ctaText}
+          href={ctaLink}
         />
       </motion.div>
     </div>

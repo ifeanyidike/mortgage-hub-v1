@@ -23,6 +23,8 @@ const Brokers = async () => {
             stat="50,000+"
             statText="Brokers in our network"
             src="/assets/images/fair-skinned.png"
+            ctaLink="/brokers/search"
+            ctaText="Search the network"
           />
         </section>
         <section className="flex flex-col overflow-hidden pb-8">
