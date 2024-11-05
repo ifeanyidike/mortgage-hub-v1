@@ -220,7 +220,7 @@ const AgentCard = ({ agent, index }: CardProps) => {
   return (
     <motion.div
       key={agent.id}
-      className="relative flex flex-col items-center bg-white rounded-xl shadow-lg px-8 py-10 transform transition hover:shadow-2xl hover:-translate-y-2 border border-gray-300 overflow-hidden"
+      className="relative flex flex-col items-center bg-white rounded-xl shadow-lg px-3 md:px-8 py-10 transform transition hover:shadow-2xl hover:-translate-y-2 border border-gray-300 overflow-hidden"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: (index + 1) * 0.08 }}
@@ -256,12 +256,12 @@ const AgentCard = ({ agent, index }: CardProps) => {
       </div>
 
       {/* Stats Section */}
-      <div className="flex justify-between w-full text-left gap-8 mb-6 text-gray-700">
+      <div className="flex justify-between w-full text-left gap-4 md:gap-8 mb-6 text-gray-700">
         <div className="flex-1">
           <p className="text-xs font-medium text-gray-500 flex items-center">
             <FaMapMarkerAlt className="mr-1 text-blue-500" /> Location
           </p>
-          <p className="text-base font-semibold text-gray-800">
+          <p className="text-sm md:text-base font-semibold text-gray-800">
             {agent.location?.city}
           </p>
         </div>
@@ -269,7 +269,7 @@ const AgentCard = ({ agent, index }: CardProps) => {
           <p className="text-xs font-medium text-gray-500 flex items-center whitespace-nowrap">
             <FaRegClock className="mr-1 text-blue-500" /> Avg. on Market
           </p>
-          <p className="text-base font-semibold text-gray-800">
+          <p className="text-sm md:text-base font-semibold text-gray-800">
             47 days
             {/* {agent.avgDaysOnMarket} days */}
           </p>
@@ -278,7 +278,7 @@ const AgentCard = ({ agent, index }: CardProps) => {
           <p className="text-xs font-medium text-gray-500 flex items-center">
             <FaChartLine className="mr-1 text-blue-500" /> List Ratio
           </p>
-          <p className="text-base font-semibold text-gray-800">
+          <p className="text-sm md:text-base font-semibold text-gray-800">
             98%
             {/* {agent.soldToListRatio} */}
           </p>
