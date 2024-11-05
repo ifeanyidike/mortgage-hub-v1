@@ -248,20 +248,20 @@ const AgentCard = ({ agent }: CardProps) => {
       </div>
 
       {/* Stats Section */}
-      <div className="flex justify-between w-full text-left gap-6 mb-6 text-gray-700">
+      <div className="flex justify-between w-full text-left gap-8 mb-6 text-gray-700">
         <div className="flex-1">
           <p className="text-xs font-medium text-gray-500 flex items-center">
             <FaMapMarkerAlt className="mr-1 text-blue-500" /> Location
           </p>
-          <p className="text-lg font-semibold text-gray-800">
+          <p className="text-base font-semibold text-gray-800">
             {agent.location}
           </p>
         </div>
         <div className="flex-1">
-          <p className="text-xs font-medium text-gray-500 flex items-center">
+          <p className="text-xs font-medium text-gray-500 flex items-center whitespace-nowrap">
             <FaRegClock className="mr-1 text-blue-500" /> Avg. on Market
           </p>
-          <p className="text-lg font-semibold text-gray-800">
+          <p className="text-base font-semibold text-gray-800">
             {agent.avgDaysOnMarket} days
           </p>
         </div>
@@ -269,7 +269,7 @@ const AgentCard = ({ agent }: CardProps) => {
           <p className="text-xs font-medium text-gray-500 flex items-center">
             <FaChartLine className="mr-1 text-blue-500" /> List Ratio
           </p>
-          <p className="text-lg font-semibold text-gray-800">
+          <p className="text-base font-semibold text-gray-800">
             {agent.soldToListRatio}
           </p>
         </div>

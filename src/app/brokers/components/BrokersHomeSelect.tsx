@@ -97,7 +97,9 @@ const BrokersHomeSelect = () => {
       }}
       onSearchCb={() => {
         const { province, city, broker_type } = searchState;
-        router.push(`/brokers/search`);
+        router.push(
+          `/brokers/search?province=${province}&city=${city}&broker_type=${broker_type}`
+        );
         // brokerStore.searchBrokers(city, province, broker_type);
       }}
     />
