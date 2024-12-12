@@ -2,7 +2,8 @@ import { supabase } from "@/lib/supabase";
 import { RealtimePostgresChangesPayload } from "@supabase/supabase-js";
 
 class SupabaseSubscription {
-  public listenToEvents(
+  public listenToEvents<T extends "messages" | "leads">(
+    table: T,
     event: "INSERT" | "UPDATE" | "DELETE",
     cb: (
       payload: RealtimePostgresChangesPayload<{
@@ -11,11 +12,11 @@ class SupabaseSubscription {
     ) => void
   ) {
     const subscription = supabase
-      .channel("public:users")
+      .channel(`public:${table}`)
       .on(
         //@ts-expect-error This should be fine. There's no error
         "postgres_changes",
-        { event, schema: "public", table: "users" },
+        { event, schema: "public", table },
         (payload: RealtimePostgresChangesPayload<any>) => {
           console.log("New user added:", payload.new);
           cb(payload.new);

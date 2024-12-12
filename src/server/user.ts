@@ -4,6 +4,7 @@ import {
   ExistingUserWithPword,
   NewBroker,
   NewUser,
+  UserProfile,
   UserUpdate,
 } from "@/types/db";
 import bcrypt from "bcryptjs";
@@ -14,6 +15,8 @@ import accountService from "./account";
 import { supabase } from "@/lib/supabase";
 import { RealtimePostgresChangesPayload } from "@supabase/supabase-js";
 import Verification from "./Verification";
+import { regularUserProfile } from "./user_profile";
+import broker from "./broker";
 
 class User extends DB {
   constructor() {
@@ -46,6 +49,34 @@ class User extends DB {
       .executeTakeFirst();
   }
 
+  public async sendVerificationEmail(
+    email: string,
+    user_id: string | null = null
+  ) {
+    let id = user_id;
+
+    if (!id) {
+      const user = await this.findByEmail(email);
+      if (!user) throw new Error("User not found");
+      id = user.id;
+    }
+    const token = jwt.sign(
+      { id },
+      process.env.VERIFY_EMAIL_TOKEN_SECRET as string,
+      { expiresIn: "1d" }
+    );
+    await emailService.sendVerificationEmail(email, token);
+    return true;
+  }
+
+  private async createProfile(user_id: string, role: "user" | "broker") {
+    if (role === "user") {
+      await regularUserProfile.createOne(user_id);
+    } else if (role === "broker") {
+      await broker.createOne(user_id);
+    }
+  }
+
   public async createOne(
     email: string,
     password: string,
@@ -64,14 +95,11 @@ class User extends DB {
       .values({ email: data.email, password: hash, role, dob, name })
       .returning("id")
       .execute();
+
+    this.createProfile(user.id, role);
     console.log("user", user);
 
-    const token = jwt.sign(
-      { id: user.id },
-      process.env.VERIFY_EMAIL_TOKEN_SECRET as string,
-      { expiresIn: "1d" }
-    );
-    await emailService.sendVerificationEmail(email, token);
+    this.sendVerificationEmail(email, user.id);
     return user;
   }
 
@@ -91,12 +119,18 @@ class User extends DB {
       .values({ email, role })
       .returning("id")
       .execute();
+    this.createProfile(user.id, role);
 
     return user;
   }
 
   public async updateOne(data: UserUpdate, id: string) {
-    await this.db.updateTable("users").set(data).where("id", "=", id).execute();
+    const rows = await this.db
+      .updateTable("users")
+      .set(data)
+      .where("id", "=", id)
+      .execute();
+    console.log("updated", rows);
   }
 
   public async authenticate(email: string, password: string) {
@@ -114,6 +148,11 @@ class User extends DB {
       email,
       "credentials"
     );
+    let userProfile: UserProfile | undefined;
+    if (user.role === "user") {
+      const profileData = await regularUserProfile.getOne(user.id);
+      userProfile = profileData;
+    }
 
     const tokens = await this.generateAndSignToken(email);
     if (!account) {
@@ -137,6 +176,7 @@ class User extends DB {
       ...user,
       accessToken: tokens?.access_token || null,
       refreshToken: tokens?.refresh_token || null,
+      ...(userProfile && { user_profile: userProfile }),
     };
   }
 

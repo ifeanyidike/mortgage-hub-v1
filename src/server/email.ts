@@ -30,17 +30,17 @@ class Email {
       "email-verfication.html"
     );
 
-    let template = await fs.readFile(pathname, "utf-8");
-    template = template.replace("{{verificationUrl}}", verificationUrl);
+    // let template = await fs.readFile(pathname, "utf-8");
+    // template = template.replace("{{verificationUrl}}", verificationUrl);
 
-    const result = await transporter.sendMail({
-      from: '"Your App" <no-reply@yourapp.com>',
-      to: email,
-      subject: "Email Verification",
-      html: template,
-    });
+    // const result = await transporter.sendMail({
+    //   from: '"Your App" <no-reply@yourapp.com>',
+    //   to: email,
+    //   subject: "Email Verification",
+    //   html: template,
+    // });
 
-    console.log(`Preview URL: `, result);
+    // console.log(`Preview URL: `, result);
   }
 
   public async sendBrokerMagicLink(

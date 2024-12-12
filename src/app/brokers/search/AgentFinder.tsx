@@ -1,7 +1,7 @@
 "use client";
 import { brokerStore } from "@/app/store/brokerStore";
-import { checkWordsInString } from "@/app/utils";
-import useMediaQuery from "@/hooks/useMediaQuery";
+import { checkWordsInString } from "@/app/utils/";
+import { useMediaQuery } from "@/hooks/";
 import { BrokerUserData } from "@/types/general";
 import { Pagination, Select } from "antd";
 import { motion } from "framer-motion";

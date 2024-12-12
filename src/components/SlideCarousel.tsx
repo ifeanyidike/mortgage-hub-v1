@@ -5,7 +5,7 @@ import { motion, PanInfo, useMotionValue, useSpring } from "framer-motion";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
-import { cn } from "@/app/utils";
+import { cn } from "@/app/utils/";
 const START_INDEX = 1;
 const DRAG_THRESHOLD = 550;
 const FALLBACK_WIDTH = 509;

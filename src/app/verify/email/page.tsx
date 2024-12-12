@@ -1,9 +1,17 @@
 "use client";
 import { verifyEmail } from "@/actions/verification";
-import { Button } from "antd";
+import { Button, Result, Spin } from "antd";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaMailBulk } from "react-icons/fa";
+import React from "react";
+import { FiMail } from "react-icons/fi";
+import { motion } from "framer-motion";
+
+import { cn } from "@/app/utils/";
+import Header from "@/components/Header";
+import Link from "next/link";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const VerifyEmail = () => {
   const params = useSearchParams();
@@ -18,52 +26,113 @@ const VerifyEmail = () => {
           await verifyEmail(token as string);
           setState(true);
           setMessage(
-            "Congratulations!!, you have successfully verified your email!"
+            "Congratulations!!, you have successfully verified your email! Please click on login to continue."
           );
         } catch (error) {
-          setMessage("Invalid or expired token.");
+          setMessage(
+            "It seems your verification link has expired or is invalid. Please request a new verification email to proceed."
+          );
         }
+      } else {
+        setMessage(
+          "It seems your verification link has expired or is invalid. Please request a new verification email to proceed."
+        );
       }
     })();
   }, [token]);
 
   return (
-    <div className="grid place-items-center h-screen">
-      <div className="flex  flex-col justify-center items-center gap-8">
-        <svg
-          width="200px"
-          x="0px"
-          y="0px"
-          viewBox="0 0 283.408 283.408"
-          xmlSpace="preserve"
-        >
-          <g>
-            <path
-              style={{
-                fill: "#FFDB77",
-              }}
-              d="M268.727,59.362c-3.471-2.903-7.939-4.655-12.819-4.655H27.5c-4.88,0-9.347,1.752-12.819,4.655 l127.023,82.341L268.727,59.362z"
+    <div className="bg-gradient-to-b from-blue-50 to-indigo-200 ">
+      <Header bgColor="bg-transparent" />
+      <div
+        className="flex flex-col items-center justify-center relative overflow-hidden px-4 sm:px-8"
+        style={{ minHeight: "min(800px, 100vh)" }}
+      >
+        {/* Decorative Glow Effect */}
+        {!message ? (
+          <Spin indicator={<LoadingOutlined style={{ fontSize: 80 }} spin />} />
+        ) : (
+          <>
+            <div className="absolute top-1/3 left-1/2 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] bg-blue-300 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+
+            <Result
+              icon={
+                <div className="relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:!w-32 md:h-32 bg-white rounded-full shadow-lg">
+                  <FiMail
+                    size={48}
+                    className="text-blue-600 sm:text-4xl lg:text-5xl"
+                  />
+                </div>
+              }
+              status="info"
+              title={
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 text-center">
+                  Email verification
+                </h1>
+              }
+              subTitle={
+                <p className="!text-base sm:!text-lg text-gray-600 max-w-xs sm:max-w-sm lg:max-w-lg text-center mt-2">
+                  {message}
+                </p>
+              }
+              extra={
+                <div className="flex flex-col sm:flex-row gap-4 mt-6 items-center justify-center w-full sm:w-auto">
+                  {state ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: 0.3,
+                        duration: 0.6,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                    >
+                      <Link href="/login">
+                        <Button
+                          size="large"
+                          type="primary"
+                          shape="round"
+                          className={cn(
+                            "!w-full sm:!w-auto !px-6 sm:!px-10 !py-3 sm:!py-4 !text-base sm:!text-lg font-semibold shadow-xl transition-all duration-200 transform hover:scale-105",
+                            "bg-gradient-to-r from-blue-600 to-indigo-500 border-none text-white"
+                          )}
+                        >
+                          Continue to Login
+                        </Button>
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: 0.5,
+                        duration: 0.6,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                    >
+                      <Link href="email/resend">
+                        <Button
+                          size="large"
+                          type="primary"
+                          shape="round"
+                          className={cn(
+                            "!w-full sm:!w-auto !px-6 sm:!px-10 !py-3 sm:!py-4 !text-base sm:!text-lg font-semibold shadow-xl transition-all duration-200 transform hover:scale-105 !bg-red-500",
+                            "bg-white border-gray-300 text-gray-700"
+                          )}
+                        >
+                          Resend Verification Email
+                        </Button>
+                      </Link>
+                    </motion.div>
+                  )}
+                </div>
+              }
+              className="flex flex-col items-center text-center gap-4 p-6 sm:p-8 rounded-xl bg-white bg-opacity-75 shadow-2xl border border-gray-200 w-full max-w-xl"
             />
-            <path
-              style={{
-                fill: "#FFDB77",
-              }}
-              d="M268.727,59.362l-127.023,82.341L14.681,59.362C10.294,63.031,7.5,68.542,7.5,74.708v133.991 c0,11.046,8.954,20,20,20h228.409c11.046,0,20-8.954,20-20V74.708C275.909,68.542,273.114,63.031,268.727,59.362z"
-            />
-            <path
-              style={{
-                fill: "#22313F",
-              }}
-              d="M283.408,208.699V74.708c0-15.279-12.421-27.5-27.5-27.5H27.5c-15.092,0-27.5,12.235-27.5,27.5 v133.991c0,15.104,12.285,27.5,27.5,27.5h228.408C271.132,236.199,283.408,223.792,283.408,208.699z M199.091,113.441 l68.088-44.137c0.8,1.666,1.229,3.507,1.229,5.404v131.436L199.091,113.441z M15,206.145V74.708c0-1.897,0.429-3.738,1.229-5.404 l68.088,44.137L15,206.145z M141.704,132.766L32.859,62.207H250.55L141.704,132.766z M27.5,221.199 c-1.555,0-3.039-0.299-4.414-0.82l73.846-98.76l40.692,26.378c2.483,1.609,5.678,1.608,8.16,0l40.692-26.378l73.846,98.76 c-1.375,0.521-2.859,0.82-4.414,0.82H27.5z"
-            />
-          </g>
-        </svg>
-        {/* <h1 className="text-3xl">Email Verification</h1> */}
-        <p>{message}</p>
-        {state && (
-          <Button type="primary" className="w-40" size="large" href="/login">
-            Login
-          </Button>
+          </>
         )}
       </div>
     </div>

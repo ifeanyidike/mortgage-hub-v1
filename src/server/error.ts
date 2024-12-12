@@ -137,6 +137,14 @@ export class CustomError {
       };
     }
   }
+
+  public phoneNumberSchema = z.string().refine(
+    (val) => /^[1-9]\d{9,14}$/.test(val), // Adjust regex to match valid phone formats
+    {
+      message:
+        "Invalid phone number. Ensure it includes country code and is valid.",
+    }
+  );
 }
 
 export const customError = new CustomError();

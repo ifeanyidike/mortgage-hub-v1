@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/app/utils";
+import { cn } from "@/app/utils/";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { VscQuote } from "react-icons/vsc";

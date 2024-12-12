@@ -11,6 +11,14 @@ class Broker extends DB {
     super();
   }
 
+  public async createOne(user_id: string) {
+    const broker_profile = await this.db
+      .insertInto("brokers")
+      .values({ user_id })
+      .executeTakeFirst();
+    return broker_profile.insertId;
+  }
+
   private traverseJSON<DB, TB extends keyof DB>(
     eb: ExpressionBuilder<DB, TB>,
     column: StringReference<DB, TB>,
@@ -110,6 +118,9 @@ class Broker extends DB {
         "users.picture as picture",
         "users.created_at as user_created_at",
         "users.updated_at as user_updated_at",
+        "users.is_email_verified",
+        "users.is_phone_verified",
+        "users.dob",
       ] as any);
 
     // Conditionally add filters
@@ -148,6 +159,26 @@ class Broker extends DB {
       .execute();
 
     return broker;
+  }
+
+  public async getBrokerByUserId(id: string) {
+    return await this.db
+      .selectFrom("brokers")
+      .innerJoin("users", "brokers.user_id", "users.id")
+      .selectAll("brokers")
+      .select([
+        "users.email",
+        "users.name",
+        "users.phone as phone",
+        "users.picture as picture",
+        "users.created_at as user_created_at",
+        "users.updated_at as user_updated_at",
+        "users.is_email_verified",
+        "users.is_phone_verified",
+        "users.dob",
+      ] as any)
+      .where("user_id", "=", id)
+      .executeTakeFirst();
   }
 }
 

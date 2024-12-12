@@ -14,6 +14,11 @@ export interface Database {
   loans: LoanTable;
   notifications: NotificationTable;
   accounts: AccountTable;
+  user_profile: UserProfileTable;
+  messages: MessagesTable;
+  documents: DocumentsTable;
+  leads: LeadsTable;
+  purchases: PurchasesTable;
 }
 
 // This interface describes the `person` table to Kysely. Table
@@ -40,8 +45,8 @@ export interface UserTable {
   // wrapper. Here we define a column `created_at` that is selected as
   // a `Date`, can optionally be provided as a `string` in inserts and
   // can never be updated:
-  created_at: Generated<Date>;
-  updated_at: Date | null;
+  created_at?: Generated<Date>;
+  updated_at?: Date | null;
   account_status: "pending_claim" | "claimed" | null;
   claim_token: string | null;
   claimed_at: Date | null;
@@ -106,7 +111,7 @@ export interface BrokerTable {
   broker_id: string | null;
   is_company: string | null;
   broker_type: string | null;
-  created_at: Date;
+  created_at?: Date;
 }
 
 export type Broker = Selectable<BrokerTable>;
@@ -154,3 +159,125 @@ export interface NotificationTable {
 export type Notification = Selectable<NotificationTable>;
 export type NewNotification = Insertable<NotificationTable>;
 export type NotificationUpdate = Updateable<NotificationTable>;
+
+export interface UserProfileTable {
+  id: Generated<string>;
+  user_id: string;
+  location: Record<"address" | "city" | "province", string> | null;
+  tools_selection?: {
+    tools: (
+      | "budgeting"
+      | "credit_builder"
+      | "mortgage_assistance"
+      | "broker_finder"
+      | "all"
+    )[];
+    do_later: boolean;
+  };
+
+  social_insurance_number: string | null;
+  postal_code: string;
+  goal?: number | null;
+
+  // Employment and Income Details
+  employer_name: string | null;
+  job_title: string | null;
+  annual_income: number | null;
+  employment_start_date: string | null;
+
+  // Financial Information
+  savings_amount: number | null;
+  credit_card_balance: number | null;
+  other_debt: number | null;
+
+  // Credit History
+  credit_check_consent: boolean;
+  credit_score: string | null;
+
+  // Mortgage-Specific Information
+  down_payment: number | null;
+  down_payment_source: string | null;
+  intended_property_type: string | null;
+  intended_property_address: string | null;
+  intended_property_price: number | null;
+
+  // Marital and Family Status
+  marital_status: string | null;
+  number_of_dependents: number | null;
+
+  // Legal and Residency Status
+  residency_status: string;
+  government_id_type: string | null;
+  government_id_number: string | null;
+
+  updated_at?: ColumnType<Date, string>;
+  created_at?: Generated<ColumnType<Date, string, never>>;
+}
+
+export type UserProfile = Selectable<UserProfileTable>;
+export type NewUserProfile = Insertable<UserProfileTable>;
+export type UserProfileUpdate = Updateable<UserProfileTable>;
+
+export interface LeadsTable {
+  id: Generated<string>;
+  user_id: string;
+  down_payment?: number | null;
+  property_price: number;
+  down_payment_source?: string | null;
+  property_type?: string | null;
+  property_address?: string | null;
+  type: "shared" | "exclusive";
+  is_sold?: boolean;
+  updated_at?: ColumnType<Date, string>;
+  created_at?: Generated<ColumnType<Date, string, never>>;
+}
+
+export type Leads = Selectable<LeadsTable>;
+export type NewLeads = Insertable<LeadsTable>;
+export type LeadsUpdate = Updateable<LeadsTable>;
+
+export interface PurchasesTable {
+  id: Generated<string>;
+  lead_id: string;
+  broker_id: string;
+  purchased_at: Date;
+  amount_paid: number;
+  lead_type?: "shared" | "exclusive";
+  currency?: string;
+  payment_method?: string;
+  updated_at?: ColumnType<Date, string>;
+  created_at?: Generated<ColumnType<Date, string, never>>;
+}
+
+export type Purchases = Selectable<PurchasesTable>;
+export type NewPurchases = Insertable<PurchasesTable>;
+export type PurchasesUpdate = Updateable<PurchasesTable>;
+
+export interface MessagesTable {
+  id: Generated<string>;
+  sender_id: string;
+  receiver_id: string;
+  content: string;
+  is_read?: boolean;
+  sent_at?: ColumnType<Date, string>;
+}
+
+export type Messages = Selectable<MessagesTable>;
+export type NewMessages = Insertable<MessagesTable>;
+export type MessagesUpdate = Updateable<MessagesTable>;
+
+export interface DocumentsTable {
+  id: Generated<string>;
+  user_id: string;
+  name: string;
+  type: string;
+  url: string;
+  size?: number | null;
+  description?: string | null;
+  updated_at?: ColumnType<Date, string>;
+  created_at?: Generated<ColumnType<Date, string, never>>;
+}
+
+export type Documents = Selectable<DocumentsTable>;
+export type NewDocuments = Insertable<DocumentsTable>;
+export type DocumentsUpdate = Updateable<DocumentsTable>;

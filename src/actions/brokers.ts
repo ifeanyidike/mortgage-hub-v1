@@ -27,3 +27,12 @@ export async function fetchBrokersByFields(
 export async function fetchBroker(id: string) {
   return (await broker.getBrokerById(id)) as BrokerUserData;
 }
+
+export async function fetchBrokerByUserId(user_id: string) {
+  try {
+    const brokerProfile = await broker.getBrokerByUserId(user_id);
+    return brokerProfile;
+  } catch (error) {
+    console.log("error getting user profile", error);
+  }
+}

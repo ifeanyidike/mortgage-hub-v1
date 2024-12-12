@@ -100,7 +100,7 @@ import House3Mobile from "@/app/assets/Images/house3_mobile.png";
 import CurvedArrowUp from "@/app/assets/Images/arrow1.png";
 import CurvedArrowDown from "@/app/assets/Images/arrow2.png";
 import CtaButton from "./CtaButton";
-import { cn } from "@/app/utils";
+import { cn } from "@/app/utils/";
 
 const HouseTransfer = () => {
   return (

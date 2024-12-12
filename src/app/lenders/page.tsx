@@ -8,7 +8,7 @@ import BlogHighlights from "@/components/BlogHighlights";
 import HomeAIPane from "@/components/HomeAIPane";
 import CustomerServicePane from "@/components/CustomerServicePane";
 import Header from "@/components/Header";
-import { cn } from "../utils";
+import { cn } from "../utils/";
 import OurOffersSection from "./components/OurOfferSection";
 
 const Lenders = () => {

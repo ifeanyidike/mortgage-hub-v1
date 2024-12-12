@@ -11,7 +11,7 @@ import {
   BiLogoInstagram,
   BiSolidQuoteAltLeft,
 } from "react-icons/bi";
-import { cn, getRandomItems } from "@/app/utils";
+import { cn, getRandomItems } from "@/app/utils/";
 import { FaXTwitter } from "react-icons/fa6";
 import BlogHighlights from "@/components/BlogHighlights";
 import HomeAIPane from "@/components/HomeAIPane";

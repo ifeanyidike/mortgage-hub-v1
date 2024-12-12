@@ -40,9 +40,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             role: existingUser.role,
             is_email_verified: existingUser.is_email_verified,
             is_phone_verified: existingUser.is_phone_verified,
+            name: existingUser.name || "",
+            picture: existingUser.picture || "",
             email: existingUser.email,
             accessToken: existingUser.accessToken,
             refreshToken: existingUser.refreshToken,
+            user_profile: existingUser.user_profile,
           };
         } catch (error: any) {
           console.log("error", error);
@@ -53,9 +56,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async jwt({ token, account, user }) {
-      console.log("user in jwt", user);
-      console.log("token in jwt", token);
-      console.log("account in jwt", account);
       if (token.accessToken) {
         const decodedToken = jwtDecode(token.accessToken as string);
         token.accessTokenExpires = decodedToken.exp! * 1000;

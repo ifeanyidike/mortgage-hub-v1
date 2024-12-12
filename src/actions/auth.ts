@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 export async function handleSocialLogin(formData: FormData) {
   const action = formData.get("action") as string;
   const role = formData.get("role") as string;
+  console.log("called");
   if (role) {
     cookies().set("role", formData.get("role") as string);
   }
@@ -15,7 +16,6 @@ export async function handleSocialLogin(formData: FormData) {
 }
 
 export async function handleLogout() {
-  console.log("I am called");
   await signOut({ redirectTo: "/" });
 }
 

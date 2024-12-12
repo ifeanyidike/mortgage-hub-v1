@@ -1,0 +1,10 @@
+[lcl-host]
+realm-apid = 'localhost'
+
+[org]
+apid = 'ifeanyidike'
+
+[service]
+apid = 'mortgage-hub-v1'
+category = 'javascript'
+cert-style = 'acme'

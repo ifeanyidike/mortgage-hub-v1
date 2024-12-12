@@ -93,7 +93,7 @@ import Tools5 from "@/app/assets/icons/Tools-icon-5.svg";
 import Tools6 from "@/app/assets/icons/Tools-icon-6.svg";
 import NiceWithGlass from "@/app/assets/Images/nice-with-glass.png";
 import Calculator from "@/app/assets/icons/Calculator.svg";
-import { cn } from "@/app/utils";
+import { cn } from "@/app/utils/";
 
 type ToolsPaneProps = {
   icon: ReactNode;

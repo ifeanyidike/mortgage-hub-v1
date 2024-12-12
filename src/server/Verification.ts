@@ -5,6 +5,7 @@ import QRCode from "qrcode";
 import crypto from "crypto";
 import twilio, { Twilio } from "twilio";
 import { addDays, addHours } from "date-fns";
+import { customError } from "./error";
 
 class Verification extends DB {
   private APP_NAME = "Mortgage Hub";
@@ -107,23 +108,36 @@ class Verification extends DB {
     return services[0];
   }
 
-  public async verifyPhone(code: string) {
+  public async verifyPhone(code: string, phone: string) {
+    console.log("phone", phone);
+    const phoneNo = customError.phoneNumberSchema.parse({ phone });
+    console.log("phone No", phoneNo);
+
     const service = await this.getOrCreateService();
     console.log("entered", service);
     const verification_check = await this.twilio_client.verify.v2
       .services(service.sid)
-      .verificationChecks.create({ to: "+2348121520994", code });
+      .verificationChecks.create({
+        to: !phone.startsWith("+") ? `+${phone}` : phone,
+        code,
+      });
     console.log("verification_check", verification_check);
     return verification_check;
     //   .then((verification_check) => console.log(verification_check.status));
   }
 
-  public async sendPhoneVerificationText() {
+  public async sendPhoneVerificationText(phone: string) {
+    console.log("phone for verification initial", phone);
+    const phoneNo = customError.phoneNumberSchema.parse(phone);
+    console.log("phone No after zod", phoneNo);
     const service = await this.getOrCreateService();
     console.log("entered", service);
     const verification = await this.twilio_client.verify.v2
       .services(service.sid)
-      .verifications.create({ to: "+2348121520994", channel: "sms" });
+      .verifications.create({
+        to: !phone.startsWith("+") ? `+${phone}` : phone,
+        channel: "sms",
+      });
     console.log("verification", verification);
     return verification;
     //   .then((verification_check) => console.log(verification_check.status));

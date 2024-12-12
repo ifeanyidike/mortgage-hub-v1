@@ -27,16 +27,16 @@ const RegistrationForm = () => {
   const [error, setError] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
 
-  useEffect(() => {
-    const subscription = supabaseSubscriptions.listenToEvents(
-      "INSERT",
-      (payload) => console.log("Payload: ", payload)
-    );
+  // useEffect(() => {
+  //   const subscription = supabaseSubscriptions.listenToEvents(
+  //     "INSERT",
+  //     (payload) => console.log("Payload: ", payload)
+  //   );
 
-    return () => {
-      supabase.removeChannel(subscription);
-    };
-  }, []);
+  //   return () => {
+  //     supabase.removeChannel(subscription);
+  //   };
+  // }, []);
 
   function redirectToLogin() {
     return (

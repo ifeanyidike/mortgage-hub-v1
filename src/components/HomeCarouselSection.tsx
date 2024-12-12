@@ -4,7 +4,7 @@ import HomeCarousel from "./HomeCarousel";
 import { motion } from "framer-motion";
 import { Button } from "antd";
 import CtaButton from "./CtaButton";
-import { cn } from "@/app/utils";
+import { cn } from "@/app/utils/";
 
 const HomeCarouselSection = () => {
   return (

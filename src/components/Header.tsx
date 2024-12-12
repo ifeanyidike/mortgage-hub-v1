@@ -6,10 +6,12 @@ import Link from "next/link";
 import { handleLogout } from "@/actions/auth";
 import Logo from "@/app/assets/logo3.png";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/app/utils";
+import { cn, toAbsoluteUrl } from "@/app/utils/";
 import { usePathname } from "next/navigation";
+import { Menu, MenuItem, MenuToggle } from "@/app/dashboard-components";
+import { DropdownUser } from "@/app/partials/dropdowns/user";
 
 const items = [
   { label: "Home", key: "/" },
@@ -25,6 +27,7 @@ type Props = {
 const Header = (props: Props) => {
   const { data: session } = useSession();
   const [mobileExpand, setMobileExpand] = useState(false);
+  const itemUserRef = useRef<any>(null);
   const pathname = usePathname();
   function handleAuth() {
     return (
@@ -74,12 +77,12 @@ const Header = (props: Props) => {
       {/* Desktop Header */}
       <div
         className={cn(
-          " max-w-screen-xl mx-auto my-auto flex py-4  items-center bg-transparent font-[family-name:var(--font-montserrat)] max-lg:hidden",
+          " max-w-screen-xl mx-auto my-auto !z-20 flex py-4  items-center bg-transparent font-[family-name:var(--font-montserrat)] max-lg:hidden",
           props.bgColor
         )}
       >
         <Flex align="end" className="w-full px-8 ">
-          <Link href="/" className="">
+          <Link href="/" className="z-50">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -88,7 +91,7 @@ const Header = (props: Props) => {
               <Image src={Logo} alt="Mortgage Hub Logo" className="w-32" />
             </motion.div>
           </Link>
-          <div className="w-full 2xl:ml-auto flex justify-between items-end text-base font-semibold px-12 1-5xl:px-24">
+          <div className="w-full 2xl:ml-auto flex justify-between items-end text-base font-semibold px-12 1-5xl:px-24 z-50">
             {items.map((i) => (
               <Link
                 key={i.key}
@@ -122,8 +125,12 @@ const Header = (props: Props) => {
           mobileExpand ? "bg-[#f0f0f0]" : props.bgColor
         )}
       >
-        <div className="flex justify-between px-4 lg:px-10 py-8 items-center w-full">
-          <Link onClick={() => setMobileExpand(false)} href="/" className="">
+        <div className="flex justify-between px-4 lg:px-10 py-8 items-center w-full ">
+          <Link
+            onClick={() => setMobileExpand(false)}
+            href="/"
+            className=" z-50"
+          >
             <Image
               src={Logo}
               alt="Mortgage Hub Logo"
@@ -132,7 +139,7 @@ const Header = (props: Props) => {
             />
           </Link>
           <button
-            className="cursor-pointer ml-auto"
+            className="cursor-pointer ml-auto z-50"
             onClick={() => setMobileExpand(!mobileExpand)}
           >
             {!mobileExpand ? (
@@ -177,6 +184,35 @@ const Header = (props: Props) => {
           )}
         </AnimatePresence>
       </div>
+      {/* <Menu>
+        <MenuItem
+          ref={itemUserRef}
+          toggle="dropdown"
+          trigger="click"
+          dropdownProps={{
+            placement: "bottom-end",
+            modifiers: [
+              {
+                name: "offset",
+                options: {
+                  offset: [20, 10], // [skid, distance]
+                },
+              },
+            ],
+          }}
+        >
+          <MenuToggle className="btn btn-icon rounded-full">
+            <img
+              className="size-9 !rounded-full !border-2 border-success !shrink-0"
+              src={toAbsoluteUrl("/media/avatars/300-2.png")}
+              alt=""
+              width={36}
+              height={36}
+            />
+          </MenuToggle>
+          {DropdownUser({ menuItemRef: itemUserRef })}
+        </MenuItem>
+      </Menu> */}
     </>
   );
 };

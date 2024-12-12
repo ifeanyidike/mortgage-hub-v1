@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/app/utils";
+import { cn } from "@/app/utils/";
 import Image from "next/image";
 import React from "react";
 import { VscQuote } from "react-icons/vsc";

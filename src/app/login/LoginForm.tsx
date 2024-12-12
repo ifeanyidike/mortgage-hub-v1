@@ -1,28 +1,30 @@
 "use client";
 import { handleCredentialLogin } from "@/actions/auth";
-import { LockFilled } from "@ant-design/icons";
-import { Button, Input, message } from "antd";
+import { LoadingOutlined, LockFilled } from "@ant-design/icons";
+import { Button, Input, message, Spin } from "antd";
 import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
-import { cn } from "../utils";
+import { cn } from "../utils/";
 import Link from "next/link";
 import SocialLoginForm from "./SocialLoginForm";
+import { CustomSessionUser } from "@/types/general";
 
 const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState<string>("");
   const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
 
-  const { update } = useSession();
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log("formData", formData);
+
     try {
+      setLoading(true);
       const response = await handleCredentialLogin(formData);
-      console.log("response: ", response);
 
       if (response.error) {
         console.log(response.error);
@@ -31,14 +33,33 @@ const LoginForm = () => {
         return;
       }
       messageApi.open({ type: "success", content: "Login successful" });
-      await getSession();
-      router.push("/");
+      const session = await getSession();
+
+      if (!session) {
+        router.push("/");
+        return;
+      }
+
+      const user = session.user as CustomSessionUser;
+      console.log("user", user, session);
+      if (user?.role === "user") {
+        router.push(`/dashboard/user?id=${user.id}`);
+      } else if (user?.role === "broker") {
+        router.push(`/dashboard/broker?id=${user.id}`);
+      }
     } catch (error: any) {
       console.log(error);
       messageApi.open({ type: "error", content: error.message });
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   }
+  // {loading && (
+  //   <div className="fixed top-0 left-0 w-screen h-full  bg-gray-100/50 grid place-items-center z-10">
+  //     <Spin indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />} />
+  //   </div>
+  // )}
   return (
     <main
       className={cn(
@@ -48,6 +69,12 @@ const LoginForm = () => {
       )}
     >
       {contextHolder}
+
+      {loading && (
+        <div className="fixed top-0 left-0 w-screen h-full  bg-gray-100/50 grid place-items-center z-10">
+          <Spin indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />} />
+        </div>
+      )}
       <h2
         className={cn(
           "capitalize py-4 px-8 lg:px-16 text-white text-2xl font-bold rounded-xl",

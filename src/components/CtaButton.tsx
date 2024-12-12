@@ -1,4 +1,4 @@
-import { cn } from "@/app/utils";
+import { cn } from "@/app/utils/";
 import { Button } from "antd";
 import { motion } from "framer-motion";
 import Link from "next/link";

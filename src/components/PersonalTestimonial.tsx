@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { VscQuote } from "react-icons/vsc";
-import { cn } from "@/app/utils";
+import { cn } from "@/app/utils/";
 import CtaButton from "./CtaButton";
 
 type Props = {

@@ -10,6 +10,8 @@ import { FaXTwitter } from "react-icons/fa6";
 import { BiSolidQuoteAltLeft } from "react-icons/bi";
 import Carousel from "antd/lib/carousel";
 import { BrokerUserData } from "@/types/general";
+import { useState } from "react";
+import { cn } from "@/app/utils/";
 
 type ProfileProps = {
   profile: BrokerUserData;
@@ -193,9 +195,6 @@ const BrokerProfile: React.FC<ProfileProps> = ({
 };
 
 export default BrokerProfile;
-
-import { useState } from "react";
-import { cn } from "@/app/utils";
 
 type DescriptionProps = {
   description: string;
